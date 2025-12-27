@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Biolife - Organic Food</title>
+    <link href="https://fonts.googleapis.com/css?family=Cairo:400,600,700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400i,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu&amp;display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png" />
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/nice-select.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/slick.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/main-color.css">
+    <style>
+        /* //navbar css */
+        .align-items-center {
+            display: flex;
+            align-items: center;
+        }
+
+        .mb-60 {
+            margin-bottom: 60px;
+        }
+
+        .p-2 {
+            padding: 10px;
+        }
+
+        .socials {
+            list-style: none;
+        }
+
+        .socials li {
+            width: 100%;
+            background-color: #21854d;
+        }
+
+        .socials li i {
+            font-size: 19px;
+            padding: 0px 15px;
+            color: #fff;
+        }
+
+        .socail-btn {
+            color: #fff !important;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .h1,
+        .h2,
+        .h3,
+        .h4,
+        .h5,
+        .h6 {
+            font-family: inherit;
+            font-weight: 500;
+            line-height: 1.1;
+            color: #302b2b;
+        }
+
+        .pr-0 {
+            padding-right: 0px !important;
+        }
+
+
+
+
+        /* offcanvas css start */
+        .offcanvas-right {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 450px;
+            height: 100%;
+            background: #fff;
+            z-index: 1050;
+            transition: right 0.3s ease;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .offcanvas-right.active {
+            right: 0;
+        }
+
+        .offcanvas-header {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .offcanvas-body {
+            padding: 15px;
+        }
+
+        .close-offcanvas {
+            background: none;
+            border: none;
+            font-size: 24px;
+            float: right;
+            cursor: pointer;
+        }
+
+        .offcanvas-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1049;
+        }
+
+        .offcanvas-overlay.active {
+            display: block;
+        }
+
+        /* offcanvas css start */
+
+
+        .mb-4 {
+            margin-bottom: 30px;
+        }
+
+        .d-none {
+            display: none;
+        }
+
+        .title {
+            font-size: 30px;
+            line-height: 1;
+            display: inline-block;
+            font-weight: 700;
+            margin: 0;
+            width: 100%;
+            text-transform: uppercase;
+            color: #e17f26;
+        }
+
+        .my-30 {
+            margin: 30px 0;
+        }
+        /* border after */
+    .g-img {
+      position: relative;
+      display: inline-block;
+      padding-bottom: 20px;
+    }
+
+    .g-img::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 25px;
+      background: url('./assets/images/border.jpg') no-repeat center bottom;
+      background-size: contain;
+    }
+    .cmb-5{
+        margin-bottom: 8px !important;
+    }
+    /* border after */
+
+
+
+
+
+        @media screen and (min-width:992px) {
+            .d-lg-none {
+                display: none;
+            }
+
+            .d-lg-block {
+                display: block;
+            }
+        }
+    </style>
+
+</head>
+
+<body class="biolife-body">
+
+    <!-- Preloader -->
+    <div id="biof-loading">
+        <div class="biof-loading-center">
+            <div class="biof-loading-center-absolute">
+                <div class="dot dot-one"></div>
+                <div class="dot dot-two"></div>
+                <div class="dot dot-three"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header id="header" class="header-area style-01 layout-03">
+        <div class="header-top bg-main hidden-xs">
+            <div class="container">
+                <div class="top-bar left">
+                    <ul class="horizontal-menu">
+                        <li><a href="#"><i class="fa fa-phone" aria-hidden="true"></i>+8801711275469</a></li>
+                        <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>cmd@jjnhoney.com </a></li>
+                    </ul>
+                </div>
+                <div class="top-bar right">
+                    <ul class="social-list">
+                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                    </ul>
+                    <ul class="horizontal-menu">
+                        <!-- <i class="biolife-icon icon-login"></i> -->
+                        <li><a href="" class="login-link">Track Your Order</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="header-middle biolife-sticky-object ">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-2 col-md-6 col-md-6 col-xs-6">
+                        <a href="index.html" class="biolife-logo"><img style="height: 59px;"
+                                src="assets/images/logo.jpg" alt="biolife logo" width="135" height="34"></a>
+                    </div>
+                    <div class="col-lg-4 col-md-7 hidden-sm hidden-xs">
+                        <div class="primary-menu">
+                            <ul class="menu biolife-menu clone-main-menu clone-primary-menu" id="primary-menu"
+                                data-menuname="main menu">
+                                <li class="menu-item"><a href="index.html">Home</a></li>
+                                <li class="menu-item"><a href="/about.html">About</a></li>
+                                <li class="menu-item menu-item-has-children has-child">
+                                    <a href="#" class="menu-name" data-title="Products">Products</a>
+                                    <ul class="sub-menu">
+                                        <li class="menu-item"><a href="#">Omelettes</a></li>
+                                        <li class="menu-item menu-item-has-children has-child"><a href="#"
+                                                class="menu-name" data-title="Eggs & other considerations">Eggs & other
+                                                considerations</a>
+                                            <ul class="sub-menu">
+                                                <li class="menu-item"><a href="#">Classic Breakfast</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="menu-item"><a href="#">Biscuits</a></li>
+                                        <li class="menu-item"><a href="#">Seasonal Fruit Plate</a></li>
+                                    </ul>
+                                </li>
+                                <!-- <li class="menu-item"><a href="contact.html">Services</a></li> -->
+                                <li class="menu-item"><a href="contact.html">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-3 col-0">
+                        <div class="header-search-bar layout-01">
+                            <form action="#" class="form-search" name="desktop-seacrh" method="get">
+                                <input type="text" name="s" class="input-text" value="" placeholder="Search here...">
+
+                                <button type="submit" class="btn-submit"><i
+                                        class="biolife-icon icon-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-md-6 col-xs-6">
+                        <div class="biolife-cart-info">
+                            <div class="wishlist-block hidden-sm hidden-xs">
+                                <a href="#" class="link-to">
+                                    <span class="icon-qty-combine">
+                                        <i class="biolife-icon icon-login"></i>
+
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="minicart-block">
+                                <div class="minicart-contain">
+                                    <a href="javascript:void(0)" id="openOffcanvas" class="link-to">
+                                        <span class="icon-qty-combine">
+                                            <i class="icon-cart-mini biolife-icon"></i>
+                                            <span class="qty">1</span>
+                                        </span>
+                                        <span class="sub-total ms-2">150 ৳ </span>
+
+                                    </a>
+
+
+                                </div>
+                            </div>
+                            <div class="mobile-menu-toggle">
+                                <a class="btn-toggle" data-object="open-mobile-menu" href="javascript:void(0)">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Contain -->
+    <div class="page-contain">
+        <!-- Main content -->
+        <div id="main-content" class="main-content">
+
+            <!--Hero Section-->
+            <div class="hero-section hero-background">
+                <nav class="biolife-nav nav-86px">
+                    <ul>
+                        <li class="nav-item">
+                            <a href="index.html" class="permal-link">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <span class="current-page">About</span>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="container">
+               <div class="mt-30 mb-30">
+                <div class="g-img text-center" style="width: 100%;">
+                    <h3 class="title text-center cmb-5">Welcome to Kamran Honey!</h3>
+                </div>
+                 
+               </div>
+
+                <div class="container">
+                    <div class="row mb-30  align-items-center">
+                        <div class="col-md-6 col-12">
+                            <img src="./assets/images/huney2.gif" class="img-fluid" alt="">
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="text-wraper">
+                                <p>We are dedicated to bringing you 100% pure and natural honey, carefully sourced from
+                                    trusted beekeepers and untouched by artificial processing. Our honey is collected
+                                    with respect for nature, ensuring its original taste, aroma, and nutritional value
+                                    remain intact.
+                                </p>
+                                <p>Quality, purity, and customer satisfaction are at the heart of everything we do. From
+                                    hive to home, we strive to deliver the finest honey you can trust and enjoy every
+                                    day.
+
+                                </p>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="why-choose-us-block">
+    <div class="container ">
+        <div class="mb-30">
+            <div class="g-img text-center" style="width: 100%;">
+                <h4 class="title text-center cmb-5">Why Choose Us</h4>
+            </div>
+            
+        </div>
+        
+
+        <div class="showcase">
+            <div class="sc-child sc-left-position">
+                <ul class="sc-list">
+                    <li>
+                        <div class="sc-element color-01">
+                            <span class="biolife-icon icon-fresh-drink"></span>
+                            <div class="txt-content">
+                                <span class="number">01</span>
+                                <b class="title">100% Pure Honey</b>
+                                <p class="desc">
+                                    Our honey is completely natural, free from sugar syrup, additives, or preservatives.
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="sc-element color-02">
+                            <span class="biolife-icon icon-healthy-about"></span>
+                            <div class="txt-content">
+                                <span class="number">02</span>
+                                <b class="title">Rich in Nutrients</b>
+                                <p class="desc">
+                                    Packed with natural enzymes, vitamins, and antioxidants that support daily health.
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sc-child sc-center-position">
+                <figure>
+                    <img src="assets/images/about2.jpg" alt="Pure Natural Honey" width="622" height="656">
+                </figure>
+            </div>
+
+            <div class="sc-child sc-right-position">
+                <ul class="sc-list">
+                    
+
+                    <li>
+                        <div class="sc-element color-05">
+                            <span class="biolife-icon icon-arteries-about"></span>
+                            <div class="txt-content">
+                                <span class="number">03</span>
+                                <b class="title">Supports Heart Health</b>
+                               
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="sc-element color-06">
+                            <span class="biolife-icon icon-title"></span>
+                            <div class="txt-content">
+                                <span class="number">04</span>
+                                <b class="title">Quality Assured</b>
+                                <p class="desc">
+                                    Every batch is carefully tested to ensure purity, taste, and premium quality.
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <div id="offcanvasRight" class="offcanvas-right">
+    <div class="offcanvas-header">
+        <h4>Shopping cart</h4>
+        <button class="close-offcanvas">&times; Close</button>
+    </div>
+
+    <div class="offcanvas-body">
+        <table class="table table-light table-borderless table-hover text-center mb-0">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Products</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody class="align-middle">
+                        <tr>
+                            <td class="align-middle">
+                                সরিষা ফুলের মধু
+                            </td>
+                            <td class="align-middle">৳150</td>
+                            <td class="align-middle">
+                                <div class="input-group quantity">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-primary btn-minus" >
+                                        <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    <input type="text" class="card-input" value="1">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-primary btn-plus">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="align-middle">৳150</td>
+                            <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
+                        </tr>
+                        
+                       
+                    </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="offcanvas-overlay"></div>
+
+    <!-- FOOTER -->
+    <footer id="footer" class="footer layout-03">
+        <div class="footer-content background-footer-03">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-4 col-sm-6 md-margin-top-5px sm-margin-top-50px xs-margin-top-40px">
+                        <section class="footer-item">
+                            <h3 class="section-title">Kamran Honey</h3>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="wrap-custom-menu vertical-menu-2" style="color: #fff;">
+                                        We are committed to delivering pure, natural, and authentic honey. Sourced with
+                                        care and packed with goodness, our honey brings nature’s sweetness straight to
+                                        your home.
+                                    </div>
+                                </div>
+
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-6 md-margin-top-5px sm-margin-top-50px xs-margin-top-40px">
+                        <section class="footer-item">
+                            <h3 class="section-title">Contact Us</h3>
+                            <div class="contact-info-block footer-layout xs-padding-top-10px">
+                                <ul class="contact-lines">
+                                    <li>
+                                        <p class="info-item">
+                                            <i class="biolife-icon icon-location"></i>
+                                            <b class="desc">7563 St. Vicent Place, Glasgow, Greater Newyork NH7689, UK
+                                            </b>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p class="info-item">
+                                            <i class="biolife-icon icon-phone"></i>
+                                            <b class="desc">Phone: (+067) 234 789 (+068) 222 888</b>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p class="info-item">
+                                            <i class="biolife-icon icon-letter"></i>
+                                            <b class="desc">Email: contact@company.com</b>
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="col-lg-2 col-md-4 col-sm-6 md-margin-top-5px sm-margin-top-50px xs-margin-top-40px">
+                        <section class="footer-item">
+                            <h3 class="section-title">Useful Links</h3>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="wrap-custom-menu vertical-menu-2">
+                                        <ul class="menu">
+                                            <li><a href="#">Home</a></li>
+                                            <li><a href="#">About Us</a></li>
+                                            <li><a href="#">Product</a></li>
+                                            <li><a href="#">Contact</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6 md-margin-top-5px sm-margin-top-50px xs-margin-top-40px">
+                        <section class="footer-item">
+                            <h3 class="section-title" style="text-align: center;">Social Links</h3>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="wrap-custom-menu vertical-menu-2">
+                                        <ul class="socials">
+
+                                            <li style="background-color: #3b5998;"><a href="#" title="facebook"
+                                                    class="socail-btn"><i class="fa fa-facebook" aria-hidden="true"></i>
+                                                    FACEBOOK</a></li>
+                                            <li style="background: linear-gradient(45deg, #d720c1, red, #e4eb0c);"><a
+                                                    href="#" title="pinterest" class="socail-btn"><i
+                                                        class="fa fa-instagram" aria-hidden="true"></i> INSTAGRAM</a>
+                                            </li>
+                                            <li style="background: red;"><a href="#" title="youtube"
+                                                    class="socail-btn"><i class="fa fa-youtube" aria-hidden="true"></i>
+                                                    YOUTUBE</a></li>
+                                            <li style="background-color: #0a0a0a;"><a href="#" title="twitter"
+                                                    class="socail-btn"><i class="fa fa-twitter" aria-hidden="true"></i>
+                                                    TWITTER</a></li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </section>
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col-lg-12 col-sm-12 col-xs-12 d-flex justify-content-end">
+                        <div class="copy-right-text ">
+                            <p style="color: #fff;text-align: right;">Designed And Developed by <a
+                                    href="https://linktechbd.com/">Linkup Technology</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Scroll Top Button -->
+    <!-- <a class="btn-scroll-top"><i class="biolife-icon icon-left-arrow"></i></a> -->
+
+
+
+
+
+
+
+
+    <script src="assets/js/jquery-3.4.1.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.countdown.min.js"></script>
+    <script src="assets/js/jquery.nice-select.min.js"></script>
+    <script src="assets/js/jquery.nicescroll.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.umd.js"></script>
+    <script src="assets/js/slick.min.js"></script>
+    <script src="assets/js/biolife.framework.js"></script>
+    <script src="assets/js/functions.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#openOffcanvas').click(function () {
+                $('#offcanvasRight').addClass('active');
+                $('.offcanvas-overlay').addClass('active');
+            });
+
+            $('.close-offcanvas, .offcanvas-overlay').click(function () {
+                $('#offcanvasRight').removeClass('active');
+                $('.offcanvas-overlay').removeClass('active');
+            });
+        });
+
+
+    </script>
+
+</body>
+
+</html>

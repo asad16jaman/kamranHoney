@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Kamran Honey | Home Page</title>
+  <link rel="shortcut icon" href="./assets/images/logo.jpg" type="image/x-icon" />
+
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400i,700i" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@100..800&family=Karla:ital,wght@0,200..800;1,200..800&display=swap"
+    rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.css" />
+  <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png" />
+  <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="assets/css/animate.min.css" />
+  <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css" />
+  <link rel="stylesheet" type="text/css" href="assets/css/nice-select.css" />
+  <link rel="stylesheet" type="text/css" href="assets/css/slick.min.css" />
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+  <link rel="stylesheet" type="text/css" href="assets/css/main-color.css" />
+  <style>
+    /* //navbar css */
+    .align-items-center {
+      display: flex;
+      align-items: center;
+    }
+
+    /* Navbar css end */
+
+    /* product card css is hare  */
+    .product-item{
+            box-shadow: 0px 0px 1px 2px #0000001f;
+            margin-bottom: 30px;
+        }
+        .card-padding{
+            padding: 0 10px;
+            display: flex;
+            justify-content: space-around;
+    
+        }
+        .add-cart-btn{
+        background: #e17f26;
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 11px;
+        border-radius: 25px;
+        margin-bottom: 5px;
+        width: 102px;
+        transition: 0.35s ease-in-out;
+        }
+
+        .add-cart-btn:hover{
+            color: #e17f26;
+            border: 1px solid #e17f26;
+            background-color: #fff !important;
+        }
+        .buy_now_btn{
+            background-color: #21854d;
+        }
+        .buy_now_btn:hover{
+            color: #21854d;
+            border: 1px solid #21854d;
+            background-color: #fff;
+
+        }
+
+        .product-item {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .offer{
+     background-color: #e17f26;
+    z-index: 9999;
+    position: absolute;
+    top: 9px;
+    /* left: 0; */
+    width: 38px;
+    height: 25px;
+    right: 1px;
+    color: #ffffff;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    }
+    .attribute{
+        top: 38px;
+    position: absolute;
+    right: 1px;
+    background: red;
+    width: 37px;
+    height: 24px;
+    font-size: 13px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    }
+
+    .product-thumnail{
+        width: 100%;
+        min-height: 240px;
+    }
+    /* product card css is hare  */
+    
+
+
+
+    .socials {
+      list-style: none;
+    }
+
+    .socials li {
+      width: 100%;
+      background-color: #21854d;
+    }
+
+    .socials li i {
+      font-size: 19px;
+      padding: 0px 15px;
+      color: #fff;
+    }
+
+    .socail-btn {
+      color: #fff !important;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .h1,
+    .h2,
+    .h3,
+    .h4,
+    .h5,
+    .h6 {
+      font-family: inherit;
+      font-weight: 500;
+      line-height: 1.1;
+      color: #302b2b;
+    }
+
+    .pr-0 {
+      padding-right: 0px !important;
+    }
+
+    .b-font {
+      font-family: "Anek Bangla", Sans-serif;
+    }
+
+    /* offcanvas css start */
+    .offcanvas-right {
+      position: fixed;
+      top: 0;
+      right: -450px;
+      width: 450px;
+      height: 100%;
+      background: #fff;
+      z-index: 1050;
+      transition: right 0.3s ease;
+      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .offcanvas-right.active {
+      right: 0;
+    }
+
+    .offcanvas-header {
+      padding: 15px;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .offcanvas-body {
+      padding: 15px;
+    }
+
+    .close-offcanvas {
+      background: none;
+      border: none;
+      font-size: 24px;
+      float: right;
+      cursor: pointer;
+    }
+
+    .offcanvas-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      z-index: 1049;
+    }
+
+    .offcanvas-overlay.active {
+      display: block;
+    }
+
+    /* offcanvas css start */
+
+    .d-none {
+      display: none;
+    }
+
+    .card {
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0px 1px 4px 1px #0000008a;
+      cursor: pointer;
+    }
+
+    .card-footer {
+      padding: 10px 0;
+    }
+
+    /* border after */
+    .g-img {
+      position: relative;
+      display: inline-block;
+      padding-bottom: 20px;
+    }
+
+    .g-img::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 25px;
+      background: url("./assets/images/border.jpg") no-repeat center bottom;
+      background-size: contain;
+    }
+
+    /* border after */
+
+    /* cart css  */
+
+    .btn-plus,
+    .btn-minus {
+      padding: 1px !important;
+    }
+
+    .card-input {
+      width: 44px;
+      padding: 0px 5px !important;
+      margin: 0px 5px;
+      height: 24px;
+    }
+
+    .cmb-5 {
+      margin-bottom: 8px !important;
+    }
+
+    /* //card hover effect */
+
+    /* responsive */
+    .mb-2 {
+      margin-bottom: 8px !important;
+    }
+
+    .d-none {
+      display: none;
+    }
+
+    @media screen and (min-width: 1025px) {
+      .mb-0 {
+        margin-bottom: 0px !important;
+      }
+
+      .d-lg-block {
+        display: block !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="biolife-body">
+  <!-- Preloader -->
+  <div id="biof-loading">
+    <div class="biof-loading-center">
+      <div class="biof-loading-center-absolute">
+        <div class="dot dot-one"></div>
+        <div class="dot dot-two"></div>
+        <div class="dot dot-three"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header id="header" class="header-area style-01 layout-03">
+    <div class="header-top bg-main hidden-xs">
+      <div class="container">
+        <div class="top-bar left">
+          <ul class="horizontal-menu">
+            <li>
+              <a href="#"><i class="fa fa-phone" aria-hidden="true"></i>+8801711275469</a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>cmd@jjnhoney.com
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="top-bar right">
+          <ul class="social-list">
+            <li>
+              <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            </li>
+          </ul>
+          <ul class="horizontal-menu">
+            <!-- <i class="biolife-icon icon-login"></i> -->
+            <li><a href="" class="login-link">Track Your Order</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="header-middle biolife-sticky-object">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-1 col-md-6 col-md-6 col-xs-6">
+            <!-- height: 59px; -->
+            <a href="index.html" class="biolife-logo"><img style="width: 100%" src="assets/images/logo.jpg"
+                alt="biolife logo" /></a>
+          </div>
+          <div class="col-lg-5 col-md-7 hidden-sm hidden-xs">
+            <div class="primary-menu">
+              <ul class="menu biolife-menu clone-main-menu clone-primary-menu" id="primary-menu"
+                data-menuname="main menu">
+                <li class="menu-item"><a href="index.html">Home</a></li>
+                <li class="menu-item"><a href="/about.html">About</a></li>
+                <li class="menu-item"><a href="">All Products</a></li>
+                <!-- <li class="menu-item"><a href="contact.html">Services</a></li> -->
+                <li class="menu-item"><a href="contact.html">Contact</a></li>
+                <li class="menu-item menu-item-has-children has-child">
+                  <a href="#" class="menu-name" data-title="Products">Pages</a>
+                  <ul class="sub-menu">
+                    <li class="menu-item"><a href="#">Our Services</a></li>
+                    <li class="menu-item"><a href="#">Video Gallery</a></li>
+                    <li class="menu-item"><a href="#">Photo Gallery</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-3 col-0 d-none d-lg-block">
+            <div class="header-search-bar layout-01">
+              <form action="#" class="form-search" name="desktop-seacrh" method="get">
+                <input type="text" name="s" class="input-text" value="" placeholder="Search here..." />
+
+                <button type="submit" class="btn-submit">
+                  <i class="biolife-icon icon-search"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-3 col-md-6 col-xs-6">
+            <div class="biolife-cart-info">
+              <div class="wishlist-block hidden-sm hidden-xs">
+                <a href="#" class="link-to">
+                  <span class="icon-qty-combine">
+                    <i class="biolife-icon icon-login"></i>
+                  </span>
+                </a>
+              </div>
+              <div class="minicart-block">
+                <div class="minicart-contain">
+                  <a href="javascript:void(0)" id="openOffcanvas" class="link-to">
+                    <span class="icon-qty-combine">
+                      <i class="icon-cart-mini biolife-icon"></i>
+                      <span class="qty">1</span>
+                    </span>
+                    <span class="sub-total ms-2">150 ৳ </span>
+                  </a>
+                </div>
+              </div>
+              <div class="mobile-menu-toggle">
+                <a class="btn-toggle" data-object="open-mobile-menu" href="javascript:void(0)">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Contain -->
+  <div class="page-contain">
+    <div id="main-content" class="main-content">
+      <!--Hero Section-->
+      <div class="hero-section hero-background">
+        <nav class="biolife-nav nav-86px">
+          <ul>
+            <li class="nav-item">
+              <a href="index.html" class="permal-link">Home</a>
+            </li>
+            <li class="nav-item">
+              <span class="current-page">Video</span>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="container">
+        <div class="row mt-30 mb-30">
+          <!-- Sidebar -->
+          <aside id="sidebar" class="sidebar col-lg-3 col-md-4 col-sm-12 col-xs-12">
+            <div class="biolife-mobile-panels">
+              <span class="biolife-current-panel-title">Sidebar</span>
+              <a class="biolife-close-btn" href="#" data-object="open-mobile-filter">&times;</a>
+            </div>
+            <div class="sidebar-contain">
+              <div class="widget biolife-filter">
+                <h4 class="wgt-title">All Category</h4>
+                <div class="wgt-content">
+                  <ul class="cat-list">
+                    <li class="cat-list-item"><a href="#" class="cat-link">Organic Food</a></li>
+                    <li class="cat-list-item"><a href="#" class="cat-link">Fresh Fruit</a></li>
+                    <li class="cat-list-item"><a href="#" class="cat-link">Dried Fruits</a></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="widget biolife-filter">
+                <h4 class="wgt-title">Product Tags</h4>
+                <div class="wgt-content">
+                  <ul class="tag-cloud">
+                    <li class="tag-item"><a href="#" class="tag-link">Fresh Fruit</a></li>
+                    <li class="tag-item"><a href="#" class="tag-link">Natural Food</a></li>
+                    <li class="tag-item"><a href="#" class="tag-link">Hot</a></li>
+                    <li class="tag-item"><a href="#" class="tag-link">Organics</a></li>
+                    <li class="tag-item"><a href="#" class="tag-link">Dried Organic</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </aside>
+          <!-- Main content -->
+          <div id="main-content" class="main-content col-lg-9 col-md-8 col-sm-12 col-xs-12">
+
+
+
+            <div class="product-category grid-style">
+              <div class="row">
+
+                <div class="col-lg-4 col-md-6 mb-3">
+                  <div class="product-item">
+                    <div class="contain-product layout-default">
+                      <div class="product-thumb">
+                        <a href="#" class="link-to-product">
+                          <img src="/assets/images/svImg.jpg" alt="Vegetables" width="270" height="270"
+                            class="product-thumnail">
+                        </a>
+                        <p class="offer">-30%</p>
+                        <p class="attribute">HOT</p>
+
+                        <a class="lookup btn_call_quickview" href="#" title="Quick View"><i
+                            class="biolife-icon icon-search"></i></a>
+                      </div>
+                      <div class="info">
+                        <h4 class="product-title">
+                          <a href="/productsDetail.html" class="pr-name">খলিশা ফুলের মধু</a>
+                        </h4>
+                        <div class="price ">
+                          <ins><span class="price-amount"><span class="currencySymbol">৳ </span>85.00</span></ins>
+                          <del><span class="price-amount"><span class="currencySymbol">৳ </span>95.00</span></del>
+                        </div>
+
+                        <div class="buttons card-padding">
+
+                          <a href="#" class="btn add-cart-btn">
+                            <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                            add to cart
+                          </a>
+
+                          <a href="#" class="btn add-cart-btn buy_now_btn">
+                            <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                            By Now
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-3">
+                  <div class="product-item">
+                    <div class="contain-product layout-default">
+                      <div class="product-thumb">
+                        <a href="#" class="link-to-product">
+                          <img src="/assets/images/svImg.jpg" alt="Vegetables" width="270" height="270"
+                            class="product-thumnail">
+                        </a>
+                        <p class="offer">-30%</p>
+                        <p class="attribute">HOT</p>
+
+                        <a class="lookup btn_call_quickview" href="#" title="Quick View"><i
+                            class="biolife-icon icon-search"></i></a>
+                      </div>
+                      <div class="info">
+                        <h4 class="product-title">
+                          <a href="#" class="pr-name">খলিশা ফুলের মধু</a>
+                        </h4>
+                        <div class="price ">
+                          <ins><span class="price-amount"><span class="currencySymbol">৳ </span>85.00</span></ins>
+                          <del><span class="price-amount"><span class="currencySymbol">৳ </span>95.00</span></del>
+                        </div>
+
+                        <div class="buttons card-padding">
+
+                          <a href="#" class="btn add-cart-btn">
+                            <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                            add to cart
+                          </a>
+
+                          <a href="#" class="btn add-cart-btn buy_now_btn">
+                            <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                            By Now
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-3">
+                  <div class="product-item">
+                    <div class="contain-product layout-default">
+                      <div class="product-thumb">
+                        <a href="#" class="link-to-product">
+                          <img src="/assets/images/svImg.jpg" alt="Vegetables" width="270" height="270"
+                            class="product-thumnail">
+                        </a>
+                        <p class="offer">-30%</p>
+                        <p class="attribute">HOT</p>
+
+                        <a class="lookup btn_call_quickview" href="#" title="Quick View"><i
+                            class="biolife-icon icon-search"></i></a>
+                      </div>
+                      <div class="info">
+                        <h4 class="product-title">
+                          <a href="#" class="pr-name">খলিশা ফুলের মধু</a>
+                        </h4>
+                        <div class="price ">
+                          <ins><span class="price-amount"><span class="currencySymbol">৳ </span>85.00</span></ins>
+                          <del><span class="price-amount"><span class="currencySymbol">৳ </span>95.00</span></del>
+                        </div>
+
+                        <div class="buttons card-padding">
+
+                          <a href="#" class="btn add-cart-btn">
+                            <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                            add to cart
+                          </a>
+
+                          <a href="#" class="btn add-cart-btn buy_now_btn">
+                            <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                            By Now
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-3">
+                  <div class="product-item">
+                    <div class="contain-product layout-default">
+                      <div class="product-thumb">
+                        <a href="#" class="link-to-product">
+                          <img src="/assets/images/svImg.jpg" alt="Vegetables" width="270" height="270"
+                            class="product-thumnail">
+                        </a>
+                        <p class="offer">-30%</p>
+                        <p class="attribute">HOT</p>
+
+                        <a class="lookup btn_call_quickview" href="#" title="Quick View"><i
+                            class="biolife-icon icon-search"></i></a>
+                      </div>
+                      <div class="info">
+                        <h4 class="product-title">
+                          <a href="#" class="pr-name">খলিশা ফুলের মধু</a>
+                        </h4>
+                        <div class="price ">
+                          <ins><span class="price-amount"><span class="currencySymbol">৳ </span>85.00</span></ins>
+                          <del><span class="price-amount"><span class="currencySymbol">৳ </span>95.00</span></del>
+                        </div>
+
+                        <div class="buttons card-padding">
+
+                          <a href="#" class="btn add-cart-btn">
+                            <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                            add to cart
+                          </a>
+
+                          <a href="#" class="btn add-cart-btn buy_now_btn">
+                            <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                            By Now
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-3">
+                  <div class="product-item">
+                    <div class="contain-product layout-default">
+                      <div class="product-thumb">
+                        <a href="#" class="link-to-product">
+                          <img src="/assets/images/svImg.jpg" alt="Vegetables" width="270" height="270"
+                            class="product-thumnail">
+                        </a>
+                        <p class="offer">-30%</p>
+                        <p class="attribute">HOT</p>
+
+                        <a class="lookup btn_call_quickview" href="#" title="Quick View"><i
+                            class="biolife-icon icon-search"></i></a>
+                      </div>
+                      <div class="info">
+                        <h4 class="product-title">
+                          <a href="#" class="pr-name">খলিশা ফুলের মধু</a>
+                        </h4>
+                        <div class="price ">
+                          <ins><span class="price-amount"><span class="currencySymbol">৳ </span>85.00</span></ins>
+                          <del><span class="price-amount"><span class="currencySymbol">৳ </span>95.00</span></del>
+                        </div>
+
+                        <div class="buttons card-padding">
+
+                          <a href="#" class="btn add-cart-btn">
+                            <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                            add to cart
+                          </a>
+
+                          <a href="#" class="btn add-cart-btn buy_now_btn">
+                            <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                            By Now
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-3">
+                  <div class="product-item">
+                    <div class="contain-product layout-default">
+                      <div class="product-thumb">
+                        <a href="#" class="link-to-product">
+                          <img src="/assets/images/svImg.jpg" alt="Vegetables" width="270" height="270"
+                            class="product-thumnail">
+                        </a>
+                        <p class="offer">-30%</p>
+                        <p class="attribute">HOT</p>
+
+                        <a class="lookup btn_call_quickview" href="#" title="Quick View"><i
+                            class="biolife-icon icon-search"></i></a>
+                      </div>
+                      <div class="info">
+                        <h4 class="product-title">
+                          <a href="#" class="pr-name">খলিশা ফুলের মধু</a>
+                        </h4>
+                        <div class="price ">
+                          <ins><span class="price-amount"><span class="currencySymbol">৳ </span>85.00</span></ins>
+                          <del><span class="price-amount"><span class="currencySymbol">৳ </span>95.00</span></del>
+                        </div>
+
+                        <div class="buttons card-padding">
+
+                          <a href="#" class="btn add-cart-btn">
+                            <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                            add to cart
+                          </a>
+
+                          <a href="#" class="btn add-cart-btn buy_now_btn">
+                            <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                            By Now
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-3">
+                  <div class="product-item">
+                    <div class="contain-product layout-default">
+                      <div class="product-thumb">
+                        <a href="#" class="link-to-product">
+                          <img src="/assets/images/svImg.jpg" alt="Vegetables" width="270" height="270"
+                            class="product-thumnail">
+                        </a>
+                        <p class="offer">-30%</p>
+                        <p class="attribute">HOT</p>
+
+                        <a class="lookup btn_call_quickview" href="#" title="Quick View"><i
+                            class="biolife-icon icon-search"></i></a>
+                      </div>
+                      <div class="info">
+                        <h4 class="product-title">
+                          <a href="#" class="pr-name">খলিশা ফুলের মধু</a>
+                        </h4>
+                        <div class="price ">
+                          <ins><span class="price-amount"><span class="currencySymbol">৳ </span>85.00</span></ins>
+                          <del><span class="price-amount"><span class="currencySymbol">৳ </span>95.00</span></del>
+                        </div>
+
+                        <div class="buttons card-padding">
+
+                          <a href="#" class="btn add-cart-btn">
+                            <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                            add to cart
+                          </a>
+
+                          <a href="#" class="btn add-cart-btn buy_now_btn">
+                            <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                            By Now
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-3">
+                  <div class="product-item">
+                    <div class="contain-product layout-default">
+                      <div class="product-thumb">
+                        <a href="#" class="link-to-product">
+                          <img src="/assets/images/svImg.jpg" alt="Vegetables" width="270" height="270"
+                            class="product-thumnail">
+                        </a>
+                        <p class="offer">-30%</p>
+                        <p class="attribute">HOT</p>
+
+                        <a class="lookup btn_call_quickview" href="#" title="Quick View"><i
+                            class="biolife-icon icon-search"></i></a>
+                      </div>
+                      <div class="info">
+                        <h4 class="product-title">
+                          <a href="#" class="pr-name">খলিশা ফুলের মধু</a>
+                        </h4>
+                        <div class="price ">
+                          <ins><span class="price-amount"><span class="currencySymbol">৳ </span>85.00</span></ins>
+                          <del><span class="price-amount"><span class="currencySymbol">৳ </span>95.00</span></del>
+                        </div>
+
+                        <div class="buttons card-padding">
+
+                          <a href="#" class="btn add-cart-btn">
+                            <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                            add to cart
+                          </a>
+
+                          <a href="#" class="btn add-cart-btn buy_now_btn">
+                            <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                            By Now
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-3">
+                  <div class="product-item">
+                    <div class="contain-product layout-default">
+                      <div class="product-thumb">
+                        <a href="#" class="link-to-product">
+                          <img src="/assets/images/svImg.jpg" alt="Vegetables" width="270" height="270"
+                            class="product-thumnail">
+                        </a>
+                        <p class="offer">-30%</p>
+                        <p class="attribute">HOT</p>
+
+                        <a class="lookup btn_call_quickview" href="#" title="Quick View"><i
+                            class="biolife-icon icon-search"></i></a>
+                      </div>
+                      <div class="info">
+                        <h4 class="product-title">
+                          <a href="#" class="pr-name">খলিশা ফুলের মধু</a>
+                        </h4>
+                        <div class="price ">
+                          <ins><span class="price-amount"><span class="currencySymbol">৳ </span>85.00</span></ins>
+                          <del><span class="price-amount"><span class="currencySymbol">৳ </span>95.00</span></del>
+                        </div>
+
+                        <div class="buttons card-padding">
+
+                          <a href="#" class="btn add-cart-btn">
+                            <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                            add to cart
+                          </a>
+
+                          <a href="#" class="btn add-cart-btn buy_now_btn">
+                            <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                            By Now
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+
+              <div class="biolife-panigations-block">
+                <ul class="panigation-contain">
+                  <li><span class="current-page">1</span></li>
+                  <li><a href="#" class="link-page">2</a></li>
+                  <li><a href="#" class="link-page">3</a></li>
+                  <li><span class="sep">....</span></li>
+                  <li><a href="#" class="link-page">20</a></li>
+                  <li><a href="#" class="link-page next"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                </ul>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+
+
+  <!-- shoping cart canvas is hare start  -->
+  <div id="offcanvasRight" class="offcanvas-right">
+    <div class="offcanvas-header">
+      <h4>Shopping cart</h4>
+      <button class="close-offcanvas">&times; Close</button>
+    </div>
+
+    <div class="offcanvas-body">
+      <table class="table table-light table-borderless table-hover text-center mb-0">
+        <thead class="thead-dark">
+          <tr>
+            <th>Products</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <tbody class="align-middle">
+          <tr>
+            <td class="align-middle">সরিষা ফুলের মধু</td>
+            <td class="align-middle">৳150</td>
+            <td class="align-middle">
+              <div class="input-group quantity">
+                <div class="input-group-btn">
+                  <button class="btn btn-primary btn-minus">
+                    <i class="fa fa-minus"></i>
+                  </button>
+                </div>
+                <input type="text" class="card-input" value="1" />
+                <div class="input-group-btn">
+                  <button class="btn btn-primary btn-plus">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </td>
+            <td class="align-middle">৳150</td>
+            <td class="align-middle">
+              <button class="btn btn-sm btn-danger">
+                <i class="fa fa-times"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="offcanvas-overlay"></div>
+  <!-- canvas cart is hare start  -->
+
+  <!--Quickview Popup-->
+    <div id="biolife-quickview-block" class="biolife-quickview-block">
+        <div class="quickview-container">
+            <a href="#" class="btn-close-quickview" data-object="open-quickview-block"><span class="biolife-icon icon-close-menu"></span></a>
+            <div class="biolife-quickview-inner">
+                <div class="media">
+                    <ul class="biolife-carousel quickview-for" data-slick='{"arrows":false,"dots":false,"slidesMargin":30,"slidesToShow":1,"slidesToScroll":1,"fade":true,"asNavFor":".quickview-nav"}'>
+                        <li><img src="assets/images/detail1.jpg" alt="" style="width: 351px; height: 306px;" width="500" height="500"></li>
+                        <li><img src="assets/images/detail2.jpg" alt="" style="width: 351px; height: 306px;" width="500" height="500"></li>
+                        <li><img src="assets/images/detail3.jpg" alt="" style="width: 351px; height: 306px;" width="500" height="500"></li>
+                        
+                    </ul>
+                    <ul class="biolife-carousel quickview-nav" data-slick='{"arrows":true,"dots":false,"centerMode":false,"focusOnSelect":true,"slidesMargin":10,"slidesToShow":3,"slidesToScroll":1,"asNavFor":".quickview-for"}'>
+                        <li><img src="assets/images/detail1.jpg" alt="" style="height: 50px !important;" width="88" height="88"></li>
+                        <li><img src="assets/images/detail2.jpg" alt="" style="height: 50px !important;" width="88" height="88"></li>
+                        <li><img src="assets/images/detail3.jpg" alt="" style="height: 50px !important;" width="88" height="88"></li>
+                        
+                    </ul>
+                </div>
+                <div class="product-attribute">
+                    <h4 class="title"><a href="#" class="pr-name">খলিশা ফুলের মধু</a></h4>
+                    <div class="rating">
+                        <p class="star-rating"><span class="width-80percent"></span></p>
+                    </div>
+
+                    <div class="price price-contain">
+                        <ins><span class="price-amount"><span class="currencySymbol">৳ </span>480</span></ins>
+                        <del><span class="price-amount"><span class="currencySymbol">৳ </span>528</span></del>
+                    </div>
+                    <p class="excerpt">
+                        অর্গানিক ফুডের বিশ্বস্ত প্রতিষ্ঠানপ্রথম কথা অর্গানিক ফুড নিয়ে আপনাদের অনেকের মনেই দ্বিধা দ্বন্দ্ব ও সন্দেহ থাকে আর এটা থাকাই স্বাভাবিক।
+
+                        সবাই খাটি পণ্যটি খেতে চায়।</p>
+                    <div class="from-cart">
+                        <div class="qty-input">
+                            <input type="text" name="qty12554" value="1" data-max_value="20" data-min_value="1" data-step="1">
+                            <a href="#" class="qty-btn btn-up"><i class="fa fa-caret-up" aria-hidden="true"></i></a>
+                            <a href="#" class="qty-btn btn-down"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="buttons">
+                            <a href="#" class="btn add-to-cart-btn btn-bold">add to cart</a>
+                        </div>
+                    </div>
+
+                    <div class="product-meta">
+                        <div class="product-atts">
+                            <div class="product-atts-item">
+                                <b class="meta-title">Categories:</b>
+                                <ul class="meta-list">
+                                    <li><a href="#" class="meta-link">Honey</a></li>
+                                    <li><a href="#" class="meta-link">Organic Food</a></li>
+                                </ul>
+                            </div>
+                            <div class="product-atts-item">
+                                <b class="meta-title">Tags:</b>
+                                <ul class="meta-list">
+                                    <li><a href="#" class="meta-link">food theme</a></li>
+                                    <li><a href="#" class="meta-link">organic food</a></li>
+                                    <li><a href="#" class="meta-link">organic theme</a></li>
+                                </ul>
+                            </div>
+                            <div class="product-atts-item">
+                                <b class="meta-title">Brand:</b>
+                                <ul class="meta-list">
+                                    <li><a href="#" class="meta-link">Kamran Hoeny</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <span class="sku">SKU: N/A</span>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  <!-- FOOTER -->
+  <footer id="footer" class="footer layout-03">
+    <div class="footer-content background-footer-03">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-4 col-sm-6 md-margin-top-5px sm-margin-top-50px xs-margin-top-40px">
+            <section class="footer-item">
+              <h3 class="section-title">Kamran Honey</h3>
+              <div class="row">
+                <div class="col-12">
+                  <div class="wrap-custom-menu vertical-menu-2" style="color: #fff">
+                    We are committed to delivering pure, natural, and
+                    authentic honey. Sourced with care and packed with
+                    goodness, our honey brings nature’s sweetness straight to
+                    your home.
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <div class="col-lg-4 col-md-4 col-sm-6 md-margin-top-5px sm-margin-top-50px xs-margin-top-40px">
+            <section class="footer-item">
+              <h3 class="section-title">Contact Us</h3>
+              <div class="contact-info-block footer-layout xs-padding-top-10px">
+                <ul class="contact-lines">
+                  <li>
+                    <p class="info-item">
+                      <i class="biolife-icon icon-location"></i>
+                      <b class="desc">7563 St. Vicent Place, Glasgow, Greater Newyork
+                        NH7689, UK
+                      </b>
+                    </p>
+                  </li>
+                  <li>
+                    <p class="info-item">
+                      <i class="biolife-icon icon-phone"></i>
+                      <b class="desc">Phone: (+067) 234 789 (+068) 222 888</b>
+                    </p>
+                  </li>
+                  <li>
+                    <p class="info-item">
+                      <i class="biolife-icon icon-letter"></i>
+                      <b class="desc">Email: contact@company.com</b>
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </section>
+          </div>
+
+          <div class="col-lg-2 col-md-4 col-sm-6 md-margin-top-5px sm-margin-top-50px xs-margin-top-40px">
+            <section class="footer-item">
+              <h3 class="section-title">Useful Links</h3>
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="wrap-custom-menu vertical-menu-2">
+                    <ul class="menu">
+                      <li><a href="#">Home</a></li>
+                      <li><a href="#">About Us</a></li>
+                      <li><a href="#">Product</a></li>
+                      <li><a href="#">Contact</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-sm-6 md-margin-top-5px sm-margin-top-50px xs-margin-top-40px">
+            <section class="footer-item">
+              <h3 class="section-title" style="text-align: center">
+                Social Links
+              </h3>
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="wrap-custom-menu vertical-menu-2">
+                    <ul class="socials">
+                      <li style="background-color: #3b5998">
+                        <a href="#" title="facebook" class="socail-btn"><i class="fa fa-facebook"
+                            aria-hidden="true"></i>
+                          FACEBOOK</a>
+                      </li>
+                      <li style="
+                            background: linear-gradient(
+                              45deg,
+                              #d720c1,
+                              red,
+                              #e4eb0c
+                            );
+                          ">
+                        <a href="#" title="pinterest" class="socail-btn"><i class="fa fa-instagram"
+                            aria-hidden="true"></i>
+                          INSTAGRAM</a>
+                      </li>
+                      <li style="background: red">
+                        <a href="#" title="youtube" class="socail-btn"><i class="fa fa-youtube" aria-hidden="true"></i>
+                          YOUTUBE</a>
+                      </li>
+                      <li style="background-color: #0a0a0a">
+                        <a href="#" title="twitter" class="socail-btn"><i class="fa fa-twitter" aria-hidden="true"></i>
+                          TWITTER</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12 col-sm-12 col-xs-12 d-flex justify-content-end">
+            <div class="copy-right-text">
+              <p style="color: #fff; text-align: right">
+                Designed And Developed by
+                <a href="https://linktechbd.com/">Linkup Technology</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll Top Button -->
+  <!-- <a class="btn-scroll-top"><i class="biolife-icon icon-left-arrow"></i></a> -->
+
+  <script src="assets/js/jquery-3.4.1.min.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
+  <script src="assets/js/jquery.countdown.min.js"></script>
+  <script src="assets/js/jquery.nice-select.min.js"></script>
+  <script src="assets/js/jquery.nicescroll.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.umd.js"></script>
+  <script src="assets/js/slick.min.js"></script>
+  <script src="assets/js/biolife.framework.js"></script>
+  <script src="assets/js/functions.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      $("#openOffcanvas").click(function () {
+        $("#offcanvasRight").addClass("active");
+        $(".offcanvas-overlay").addClass("active");
+      });
+
+      $(".close-offcanvas, .offcanvas-overlay").click(function () {
+        $("#offcanvasRight").removeClass("active");
+        $(".offcanvas-overlay").removeClass("active");
+      });
+    });
+  </script>
+</body>
+
+</html>
