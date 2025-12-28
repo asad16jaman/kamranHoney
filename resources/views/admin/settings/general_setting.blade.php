@@ -87,8 +87,8 @@
                             <!-- Facebook URL -->
                             <label for="facebook_url" class="col-sm-1 col-form-label">Facebook</label>
                             <div class="col-sm-3">
-                                <input type="url" class="form-control form-control-sm" id="facebook_url" name="facebook_url"
-                                    value="{{ old('facebook_url', $setting->facebook_url) }}">
+                                <input type="url" class="form-control form-control-sm" id="facebook_url"
+                                    name="facebook_url" value="{{ old('facebook_url', $setting->facebook_url) }}">
                                 @error('facebook_url')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -97,8 +97,8 @@
                             <!-- Twitter URL -->
                             <label for="twitter_url" class="col-sm-1 col-form-label">Twitter</label>
                             <div class="col-sm-3">
-                                <input type="url" class="form-control form-control-sm" id="twitter_url" name="twitter_url"
-                                    value="{{ old('twitter_url', $setting->twitter_url) }}">
+                                <input type="url" class="form-control form-control-sm" id="twitter_url"
+                                    name="twitter_url" value="{{ old('twitter_url', $setting->twitter_url) }}">
                                 @error('twitter_url')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -107,8 +107,8 @@
                             <!-- LinkedIn URL -->
                             <label for="linkedin_url" class="col-sm-1 col-form-label">LinkedIn</label>
                             <div class="col-sm-3">
-                                <input type="url" class="form-control form-control-sm" id="linkedin_url" name="linkedin_url"
-                                    value="{{ old('linkedin_url', $setting->linkedin_url) }}">
+                                <input type="url" class="form-control form-control-sm" id="linkedin_url"
+                                    name="linkedin_url" value="{{ old('linkedin_url', $setting->linkedin_url) }}">
                                 @error('linkedin_url')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -176,8 +176,8 @@
                             <!-- Copyright -->
                             <label for="copyright" class="col-sm-1 col-form-label">Copyright</label>
                             <div class="col-sm-3">
-                                <input type="text" class="form-control form-control-sm" id="copyright" name="copyright"
-                                    value="{{ old('copyright', $setting->copyright) }}" required>
+                                <input type="text" class="form-control form-control-sm" id="copyright"
+                                    name="copyright" value="{{ old('copyright', $setting->copyright) }}" required>
                                 @error('copyright')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -186,8 +186,8 @@
                             <!-- Google Map -->
                             <label for="google_map" class="col-sm-1 col-form-label">Google Map</label>
                             <div class="col-sm-3">
-                                <input type="text" class="form-control form-control-sm" id="google_map" name="google_map"
-                                    value="{{ old('google_map', $setting->google_map) }}">
+                                <input type="text" class="form-control form-control-sm" id="google_map"
+                                    name="google_map" value="{{ old('google_map', $setting->google_map) }}">
                                 @error('google_map')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -195,12 +195,20 @@
                         </div>
 
                         <div class="row">
-                            <!-- Office Hour -->
-                            <label for="office_hour" class="col-sm-1 col-form-label">Office Hour</label>
+                            <!-- Video Upload -->
+                            <label for="video_file" class="col-sm-1 col-form-label">Video</label>
                             <div class="col-sm-3">
-                                <input type="text" class="form-control form-control-sm" id="office_hour" name="office_hour"
-                                    value="{{ old('office_hour', $setting->office_hour) }}">
-                                @error('office_hour')
+                                <input type="file" class="form-control form-control-sm" id="video_file"
+                                    name="video_file" accept="video/mp4,video/webm,video/ogg">
+
+                                @if (!empty($setting->video_file))
+                                    <small class="text-muted d-block mt-1">
+                                        Current Video:
+                                        <a href="{{ asset($setting->video_file) }}" target="_blank">View</a>
+                                    </small>
+                                @endif
+
+                                @error('video_file')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -209,8 +217,7 @@
                             <label for="inside" class="col-sm-1 col-form-label">Inside Dhaka</label>
                             <div class="col-sm-3">
                                 <input type="number" step="0.01" min="0" class="form-control form-control-sm"
-                                    id="inside" name="inside"
-                                    value="{{ old('inside', $setting->inside) }}">
+                                    id="inside" name="inside" value="{{ old('inside', $setting->inside) }}">
                                 @error('inside')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -219,8 +226,7 @@
                             <label for="outside" class="col-sm-1 col-form-label">Outside Dhaka</label>
                             <div class="col-sm-3">
                                 <input type="number" step="0.01" min="0" class="form-control form-control-sm"
-                                    id="outside" name="outside"
-                                    value="{{ old('outside', $setting->outside) }}">
+                                    id="outside" name="outside" value="{{ old('outside', $setting->outside) }}">
                                 @error('outside')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -231,10 +237,8 @@
                             <!-- About the Company -->
                             <label for="company_about" class="col-sm-1 col-form-label">About</label>
                             <div class="col-sm-12">
-                                <textarea id="company_about_editor"
-                                    class="form-control form-control-sm @error('company_about') is-invalid @enderror"
-                                    name="company_about" placeholder="Enter About the Company" rows="5"
-                                    required>{{ old('company_about', $setting->company_about) }}</textarea>
+                                <textarea id="company_about_editor" class="form-control form-control-sm @error('company_about') is-invalid @enderror"
+                                    name="company_about" placeholder="Enter About the Company" rows="5" required>{{ old('company_about', $setting->company_about) }}</textarea>
                                 @error('company_about')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -258,7 +262,7 @@
     <script>
         function previewImage(event, previewId) {
             const reader = new FileReader();
-            reader.onload = function () {
+            reader.onload = function() {
                 const imgElement = document.getElementById(previewId);
                 imgElement.src = reader.result;
                 imgElement.classList.remove('d-none');
@@ -272,10 +276,10 @@
                 console.error('CKEditor Error:', error);
             });
 
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const successAlert = document.getElementById('success-alert');
             if (successAlert) {
-                setTimeout(function () {
+                setTimeout(function() {
                     successAlert.style.display = 'none';
                 }, 3000);
             }

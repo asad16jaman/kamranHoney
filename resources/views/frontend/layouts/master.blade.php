@@ -459,7 +459,7 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            min-width: 100%;
+            min-width: 101%;
             min-height: 100%;
             width: auto;
             height: auto;

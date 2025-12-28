@@ -34,11 +34,11 @@ class SettingsHelper
 
                 'company_about' => 'Sample Company is a leader in technology solutions.',
                 'google_map' => '<iframe src="..."></iframe>',
-                'office_hour' => 'Saturday to Friday: 9:00 AM - 5:00 PM',
+                'video_file' => '', 
 
                 'copyright' => '© 2025 Sample Company',
             ];
-
+ 
             $setting = Setting::first();
 
             if (!$setting) {

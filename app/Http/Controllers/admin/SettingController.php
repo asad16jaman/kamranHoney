@@ -33,7 +33,7 @@ class SettingController extends Controller
                 'footer_description' => '',
                 'company_about' => 'Sample Company is a leader in technology solutions.',
                 'google_map' => '',
-                'office_hour' => 'Saturday to Friday: 9:00 AM - 5:00 PM',
+                'video_file' => '',
                 'copyright' => '© 2025 Sample Company',
             ]);
 
@@ -70,7 +70,7 @@ class SettingController extends Controller
             'footer_description' => 'nullable|string|max:1000',
             'company_about' => 'required|string',
             'google_map' => 'nullable|string',
-            'office_hour' => 'nullable|string',
+            'video_file' => 'nullable|mimes:mp4,webm,ogg|max:51200',
             'copyright' => 'required|string|max:255',
         ]);
 
@@ -113,6 +113,17 @@ class SettingController extends Controller
                 $setting->footer_logo = $footerLogoName;
             }
 
+            if ($request->hasFile('video_file')) {
+                if ($setting->video_file && file_exists(public_path($setting->video_file))) {
+                    unlink(public_path($setting->video_file));
+                }
+                $video = $request->file('video_file');
+                $videoName = time() . '_' . rand(1000, 9999) . '.' . $video->getClientOriginalExtension();
+                $videoPath = 'uploads/videos/';
+                $video->move(public_path($videoPath), $videoName);
+                $setting->video_file = $videoPath . $videoName;
+            }
+
             // Update other fields
             $setting->company_name = $request->company_name;
             $setting->company_address = $request->company_address;
@@ -131,7 +142,6 @@ class SettingController extends Controller
             $setting->footer_description = $request->footer_description;
             $setting->company_about = strip_tags($request->company_about);
             $setting->google_map = $request->google_map;
-            $setting->office_hour = $request->office_hour;
             $setting->copyright = $request->copyright;
 
             $setting->save();

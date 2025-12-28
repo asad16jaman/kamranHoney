@@ -31,7 +31,7 @@ class Setting extends Model
         'footer_description',
         'company_about',
         'google_map',
-        'office_hour',
+        'video_file',
         'copyright',
     ];
 }

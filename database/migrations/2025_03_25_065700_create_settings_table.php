@@ -35,7 +35,7 @@ return new class extends Migration {
 
             $table->text('company_about')->nullable();
             $table->text('google_map')->nullable();
-            $table->text('office_hour')->nullable();
+            $table->text('video_file')->nullable();
 
             $table->text('copyright')->nullable();
 
