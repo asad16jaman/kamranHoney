@@ -177,7 +177,7 @@
         $(this).not('.slick-initialized').each(function () {
             let slide           = $(this),
                 default_config  = slide.attr('data-slick'),
-                config          = default_config !== undefined ? JSON.parse(default_config) : { arrows: true, dots: false, slidesMargin: 0, slidesToShow: 1, infinite: true, speed: 400};
+                config          = default_config !== undefined ? JSON.parse(default_config) : { arrows: true, dots: false, slidesMargin: 0, slidesToShow: 1, infinite: true, speed: 400,autoplay: true,autoplaySpeed: 500};
 
             if (config.vertical === true ) {
                 config.prevArrow = '<span class="biolife-icon icon-left-arrow prev"></span>';
