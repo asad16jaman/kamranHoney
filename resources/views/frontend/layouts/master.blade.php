@@ -1,3 +1,7 @@
+@php
+    $setting = \App\Helpers\SettingsHelper::getSetting();
+@endphp
+
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
@@ -7,7 +11,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Kamran Honey | Home Page</title>
-    <link rel="shortcut icon" href="{{ asset('frontend/assets') }}/images/logo.jpg" type="image/x-icon" />
+    @if ($setting->favicon_image)
+        <link rel="shortcut icon" href="{{ asset('uploads/logo_and_icon/' . $setting->favicon_image) }}"
+            type="image/x-icon" />
+    @else
+        <link rel="shortcut icon" href="{{ asset('uploads/no_images/no-image.png') }}" type="image/x-icon" />
+    @endif
 
     <link href="https://fonts.googleapis.com/css?family=Cairo:400,600,700&amp;display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Poppins:600&amp;display=swap" rel="stylesheet" />

@@ -3664,6 +3664,41 @@ body.open-mobile-search .header-area.layout-02 {
     color: #222222;
 }
 
+#footer .row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+#footer [class*="col-"] {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#footer .copy-right-text p {
+    margin: 0;
+}
+
+#footer .socials {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+#footer .socials li {
+    width: 100%;
+    margin-bottom: 8px;
+    border-radius: 4px;
+}
+
+#footer .socials li a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+    font-weight: 500;
+    text-decoration: none;
+}
+
 .border-top-type-1 {
     border-top: 1px solid #e6e6e6;
 }
@@ -14801,8 +14836,17 @@ body.open-quickview-block .biolife-quickview-block {
         margin: 0 0 30px;
     }
 
+    .footer-item {
+        margin-left: 0 !important;
+    }
+
     .footer-item .section-title {
         font-size: 19px;
+    }
+
+    #footer .footer-item,
+    #footer .footer-item * {
+        text-align: left !important;
     }
 
     .biolife-cart-info .minicart-block .cart-content {

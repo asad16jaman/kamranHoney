@@ -1,8 +1,13 @@
+@php
+    $setting = \App\Helpers\SettingsHelper::getSetting();
+    $videoSrc = $setting->video_file ? asset($setting->video_file) : asset('frontend/assets/images/4293-178324579.mp4');
+@endphp
+
 @if (Route::currentRouteName() === 'home')
     <div class="video-header-wrapper">
         <!-- Background Video -->
-        <video class="bg-video" autoplay muted loop playsinline>
-            <source src="{{ asset('frontend/assets/images/4293-178324579.mp4') }}" type="video/mp4">
+         <video class="bg-video" autoplay muted loop playsinline>
+            <source src="{{ $videoSrc }}" type="video/mp4">
             Your browser does not support the video tag.
         </video>
 
@@ -16,20 +21,20 @@
             <div class="top-bar left">
                 <ul class="horizontal-menu">
                     <li>
-                        <a href="#"><i class="fa fa-phone" aria-hidden="true"></i>+8801711275469</a>
+                        <a href="tel:{{ $setting->company_phone }}"><i class="fa fa-phone" aria-hidden="true"></i>{{ $setting->company_phone }}</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>cmd@jjnhoney.com</a>
+                        <a href="mailto:{{ $setting->company_email }}"><i class="fa fa-envelope" aria-hidden="true"></i>{{ $setting->company_email }}</a>
                     </li>
                 </ul>
             </div>
             <div class="top-bar right">
                 <ul class="social-list">
                     <li>
-                        <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                        <a href="{{ $setting->twitter_url }}"><i class="fa fa-twitter" aria-hidden="true"></i></a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                        <a href="{{ $setting->facebook_url }}"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                     </li>
                 </ul>
                 <ul class="horizontal-menu">
@@ -44,8 +49,11 @@
             <div class="row align-items-center">
                 <div class="col-lg-1 col-md-6 col-xs-6">
                     <a href="{{ route('home') }}" class="biolife-logo">
-                        <img style="width:100%" src="{{ asset('frontend/assets/images/logo-removebg-preview.png') }}"
-                            alt="biolife logo" />
+                        <img style="width:100%"
+                            src="{{ $setting && $setting->company_logo
+                                ? asset('uploads/logo_and_icon/' . $setting->company_logo)
+                                : asset('frontend/assets/images/logo-removebg-preview.png') }}"
+                            alt="Company Logo" />
                     </a>
                 </div>
 
