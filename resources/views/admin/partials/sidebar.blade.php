@@ -15,8 +15,7 @@
                             checkAccess('subcategories.create') ||
                             checkAccess('subcategories.index') ||
                             checkAccess('client.create') ||
-                            checkAccess('client.index') ||
-                            checkAccess('sizes_colors.index'))
+                            checkAccess('client.index'))
                         <!-- Catalog Setup -->
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#collapseCatalogSetup" aria-expanded="false"
@@ -58,14 +57,6 @@
                                 @if (checkAccess('client.index'))
                                     <a class="nav-link {{ Request::routeIs('client.index') ? 'active' : '' }}"
                                         href="{{ route('client.index') }}">Brand List</a>
-                                @endif
-
-                                {{-- Size & Color --}}
-                                @if (checkAccess('sizes_colors.index'))
-                                    <a class="nav-link {{ Request::routeIs('sizes_colors.index') ? 'active' : '' }}"
-                                        href="{{ route('sizes_colors.index') }}">
-                                        Create Size & Color
-                                    </a>
                                 @endif
                             </nav>
                         </div>

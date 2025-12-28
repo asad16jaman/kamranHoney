@@ -39,7 +39,8 @@ class HomeController extends Controller
     public function home()
     {
         try {
-            return view('frontend.pages.home');
+            $categories = Category::where('status', 'a')->latest()->get();
+            return view('frontend.pages.home', compact('categories'));
         } catch (\Exception $e) {
             Log::error('Error fetching sliders: ' . $e->getMessage());
             return redirect()->route('home')->with('error', 'There was an error loading the sliders. Please try again later.');
