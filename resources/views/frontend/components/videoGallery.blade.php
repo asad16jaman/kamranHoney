@@ -2,7 +2,7 @@
 <div class="brand-slide xs-padding-bottom-50px">
     <div class="biolife-title-box xs-padding-bottom-50px">
         <div class="g-img">
-            <h3 class="main-title cmb-5 Customshake ">Video Gallery</h3>
+            <h3 class="main-title cmb-5">Video Gallery</h3>
         </div>
     </div>
 

@@ -3,7 +3,7 @@
     <div class="container fade-up-on-scroll">
         <div class="biolife-title-box mb-30 mt-30">
             <div class="g-img">
-                <h3 class="main-title cmb-5 Customshake">From the Blog</h3>
+                <h3 class="main-title cmb-5">From the Blog</h3>
             </div>
         </div>
         <ul class="biolife-carousel nav-center nav-none-on-mobile xs-margin-top-36px"

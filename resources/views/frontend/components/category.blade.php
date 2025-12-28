@@ -2,7 +2,7 @@
                 <div class="container">
                     <div class="biolife-title-box mb-30">
                         <div class="g-img">
-                            <h3 class="main-title Customshake" style="margin-bottom: 8px">
+                            <h3 class="main-title" style="margin-bottom: 8px">
                                 Product Category
                             </h3>
                         </div>

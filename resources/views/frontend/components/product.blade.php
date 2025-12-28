@@ -3,7 +3,7 @@
     <div class="container mt-30">
         <div class="biolife-title-box mb-30">
             <div class="g-img">
-                <h3 class="main-title cmb-5 Customshake">Our Products</h3>
+                <h3 class="main-title cmb-5">Our Products</h3>
             </div>
         </div>
 
