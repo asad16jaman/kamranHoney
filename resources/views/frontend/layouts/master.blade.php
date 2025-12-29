@@ -41,6 +41,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend/assets') }}/css/slick.min.css" />
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend/assets') }}/css/style.css" />
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend/assets') }}/css/main-color.css" />
+
     <style>
         /* //navbar css */
         .align-items-center {
@@ -498,6 +499,8 @@
 
         /* top video css end */
     </style>
+
+    @stack('styles')
 </head>
 
 <body class="">
@@ -518,7 +521,7 @@
     <!-- Page Contain -->
     <div class="page-contain mt-15">
         <div id="main-content" class="main-content">
-            
+
             @yield('content')
 
         </div>
@@ -537,54 +540,21 @@
                     class="biolife-icon icon-close-menu"></span></a>
             <div class="biolife-quickview-inner">
                 <div class="media">
-                    <ul class="biolife-carousel quickview-for"
-                        data-slick='{"arrows":false,"dots":false,"slidesMargin":30,"slidesToShow":1,"slidesToScroll":1,"fade":true,"asNavFor":".quickview-nav"}'>
-                        <li>
-                            <img src="{{ asset('frontend/assets') }}/images/detail1.jpg" alt=""
-                                style="width: 351px; height: 306px" width="500" height="500" />
-                        </li>
-                        <li>
-                            <img src="{{ asset('frontend/assets') }}/images/detail2.jpg" alt=""
-                                style="width: 351px; height: 306px" width="500" height="500" />
-                        </li>
-                        <li>
-                            <img src="{{ asset('frontend/assets') }}/images/detail3.jpg" alt=""
-                                style="width: 351px; height: 306px" width="500" height="500" />
-                        </li>
-                    </ul>
-                    <ul class="biolife-carousel quickview-nav"
-                        data-slick='{"arrows":true,"dots":false,"centerMode":false,"focusOnSelect":true,"slidesMargin":10,"slidesToShow":3,"slidesToScroll":1,"asNavFor":".quickview-for"}'>
-                        <li>
-                            <img src="{{ asset('frontend/assets') }}/images/detail1.jpg" alt=""
-                                style="height: 50px !important" width="88" height="88" />
-                        </li>
-                        <li>
-                            <img src="{{ asset('frontend/assets') }}/images/detail2.jpg" alt=""
-                                style="height: 50px !important" width="88" height="88" />
-                        </li>
-                        <li>
-                            <img src="{{ asset('frontend/assets') }}/images/detail3.jpg" alt=""
-                                style="height: 50px !important" width="88" height="88" />
-                        </li>
-                    </ul>
+                    <ul class="biolife-carousel quickview-for" id="qv-images"></ul>
+                    <ul class="biolife-carousel quickview-nav" id="qv-thumbs"></ul>
                 </div>
                 <div class="product-attribute">
                     <h4 class="title">
-                        <a href="#" class="pr-name">খলিশা ফুলের মধু</a>
+                        <a href="#" class="pr-name" id="qv-name"></a>
                     </h4>
                     <div class="rating">
                         <p class="star-rating"><span class="width-80percent"></span></p>
                     </div>
 
-                    <div class="price price-contain">
-                        <ins><span class="price-amount"><span class="currencySymbol">৳ </span>480</span></ins>
-                        <del><span class="price-amount"><span class="currencySymbol">৳ </span>528</span></del>
-                    </div>
-                    <p class="excerpt">
-                        অর্গানিক ফুডের বিশ্বস্ত প্রতিষ্ঠানপ্রথম কথা অর্গানিক ফুড নিয়ে
-                        আপনাদের অনেকের মনেই দ্বিধা দ্বন্দ্ব ও সন্দেহ থাকে আর এটা থাকাই
-                        স্বাভাবিক। সবাই খাটি পণ্যটি খেতে চায়।
-                    </p>
+                    <div class="price price-contain" id="qv-price"></div>
+
+                    <p class="excerpt" id="qv-description"></p>
+
                     <div class="from-cart">
                         <div class="qty-input">
                             <input type="text" name="qty12554" value="1" data-max_value="20"
@@ -604,22 +574,13 @@
                             <div class="product-atts-item">
                                 <b class="meta-title">Categories:</b>
                                 <ul class="meta-list">
-                                    <li><a href="#" class="meta-link">Honey</a></li>
-                                    <li><a href="#" class="meta-link">Organic Food</a></li>
-                                </ul>
-                            </div>
-                            <div class="product-atts-item">
-                                <b class="meta-title">Tags:</b>
-                                <ul class="meta-list">
-                                    <li><a href="#" class="meta-link">food theme</a></li>
-                                    <li><a href="#" class="meta-link">organic food</a></li>
-                                    <li><a href="#" class="meta-link">organic theme</a></li>
-                                </ul>
+                                    <li><a href="#" class="meta-link" id="qv-category"></a></li>
+                                </ul> 
                             </div>
                             <div class="product-atts-item">
                                 <b class="meta-title">Brand:</b>
                                 <ul class="meta-list">
-                                    <li><a href="#" class="meta-link">Kamran Hoeny</a></li>
+                                    <li><a href="#" class="meta-link" id="qv-brand"></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -671,11 +632,11 @@
                     entries.forEach((entry) => {
                         if (entry.isIntersecting) {
                             entry.target.classList.add("is-visible");
-                            observer.unobserve(entry.target); // একবারই animation হবে
+                            observer.unobserve(entry.target); 
                         }
                     });
                 }, {
-                    threshold: 0.2, // 20% visible হলে trigger
+                    threshold: 0.2, 
                 }
             );
 
@@ -691,6 +652,8 @@
             }
         });
     </script>
+
+    @stack('scripts')
 </body>
 
 </html>

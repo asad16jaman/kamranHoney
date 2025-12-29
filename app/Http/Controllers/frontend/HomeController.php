@@ -40,7 +40,7 @@ class HomeController extends Controller
     {
         try {
             $categories = Category::where('status', 'a')->latest()->get();
-            $products = Product::with('inventory')->where('status', 'a')->latest()->take(8)->get();
+            $products = Product::with(['inventory.unit', 'category', 'client'])->where('status', 'a')->latest()->take(8)->get();
             return view('frontend.pages.home', compact('categories', 'products'));
         } catch (\Exception $e) {
             Log::error('Error fetching sliders: ' . $e->getMessage());

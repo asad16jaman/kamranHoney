@@ -37,7 +37,10 @@
                                     <p class="attribute">HOT</p>
                                 @endif
 
-                                <a class="lookup btn_call_quickview" href="#" title="Quick View">
+                                <a class="lookup btn_call_quickview" href="javascript:void(0)"
+                                    data-product='@json($product)'
+                                    data-gallery='@json(json_decode($product->gallery_images, true))'
+                                    data-inventory='@json($product->inventory)' onclick="openQuickView(this)">
                                     <i class="biolife-icon icon-search"></i>
                                 </a>
                             </div>
@@ -116,3 +119,92 @@
         </div>
     </div>
 </div>
+
+@push('scripts')
+    <script>
+        const ASSET_URL = "{{ asset('') }}";
+    </script>
+
+    <script>
+        function openQuickView(el) {
+            const product = JSON.parse(el.dataset.product);
+            let gallery = JSON.parse(el.dataset.gallery || '[]'); // existing gallery
+            const inventory = JSON.parse(el.dataset.inventory || '[]');
+
+            // If no gallery images, use thumbnail image
+            if (!gallery.length && product.thumbnail_image) {
+                gallery.push(product.thumbnail_image);
+            }
+
+            document.getElementById('qv-name').innerText = product.name;
+            document.getElementById('qv-description').innerText = product.short_description ?? '';
+            document.getElementById('qv-category').innerText = product.category?.name ?? '';
+            document.getElementById('qv-brand').innerText = product.client?.name ?? '';
+
+            let imgHtml = '';
+            let thumbHtml = '';
+
+            gallery.forEach(img => {
+                imgHtml += `
+        <li>
+            <img src="${ASSET_URL}${img}"
+                 style="width:351px;height:306px"
+                 alt="">
+        </li>`;
+                thumbHtml += `
+        <li>
+            <img src="${ASSET_URL}${img}"
+                 style="height:50px"
+                 alt="">
+        </li>`;
+            });
+
+            document.getElementById('qv-images').innerHTML = imgHtml;
+            document.getElementById('qv-thumbs').innerHTML = thumbHtml;
+
+            // Destroy & reinitialize slick
+            if ($('#qv-images').hasClass('slick-initialized')) {
+                $('#qv-images').slick('unslick');
+            }
+            if ($('#qv-thumbs').hasClass('slick-initialized')) {
+                $('#qv-thumbs').slick('unslick');
+            }
+
+            $('#qv-images').slick({
+                arrows: false,
+                dots: false,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                fade: true,
+                asNavFor: '#qv-thumbs'
+            });
+
+            $('#qv-thumbs').slick({
+                arrows: true,
+                dots: false,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                focusOnSelect: true,
+                asNavFor: '#qv-images'
+            });
+
+            // Price logic
+            let prices = inventory.map(i => i.price);
+            let discounts = inventory.filter(i => i.discount_price).map(i => i.discount_price);
+
+            let priceHtml = '';
+            if (discounts.length) {
+                priceHtml = `
+            <ins>৳ ${Math.min(...discounts)} – ৳ ${Math.max(...discounts)}</ins>
+            <del>৳ ${Math.min(...prices)} – ৳ ${Math.max(...prices)}</del>
+        `;
+            } else {
+                priceHtml = `<ins>৳ ${Math.min(...prices)} – ৳ ${Math.max(...prices)}</ins>`;
+            }
+            document.getElementById('qv-price').innerHTML = priceHtml;
+
+            // Open modal
+            document.getElementById('biolife-quickview-block').classList.add('open');
+        }
+    </script>
+@endpush
