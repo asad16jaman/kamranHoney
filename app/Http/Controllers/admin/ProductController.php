@@ -55,12 +55,6 @@ class ProductController extends Controller
             'gallery_images.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'short_description' => 'nullable|string',
             'description' => 'nullable|string',
-            'is_featured' => 'nullable|in:Yes,No',
-            'is_top_selling' => 'nullable|in:Yes,No',
-            'is_popular' => 'nullable|in:Yes,No',
-            'is_special' => 'nullable|in:Yes,No',
-            'is_best' => 'nullable|in:Yes,No',
-            'is_new' => 'nullable|in:Yes,No',
         ]);
 
         try {
@@ -95,12 +89,6 @@ class ProductController extends Controller
                 'product_code' =>  $productCode,
                 'thumbnail_image' => $thumbnailPath,
                 'gallery_images' => json_encode($galleryPaths),
-                'is_featured' => $request->is_featured ?? 'No',
-                'is_top_selling' => $request->is_top_selling ?? 'No',
-                'is_popular' => $request->is_popular ?? 'No',
-                'is_special' => $request->is_special ?? 'No',
-                'is_best' => $request->is_best ?? 'No',
-                'is_new' => $request->is_new ?? 'No',
                 'ip_address' => $request->ip(),
             ]);
 
@@ -143,12 +131,6 @@ class ProductController extends Controller
                 'gallery_images.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
                 'short_description' => 'nullable|string',
                 'description' => 'nullable|string',
-                'is_featured' => 'nullable|in:Yes,No',
-                'is_top_selling' => 'nullable|in:Yes,No',
-                'is_popular' => 'nullable|in:Yes,No',
-                'is_special' => 'nullable|in:Yes,No',
-                'is_best' => 'nullable|in:Yes,No',
-                'is_new' => 'nullable|in:Yes,No',
             ]);
 
             $thumbnailPath = $product->thumbnail_image;
@@ -194,12 +176,6 @@ class ProductController extends Controller
                 'description' => strip_tags($request->description),
                 'thumbnail_image' => $thumbnailPath,
                 'gallery_images' => json_encode(array_values($galleryPaths)),
-                'is_featured' => $request->is_featured ?? 'No',
-                'is_top_selling' => $request->is_top_selling ?? 'No',
-                'is_popular' => $request->is_popular ?? 'No',
-                'is_special' => $request->is_special ?? 'No',
-                'is_best' => $request->is_best ?? 'No',
-                'is_new' => $request->is_new ?? 'No',
             ]);
 
             return redirect()->route('products.index')->with('success', 'Product updated successfully.');

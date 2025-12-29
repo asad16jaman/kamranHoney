@@ -77,22 +77,18 @@
                     <!-- Web Content -->
                     @if (checkAccess('products.create') ||
                             checkAccess('products.index') ||
-                            checkAccess('faqs.create') ||
-                            checkAccess('faqs.index') ||
                             checkAccess('review.index') ||
-                            checkAccess('return.index') ||
                             checkAccess('privacy.index') ||
-                            checkAccess('terms.index') ||
                             checkAccess('contact-us.index'))
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#collapseWebContentMenu"
-                            aria-expanded="{{ Request::is('products*') || Request::is('faq*') || Request::routeIs('about-us.index', 'return.index', 'privacy.index', 'terms.index', 'contact-us.index', 'reviews.index', 'faqs.*') ? 'true' : 'false' }}"
+                            aria-expanded="{{ Request::is('products*') || Request::routeIs('privacy.index', 'contact-us.index', 'reviews.index') ? 'true' : 'false' }}"
                             aria-controls="collapseWebContentMenu">
                             <div class="sb-nav-link-icon"><i class="fas fa-globe"></i></div>
                             Web Content
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-                        <div class="collapse {{  Request::is('products*') || Request::is('faq*') || Request::routeIs('about-us.index', 'return.index', 'privacy.index', 'terms.index', 'contact-us.index', 'reviews.index') ? 'show' : '' }}"
+                        <div class="collapse {{  Request::is('products*') || Request::routeIs('privacy.index', 'contact-us.index', 'reviews.index') ? 'show' : '' }}"
                             id="collapseWebContentMenu" aria-labelledby="headingWebContentMenu"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
@@ -121,53 +117,16 @@
                                     </div>
                                 @endif
 
-                                <!-- FAQs -->
-                                @if (checkAccess('faqs.create') || checkAccess('faqs.index'))
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseFaqsMenu"
-                                        aria-expanded="{{ Request::is('faq*') ? 'true' : 'false' }}"
-                                        aria-controls="collapseFaqsMenu">
-                                        FAQs
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse {{ Request::is('faq*') ? 'show' : '' }}"
-                                        id="collapseFaqsMenu" aria-labelledby="headingFaqsMenu"
-                                        data-bs-parent="#collapseWebContentMenu">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            @if (checkAccess('faqs.create'))
-                                                <a class="nav-link {{ Request::routeIs('faqs.create') ? 'active' : '' }}"
-                                                    href="{{ route('faqs.create') }}">Create FAQ</a>
-                                            @endif
-                                            @if (checkAccess('faqs.index'))
-                                                <a class="nav-link {{ Request::routeIs('faqs.index') ? 'active' : '' }}"
-                                                    href="{{ route('faqs.index') }}">FAQ Lists</a>
-                                            @endif
-                                        </nav>
-                                    </div>
-                                @endif
-
                                 <!-- Reviews -->
                                 @if (checkAccess('review.index'))
                                     <a class="nav-link {{ Request::routeIs('reviews.index') ? 'active' : '' }}"
                                         href="{{ route('reviews.index') }}">Reviews</a>
                                 @endif
 
-                                <!-- Return Policy -->
-                                @if (checkAccess('return.index'))
-                                    <a class="nav-link {{ Request::routeIs('return.index') ? 'active' : '' }}"
-                                        href="{{ route('return.index') }}">Return Policy</a>
-                                @endif
-
                                 <!-- Privacy Policy -->
                                 @if (checkAccess('privacy.index'))
                                     <a class="nav-link {{ Request::routeIs('privacy.index') ? 'active' : '' }}"
                                         href="{{ route('privacy.index') }}">Privacy Policy</a>
-                                @endif
-
-                                <!-- Terms & Conditions -->
-                                @if (checkAccess('terms.index'))
-                                    <a class="nav-link {{ Request::routeIs('terms.index') ? 'active' : '' }}"
-                                        href="{{ route('terms.index') }}">Terms & Conditions</a>
                                 @endif
 
                                 <!-- Contact Us -->

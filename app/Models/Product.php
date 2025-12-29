@@ -10,6 +10,7 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
+        'product_code',
         'category_id',
         'sub_category_id',
         'client_id',
@@ -19,25 +20,12 @@ class Product extends Model
         'description',
         'thumbnail_image',
         'gallery_images',
-        'sizes',
-        'colors',
         'ip_address',
         'status',
-        'is_featured',
-        'is_top_selling',
-        'is_popular',
-        'is_special',
-        'is_best',
-        'is_new',
-        'price',
-        'discount_price',
-        'product_code',
     ];
 
     protected $casts = [
         'gallery_images' => 'array',
-        'sizes' => 'array',
-        'colors' => 'array',
     ];
 
     public function category()
@@ -58,15 +46,5 @@ class Product extends Model
     public function reviews()
     {
         return $this->hasMany(Review::class);
-    }
-
-    public function banners()
-    {
-        return $this->belongsToMany(Banner::class);
-    }
-
-    public function variants()
-    {
-        return $this->hasMany(ProductVariant::class);
     }
 }
