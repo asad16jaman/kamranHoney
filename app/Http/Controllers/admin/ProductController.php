@@ -19,10 +19,7 @@ class ProductController extends Controller
     {
         try {
             $products = Product::with('category', 'subCategory', 'client')->latest()->get();
-
-            $sizes = Size::all();
-            $colors = Color::all();
-            return view('admin.products.index', compact('products', 'sizes', 'colors'));
+            return view('admin.products.index', compact('products'));
         } catch (\Exception $e) {
             Log::error('Error loading products: ' . $e->getMessage());
             return redirect()->route('admin.dashboard')->with('error', 'Unable to load products.');
@@ -36,10 +33,11 @@ class ProductController extends Controller
             $subCategories = SubCategory::all();
             $clients = Client::all();
             $products = Product::with('category', 'subCategory')->latest()->get();
-            $sizes = Size::all();
-            $colors = Color::all();
 
-            return view('admin.products.create', compact('categories', 'subCategories', 'products', 'sizes', 'colors', 'clients'));
+            $count = Product::count() + 1;
+            $nextProductCode = 'P' . str_pad($count, 4, '0', STR_PAD_LEFT);
+
+            return view('admin.products.create', compact('categories', 'subCategories', 'products', 'clients', 'nextProductCode'));
         } catch (\Exception $e) {
             Log::error('Error displaying product create page: ' . $e->getMessage());
             return back()->with('error', 'Error loading create product page.');
@@ -53,15 +51,8 @@ class ProductController extends Controller
             'sub_category_id' => 'nullable|exists:sub_categories,id',
             'client_id' => 'required|exists:clients,id',
             'name' => 'required|string|max:255',
-            'price' => 'required|numeric|min:0',
-            'discount_price' => 'nullable|numeric|min:0',
-            'product_code' => 'nullable|string|max:255',
-            'thumbnail_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'gallery_images.*' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            // 'sizes' => 'nullable|array',
-            // 'sizes.*' => 'string',
-            // 'colors' => 'nullable|array',
-            // 'colors.*' => 'string',
+            'thumbnail_image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'gallery_images.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'short_description' => 'nullable|string',
             'description' => 'nullable|string',
             'is_featured' => 'nullable|in:Yes,No',
@@ -90,6 +81,9 @@ class ProductController extends Controller
                 }
             }
 
+            $count = Product::count() + 1;
+            $productCode = 'P' . str_pad($count, 4, '0', STR_PAD_LEFT);
+
             Product::create([
                 'category_id' => $request->category_id,
                 'sub_category_id' => $request->sub_category_id,
@@ -98,13 +92,9 @@ class ProductController extends Controller
                 'slug' => Str::slug($request->name),
                 'short_description' => strip_tags($request->short_description),
                 'description' => strip_tags($request->description),
-                'price' => $request->price,
-                'discount_price' => $request->discount_price,
-                'product_code' => $request->product_code,
+                'product_code' =>  $productCode,
                 'thumbnail_image' => $thumbnailPath,
                 'gallery_images' => json_encode($galleryPaths),
-                // 'sizes' => array_map('trim', explode(',', $request->sizes[0])),
-                // 'colors' => array_map('trim', explode(',', $request->colors[0] ?? '')),
                 'is_featured' => $request->is_featured ?? 'No',
                 'is_top_selling' => $request->is_top_selling ?? 'No',
                 'is_popular' => $request->is_popular ?? 'No',
@@ -114,7 +104,7 @@ class ProductController extends Controller
                 'ip_address' => $request->ip(),
             ]);
 
-            return redirect()->route('products.create')->with('success', 'Product created successfully.');
+            return redirect()->route('products.index')->with('success', 'Product created successfully.');
         } catch (\Exception $e) {
             Log::error('Error creating product: ' . $e->getMessage());
             return back()->with('error', 'Unexpected error occurred.');
@@ -149,15 +139,8 @@ class ProductController extends Controller
                 'sub_category_id' => 'nullable|exists:sub_categories,id',
                 'client_id' => 'required|exists:clients,id',
                 'name' => 'required|string|max:255',
-                'price' => 'required|numeric|min:0',
-                'discount_price' => 'nullable|numeric|min:0',
-                'product_code' => 'nullable|string|max:255',
-                'thumbnail_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-                'gallery_images.*' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-                // 'sizes' => 'nullable|array',
-                // 'sizes.*' => 'string',
-                // 'colors' => 'nullable|array',
-                // 'colors.*' => 'string',
+                'thumbnail_image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+                'gallery_images.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
                 'short_description' => 'nullable|string',
                 'description' => 'nullable|string',
                 'is_featured' => 'nullable|in:Yes,No',
@@ -183,7 +166,6 @@ class ProductController extends Controller
 
             $galleryPaths = json_decode($product->gallery_images, true) ?? [];
 
-            // Check for gallery images to remove
             if ($request->has('remove_gallery_images')) {
                 $removeGalleryImages = $request->remove_gallery_images;
                 foreach ($removeGalleryImages as $index) {
@@ -202,25 +184,6 @@ class ProductController extends Controller
                 }
             }
 
-            // $sizes = [];
-
-            // if (!empty($request->sizes) && is_array($request->sizes)) {
-            //     if (isset($request->sizes[0]) && strpos($request->sizes[0], ',') !== false) {
-            //         $sizes = array_map('trim', explode(',', $request->sizes[0]));
-            //     } else {
-            //         $sizes = $request->sizes;
-            //     }
-            // }
-
-            // $colors = [];
-            // if (!empty($request->colors) && is_array($request->colors)) {
-            //     if (isset($request->colors[0]) && strpos($request->colors[0], ',') !== false) {
-            //         $colors = array_map('trim', explode(',', $request->colors[0]));
-            //     } else {
-            //         $colors = $request->colors;
-            //     }
-            // }
-
             $product->update([
                 'category_id' => $request->category_id,
                 'sub_category_id' => $request->sub_category_id,
@@ -229,13 +192,8 @@ class ProductController extends Controller
                 'slug' => Str::slug($request->name),
                 'short_description' => strip_tags($request->short_description),
                 'description' => strip_tags($request->description),
-                'price' => $request->price,
-                'discount_price' => $request->discount_price,
-                'product_code' => $request->product_code,
                 'thumbnail_image' => $thumbnailPath,
                 'gallery_images' => json_encode(array_values($galleryPaths)),
-                // 'sizes' => $sizes,
-                // 'colors' => $colors,
                 'is_featured' => $request->is_featured ?? 'No',
                 'is_top_selling' => $request->is_top_selling ?? 'No',
                 'is_popular' => $request->is_popular ?? 'No',
@@ -244,7 +202,7 @@ class ProductController extends Controller
                 'is_new' => $request->is_new ?? 'No',
             ]);
 
-            return redirect()->route('products.create')->with('success', 'Product updated successfully.');
+            return redirect()->route('products.index')->with('success', 'Product updated successfully.');
         } catch (\Exception $e) {
             Log::error('Error updating product: ' . $e->getMessage());
             return back()->with('error', 'Unexpected error occurred during update.');
@@ -289,7 +247,7 @@ class ProductController extends Controller
 
             $product->delete();
 
-            return redirect()->route('products.create')->with('success', 'Product deleted successfully.');
+            return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
         } catch (\Exception $e) {
             Log::error('Error deleting product: ' . $e->getMessage());
             return back()->with('error', 'Could not delete the product.');

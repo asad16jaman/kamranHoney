@@ -1,6 +1,7 @@
 <!--Product-->
 <div class="product-tab z-index-20 sm-margin-top-193px xs-margin-top-30px">
     <div class="container mt-30">
+
         <div class="biolife-title-box mb-30">
             <div class="g-img">
                 <h3 class="main-title cmb-5">Our Products</h3>
@@ -8,538 +9,91 @@
         </div>
 
         <div class="row xs-margin-top-30px">
-            <div class="col-lg-3 col-md-6 mb-3">
-                <div class="product-item fade-up-on-scroll">
-                    <div class="contain-product layout-default">
-                        <div class="product-thumb">
-                            <a href="#" class="link-to-product">
-                                <img src="{{ asset('frontend/assets') }}/images/svImg.jpg" alt="Vegetables"
-                                    width="270" height="270" class="product-thumnail" />
-                            </a>
-                            <p class="offer">-30%</p>
-                            <p class="attribute">HOT</p>
 
-                            <a class="lookup btn_call_quickview" href="#" title="Quick View"><i
-                                    class="biolife-icon icon-search"></i></a>
-                        </div>
-                        <div class="info">
-                            <h4 class="product-title">
-                                <a href="#" class="pr-name">খলিশা ফুলের মধু</a>
-                            </h4>
-                            <div class="price">
-                                <ins><span class="price-amount"><span class="currencySymbol">৳
-                                        </span>85.00</span></ins>
-                                <del><span class="price-amount"><span class="currencySymbol">৳
-                                        </span>95.00</span></del>
-                            </div>
+            @forelse ($products as $product)
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="product-item fade-up-on-scroll">
+                        <div class="contain-product layout-default">
 
-                            <div class="buttons card-padding">
-                                <a href="#" class="btn add-cart-btn">
-                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                    add to cart
+                            <!-- Thumbnail -->
+                            <div class="product-thumb">
+                                <a href="#" class="link-to-product">
+                                    <img src="{{ asset($product->thumbnail_image ?? 'uploads/no_images/no-image.png') }}"
+                                        alt="{{ $product->name }}" width="270" height="270"
+                                        class="product-thumnail">
                                 </a>
 
-                                <a href="#" class="btn add-cart-btn buy_now_btn">
-                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                    By Now
+                                @if ($product->discount_price)
+                                    <p class="offer">
+                                        -{{ round((($product->price - $product->discount_price) / $product->price) * 100) }}%
+                                    </p>
+                                @endif
+
+                                @if ($product->is_hot ?? false)
+                                    <p class="attribute">HOT</p>
+                                @endif
+
+                                <a class="lookup btn_call_quickview"
+                                    href="#" title="Quick View">
+                                    <i class="biolife-icon icon-search"></i>
                                 </a>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="col-lg-3 col-md-6 mb-3">
-                <div class="product-item fade-up-on-scroll">
-                    <div class="contain-product layout-default">
-                        <div class="product-thumb">
-                            <a href="#" class="link-to-product">
-                                <img src="{{ asset('frontend/assets') }}/images/svImg.jpg" alt="Vegetables"
-                                    width="270" height="270" class="product-thumnail" />
-                            </a>
-                            <p class="offer">-30%</p>
-                            <p class="attribute">HOT</p>
+                            <!-- Info -->
+                            <div class="info">
+                                <h4 class="product-title">
+                                    <a href="#" class="pr-name">
+                                        {{ $product->name }}
+                                    </a>
+                                </h4>
 
-                            <a class="lookup btn_call_quickview" href="#" title="Quick View"><i
-                                    class="biolife-icon icon-search"></i></a>
-                        </div>
-                        <div class="info">
-                            <h4 class="product-title">
-                                <a href="#" class="pr-name">খলিশা ফুলের মধু</a>
-                            </h4>
-                            <div class="price">
-                                <ins><span class="price-amount"><span class="currencySymbol">৳
-                                        </span>85.00</span></ins>
-                                <del><span class="price-amount"><span class="currencySymbol">৳
-                                        </span>95.00</span></del>
+                                <div class="price">
+                                    @if ($product->discount_price)
+                                        <ins>
+                                            <span class="price-amount">
+                                                <span class="currencySymbol">৳</span>
+                                                {{ number_format($product->discount_price, 2) }}
+                                            </span>
+                                        </ins>
+                                        <del>
+                                            <span class="price-amount">
+                                                <span class="currencySymbol">৳</span>
+                                                {{ number_format($product->price, 2) }}
+                                            </span>
+                                        </del>
+                                    @else
+                                        <ins>
+                                            <span class="price-amount">
+                                                <span class="currencySymbol">৳</span>
+                                                {{ number_format($product->price, 2) }}
+                                            </span>
+                                        </ins>
+                                    @endif
+                                </div>
+
+                                <!-- Buttons -->
+                                <div class="buttons card-padding">
+                                    <a href="#" class="btn add-cart-btn">
+                                        <i class="fa fa-cart-arrow-down"></i>
+                                        Add to Cart
+                                    </a>
+
+                                    <a href="#" class="btn add-cart-btn buy_now_btn">
+                                        <i class="fa fa-cart-arrow-down"></i>
+                                        Buy Now
+                                    </a>
+                                </div>
                             </div>
 
-                            <div class="buttons card-padding">
-                                <a href="#" class="btn add-cart-btn">
-                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                    add to cart
-                                </a>
-
-                                <a href="#" class="btn add-cart-btn buy_now_btn">
-                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                    By Now
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 mb-3">
-                <div class="product-item fade-up-on-scroll">
-                    <div class="contain-product layout-default">
-                        <div class="product-thumb">
-                            <a href="#" class="link-to-product">
-                                <img src="{{ asset('frontend/assets') }}/images/svImg.jpg" alt="Vegetables"
-                                    width="270" height="270" class="product-thumnail" />
-                            </a>
-                            <p class="offer">-30%</p>
-                            <p class="attribute">HOT</p>
-
-                            <a class="lookup btn_call_quickview" href="#" title="Quick View"><i
-                                    class="biolife-icon icon-search"></i></a>
-                        </div>
-                        <div class="info">
-                            <h4 class="product-title">
-                                <a href="#" class="pr-name">খলিশা ফুলের মধু</a>
-                            </h4>
-                            <div class="price">
-                                <ins><span class="price-amount"><span class="currencySymbol">৳
-                                        </span>85.00</span></ins>
-                                <del><span class="price-amount"><span class="currencySymbol">৳
-                                        </span>95.00</span></del>
-                            </div>
-
-                            <div class="buttons card-padding">
-                                <a href="#" class="btn add-cart-btn">
-                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                    add to cart
-                                </a>
-
-                                <a href="#" class="btn add-cart-btn buy_now_btn">
-                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                    By Now
-                                </a>
-                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 mb-3">
-                <div class="product-item fade-up-on-scroll">
-                    <div class="contain-product layout-default">
-                        <div class="product-thumb">
-                            <a href="#" class="link-to-product">
-                                <img src="{{ asset('frontend/assets') }}/images/svImg.jpg" alt="Vegetables"
-                                    width="270" height="270" class="product-thumnail" />
-                            </a>
-                            <p class="offer">-30%</p>
-                            <p class="attribute">HOT</p>
-
-                            <a class="lookup btn_call_quickview" href="#" title="Quick View"><i
-                                    class="biolife-icon icon-search"></i></a>
-                        </div>
-                        <div class="info">
-                            <h4 class="product-title">
-                                <a href="#" class="pr-name">খলিশা ফুলের মধু</a>
-                            </h4>
-                            <div class="price">
-                                <ins><span class="price-amount"><span class="currencySymbol">৳
-                                        </span>85.00</span></ins>
-                                <del><span class="price-amount"><span class="currencySymbol">৳
-                                        </span>95.00</span></del>
-                            </div>
-
-                            <div class="buttons card-padding">
-                                <a href="#" class="btn add-cart-btn">
-                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                    add to cart
-                                </a>
-
-                                <a href="#" class="btn add-cart-btn buy_now_btn">
-                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                    By Now
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+            @empty
+                <div class="col-12 text-center">
+                    <p>No products found.</p>
                 </div>
-            </div>
+            @endforelse
 
-            <div class="col-lg-3 col-md-6 mb-3">
-                <div class="product-item fade-up-on-scroll">
-                    <div class="contain-product layout-default">
-                        <div class="product-thumb">
-                            <a href="#" class="link-to-product">
-                                <img src="{{ asset('frontend/assets') }}/images/svImg.jpg" alt="Vegetables"
-                                    width="270" height="270" class="product-thumnail" />
-                            </a>
-                            <p class="offer">-30%</p>
-                            <p class="attribute">HOT</p>
-
-                            <a class="lookup btn_call_quickview" href="#" title="Quick View"><i
-                                    class="biolife-icon icon-search"></i></a>
-                        </div>
-                        <div class="info">
-                            <h4 class="product-title">
-                                <a href="#" class="pr-name">খলিশা ফুলের মধু</a>
-                            </h4>
-                            <div class="price">
-                                <ins><span class="price-amount"><span class="currencySymbol">৳
-                                        </span>85.00</span></ins>
-                                <del><span class="price-amount"><span class="currencySymbol">৳
-                                        </span>95.00</span></del>
-                            </div>
-
-                            <div class="buttons card-padding">
-                                <a href="#" class="btn add-cart-btn">
-                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                    add to cart
-                                </a>
-
-                                <a href="#" class="btn add-cart-btn buy_now_btn">
-                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                    By Now
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 mb-3">
-                <div class="product-item fade-up-on-scroll">
-                    <div class="contain-product layout-default">
-                        <div class="product-thumb">
-                            <a href="#" class="link-to-product">
-                                <img src="{{ asset('frontend/assets') }}/images/svImg.jpg" alt="Vegetables"
-                                    width="270" height="270" class="product-thumnail" />
-                            </a>
-                            <p class="offer">-30%</p>
-                            <p class="attribute">HOT</p>
-
-                            <a class="lookup btn_call_quickview" href="#" title="Quick View"><i
-                                    class="biolife-icon icon-search"></i></a>
-                        </div>
-                        <div class="info">
-                            <h4 class="product-title">
-                                <a href="#" class="pr-name">খলিশা ফুলের মধু</a>
-                            </h4>
-                            <div class="price">
-                                <ins><span class="price-amount"><span class="currencySymbol">৳
-                                        </span>85.00</span></ins>
-                                <del><span class="price-amount"><span class="currencySymbol">৳
-                                        </span>95.00</span></del>
-                            </div>
-
-                            <div class="buttons card-padding">
-                                <a href="#" class="btn add-cart-btn">
-                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                    add to cart
-                                </a>
-
-                                <a href="#" class="btn add-cart-btn buy_now_btn">
-                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                    By Now
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 mb-3">
-                <div class="product-item fade-up-on-scroll">
-                    <div class="contain-product layout-default">
-                        <div class="product-thumb">
-                            <a href="#" class="link-to-product">
-                                <img src="{{ asset('frontend/assets') }}/images/svImg.jpg" alt="Vegetables"
-                                    width="270" height="270" class="product-thumnail" />
-                            </a>
-                            <p class="offer">-30%</p>
-                            <p class="attribute">HOT</p>
-
-                            <a class="lookup btn_call_quickview" href="#" title="Quick View"><i
-                                    class="biolife-icon icon-search"></i></a>
-                        </div>
-                        <div class="info">
-                            <h4 class="product-title">
-                                <a href="#" class="pr-name">খলিশা ফুলের মধু</a>
-                            </h4>
-                            <div class="price">
-                                <ins><span class="price-amount"><span class="currencySymbol">৳
-                                        </span>85.00</span></ins>
-                                <del><span class="price-amount"><span class="currencySymbol">৳
-                                        </span>95.00</span></del>
-                            </div>
-
-                            <div class="buttons card-padding">
-                                <a href="#" class="btn add-cart-btn">
-                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                    add to cart
-                                </a>
-
-                                <a href="#" class="btn add-cart-btn buy_now_btn">
-                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                    By Now
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 mb-3">
-                <div class="product-item fade-up-on-scroll">
-                    <div class="contain-product layout-default">
-                        <div class="product-thumb">
-                            <a href="#" class="link-to-product">
-                                <img src="{{ asset('frontend/assets') }}/images/svImg.jpg" alt="Vegetables"
-                                    width="270" height="270" class="product-thumnail" />
-                            </a>
-                            <p class="offer">-30%</p>
-                            <p class="attribute">HOT</p>
-
-                            <a class="lookup btn_call_quickview" href="#" title="Quick View"><i
-                                    class="biolife-icon icon-search"></i></a>
-                        </div>
-                        <div class="info">
-                            <h4 class="product-title">
-                                <a href="#" class="pr-name">খলিশা ফুলের মধু</a>
-                            </h4>
-                            <div class="price">
-                                <ins><span class="price-amount"><span class="currencySymbol">৳
-                                        </span>85.00</span></ins>
-                                <del><span class="price-amount"><span class="currencySymbol">৳
-                                        </span>95.00</span></del>
-                            </div>
-
-                            <div class="buttons card-padding">
-                                <a href="#" class="btn add-cart-btn">
-                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                    add to cart
-                                </a>
-
-                                <a href="#" class="btn add-cart-btn buy_now_btn">
-                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                    By Now
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 mb-3">
-                <div class="product-item fade-up-on-scroll">
-                    <div class="contain-product layout-default">
-                        <div class="product-thumb">
-                            <a href="#" class="link-to-product">
-                                <img src="{{ asset('frontend/assets') }}/images/svImg.jpg" alt="Vegetables"
-                                    width="270" height="270" class="product-thumnail" />
-                            </a>
-                            <p class="offer">-30%</p>
-                            <p class="attribute">HOT</p>
-
-                            <a class="lookup btn_call_quickview" href="#" title="Quick View"><i
-                                    class="biolife-icon icon-search"></i></a>
-                        </div>
-                        <div class="info">
-                            <h4 class="product-title">
-                                <a href="#" class="pr-name">খলিশা ফুলের মধু</a>
-                            </h4>
-                            <div class="price">
-                                <ins><span class="price-amount"><span class="currencySymbol">৳
-                                        </span>85.00</span></ins>
-                                <del><span class="price-amount"><span class="currencySymbol">৳
-                                        </span>95.00</span></del>
-                            </div>
-
-                            <div class="buttons card-padding">
-                                <a href="#" class="btn add-cart-btn">
-                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                    add to cart
-                                </a>
-
-                                <a href="#" class="btn add-cart-btn buy_now_btn">
-                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                    By Now
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 mb-3">
-                <div class="product-item fade-up-on-scroll">
-                    <div class="contain-product layout-default">
-                        <div class="product-thumb">
-                            <a href="#" class="link-to-product">
-                                <img src="{{ asset('frontend/assets') }}/images/svImg.jpg" alt="Vegetables"
-                                    width="270" height="270" class="product-thumnail" />
-                            </a>
-                            <p class="offer">-30%</p>
-                            <p class="attribute">HOT</p>
-
-                            <a class="lookup btn_call_quickview" href="#" title="Quick View"><i
-                                    class="biolife-icon icon-search"></i></a>
-                        </div>
-                        <div class="info">
-                            <h4 class="product-title">
-                                <a href="#" class="pr-name">খলিশা ফুলের মধু</a>
-                            </h4>
-                            <div class="price">
-                                <ins><span class="price-amount"><span class="currencySymbol">৳
-                                        </span>85.00</span></ins>
-                                <del><span class="price-amount"><span class="currencySymbol">৳
-                                        </span>95.00</span></del>
-                            </div>
-
-                            <div class="buttons card-padding">
-                                <a href="#" class="btn add-cart-btn">
-                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                    add to cart
-                                </a>
-
-                                <a href="#" class="btn add-cart-btn buy_now_btn">
-                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                    By Now
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 mb-3">
-                <div class="product-item fade-up-on-scroll">
-                    <div class="contain-product layout-default">
-                        <div class="product-thumb">
-                            <a href="#" class="link-to-product">
-                                <img src="{{ asset('frontend/assets') }}/images/svImg.jpg" alt="Vegetables"
-                                    width="270" height="270" class="product-thumnail" />
-                            </a>
-                            <p class="offer">-30%</p>
-                            <p class="attribute">HOT</p>
-
-                            <a class="lookup btn_call_quickview" href="#" title="Quick View"><i
-                                    class="biolife-icon icon-search"></i></a>
-                        </div>
-                        <div class="info">
-                            <h4 class="product-title">
-                                <a href="#" class="pr-name">খলিশা ফুলের মধু</a>
-                            </h4>
-                            <div class="price">
-                                <ins><span class="price-amount"><span class="currencySymbol">৳
-                                        </span>85.00</span></ins>
-                                <del><span class="price-amount"><span class="currencySymbol">৳
-                                        </span>95.00</span></del>
-                            </div>
-
-                            <div class="buttons card-padding">
-                                <a href="#" class="btn add-cart-btn">
-                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                    add to cart
-                                </a>
-
-                                <a href="#" class="btn add-cart-btn buy_now_btn">
-                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                    By Now
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 mb-3">
-                <div class="product-item fade-up-on-scroll">
-                    <div class="contain-product layout-default">
-                        <div class="product-thumb">
-                            <a href="#" class="link-to-product">
-                                <img src="{{ asset('frontend/assets') }}/images/svImg.jpg" alt="Vegetables"
-                                    width="270" height="270" class="product-thumnail" />
-                            </a>
-                            <p class="offer">-30%</p>
-                            <p class="attribute">HOT</p>
-
-                            <a class="lookup btn_call_quickview" href="#" title="Quick View"><i
-                                    class="biolife-icon icon-search"></i></a>
-                        </div>
-                        <div class="info">
-                            <h4 class="product-title">
-                                <a href="#" class="pr-name">খলিশা ফুলের মধু</a>
-                            </h4>
-                            <div class="price">
-                                <ins><span class="price-amount"><span class="currencySymbol">৳
-                                        </span>85.00</span></ins>
-                                <del><span class="price-amount"><span class="currencySymbol">৳
-                                        </span>95.00</span></del>
-                            </div>
-
-                            <div class="buttons card-padding">
-                                <a href="#" class="btn add-cart-btn">
-                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                    add to cart
-                                </a>
-
-                                <a href="#" class="btn add-cart-btn buy_now_btn">
-                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                    By Now
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 mb-3">
-                <div class="product-item fade-up-on-scroll">
-                    <div class="contain-product layout-default">
-                        <div class="product-thumb">
-                            <a href="#" class="link-to-product">
-                                <img src="{{ asset('frontend/assets') }}/images/svImg.jpg" alt="Vegetables"
-                                    width="270" height="270" class="product-thumnail" />
-                            </a>
-                            <p class="offer">-30%</p>
-                            <p class="attribute">HOT</p>
-
-                            <a class="lookup btn_call_quickview" href="#" title="Quick View"><i
-                                    class="biolife-icon icon-search"></i></a>
-                        </div>
-                        <div class="info">
-                            <h4 class="product-title">
-                                <a href="#" class="pr-name">খলিশা ফুলের মধু</a>
-                            </h4>
-                            <div class="price">
-                                <ins><span class="price-amount"><span class="currencySymbol">৳
-                                        </span>85.00</span></ins>
-                                <del><span class="price-amount"><span class="currencySymbol">৳
-                                        </span>95.00</span></del>
-                            </div>
-
-                            <div class="buttons card-padding">
-                                <a href="#" class="btn add-cart-btn">
-                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                    add to cart
-                                </a>
-
-                                <a href="#" class="btn add-cart-btn buy_now_btn">
-                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                    By Now
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>

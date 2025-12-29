@@ -27,6 +27,16 @@
                             @csrf
                             @method('PUT')
                             <div class="row">
+
+                                <div class="form-group row mt-2">
+                                    <!-- Product Code -->
+                                    <label class="col-sm-1 col-form-label">Code</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" class="form-control form-control-sm"
+                                            value="{{ $product->product_code }}" readonly>
+                                    </div>
+                                </div>
+
                                 <div class="form-group row mt-2">
                                     <!-- Product Name -->
                                     <label for="product_name" class="col-sm-1 col-form-label">Name</label>
@@ -92,16 +102,6 @@
                                         @enderror
                                     </div>
 
-                                    <!-- Price -->
-                                    <label for="price" class="col-sm-1 col-form-label">Price</label>
-                                    <div class="col-sm-3">
-                                        <input type="number" step="0.01" class="form-control form-control-sm"
-                                            id="price" name="price" value="{{ old('price', $product->price) }}">
-                                        @error('price')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-
                                     <!-- Product Thumbnail -->
                                     <label for="thumbnail_image" class="col-sm-1 col-form-label">Image</label>
                                     <div class="col-sm-3">
@@ -116,9 +116,7 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                </div>
 
-                                <div class="form-group row">
                                     <!-- Gallery Images -->
                                     <label for="gallery_images" class="col-sm-1 col-form-label">M. Image</label>
                                     <div class="col-sm-3">
@@ -152,53 +150,7 @@
                                             @endif
                                         </div>
                                     </div>
-
-                                    <!-- Discount Price -->
-                                    <label for="discount_price" class="col-sm-1 col-form-label">Discount Price</label>
-                                    <div class="col-sm-3">
-                                        <input type="number" step="0.01" class="form-control form-control-sm"
-                                            id="discount_price" name="discount_price"
-                                            value="{{ old('discount_price', $product->discount_price) }}">
-                                        @error('discount_price')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-
-                                    <!-- Product Code -->
-                                    <label for="product_code" class="col-sm-1 col-form-label">Product Code</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" class="form-control form-control-sm" id="product_code"
-                                            name="product_code"
-                                            value="{{ old('product_code', $product->product_code) }}">
-                                        @error('product_code')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
                                 </div>
-
-                                {{-- <div class="form-group row mt-2">
-                                    <!-- Sizes -->
-                                    <label for="sizes" class="col-sm-1 col-form-label">Sizes</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="sizes[]" class="form-control form-control-sm"
-                                            placeholder="e.g. S,M,L,XL"
-                                            value="{{ old('sizes.0', is_array($product->sizes) ? implode(',', $product->sizes) : '') }}">
-                                        @error('sizes.*')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-
-                                    <!-- Colors -->
-                                    <label for="colors" class="col-sm-1 col-form-label">Colors</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="colors[]" class="form-control form-control-sm"
-                                            placeholder="e.g. Red,Blue,Green"
-                                            value="{{ old('colors.0', is_array($product->colors) ? implode(',', $product->colors) : '') }}">
-                                        @error('colors.*')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div> --}}
 
                                 <div class="form-group row mt-2">
                                     <!-- Short Description -->
@@ -218,36 +170,6 @@
                                         @error('description')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
-                                    </div>
-                                </div>
-
-                                <!-- Feature Toggles -->
-                                <div class="form-group row">
-                                    <div class="col-12">
-                                        <label class="form-label d-block text-center fw-bold mb-2">Product Tags</label>
-                                        <div class="d-flex justify-content-center flex-wrap gap-3">
-                                            @php
-                                                $toggles = [
-                                                    'is_featured' => 'Featured',
-                                                    'is_top_selling' => 'Top Selling',
-                                                    'is_popular' => 'Popular',
-                                                    'is_special' => 'Special',
-                                                    'is_best' => 'Best',
-                                                    'is_new' => 'New',
-                                                ];
-                                            @endphp
-
-                                            @foreach ($toggles as $key => $label)
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox"
-                                                        id="{{ $key }}" name="{{ $key }}"
-                                                        value="Yes"
-                                                        {{ old($key, $product->$key) === 'Yes' ? 'checked' : '' }}>
-                                                    <label class="form-check-label"
-                                                        for="{{ $key }}">{{ $label }}</label>
-                                                </div>
-                                            @endforeach
-                                        </div>
                                     </div>
                                 </div>
 

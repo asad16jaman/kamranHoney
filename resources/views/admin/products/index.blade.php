@@ -26,13 +26,13 @@
                         <thead class="text-center bg-light">
                             <tr>
                                 <th>Sl</th>
-                                <th>Product Name</th>
+                                <th>Code</th>
+                                <th>Name</th>
                                 <th>Category</th>
                                 <th>Brand</th>
                                 <th>Price</th>
                                 <th>Image</th>
                                 <th>Images</th>
-                                <th>Description</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -41,6 +41,7 @@
                             @foreach ($products as $key => $product)
                                 <tr class="text-center">
                                     <td class="align-middle">{{ $key + 1 }}</td>
+                                    <td class="align-middle">{{ $product->product_code }}</td>
                                     <td class="align-middle">{{ $product->name }}</td>
                                     <td class="align-middle">{{ $product->category->name ?? 'N/A' }}</td>
                                     <td class="align-middle">{{ $product->client->name ?? 'N/A' }}</td>
@@ -62,9 +63,6 @@
                                             <span class="text-muted">No Images</span>
                                         @endif
                                     </td>
-                                    <td class="align-middle">
-                                        {{ Str::limit(strip_tags($product->description ?? 'N/A'), 20) }}</td>
-
                                     <td class="align-middle">
                                         <form action="{{ route('products.updateStatus', $product->id) }}" method="POST">
                                             @csrf
@@ -89,12 +87,6 @@
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
 
-                                            <button type="button" class="btn btn-secondary btn-sm me-2"
-                                                style="font-size: 0.5rem;" data-bs-toggle="modal"
-                                                data-bs-target="#variantModal{{ $product->id }}" title="Manage Variants">
-                                                <i class="fas fa-boxes fa-sm"></i>
-                                            </button>
-
                                             <form action="{{ route('products.destroy', $product->id) }}" method="POST"
                                                 class="delete-form m-0 p-0">
                                                 @csrf
@@ -106,15 +98,6 @@
                                         </div>
                                     </td>
                                 </tr>
-
-                                <!-- Modal -->
-                                @include('admin.partials.variant_modal', [
-                                    'product' => $product,
-                                    'sizes' => $sizes,
-                                    'colors' => $colors,
-                                ])
-
-                                <!-- End Variant Modal -->
                             @endforeach
                         </tbody>
                     </table>
