@@ -1,17 +1,43 @@
+<style>
+    @keyframes fadeInUp {
+        0% {
+            opacity: 0;
+            transform: translateY(80px);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
 @php
     $setting = \App\Helpers\SettingsHelper::getSetting();
     $videoSrc = $setting->video_file ? asset($setting->video_file) : asset('frontend/assets/images/4293-178324579.mp4');
+    $slogan = $setting->company_slogan ?? 'Your Company Slogan Here';
 @endphp
 
 @if (Route::currentRouteName() === 'home')
     <div class="video-header-wrapper">
         <!-- Background Video -->
-         <video class="bg-video" autoplay muted loop playsinline>
+        <video class="bg-video" autoplay muted loop playsinline>
             <source src="{{ $videoSrc }}" type="video/mp4">
             Your browser does not support the video tag.
         </video>
 
         <div class="video-overlay"></div>
+
+        <!-- Slogan -->
+        <div class="slogan-wrapper"
+            style="position: absolute; left: 50px; top: 50%; transform: translateY(-50%);
+           color: #fff; max-width: 600px; z-index: 10; text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+           opacity: 0; animation: fadeInUp 1.5s forwards;">
+
+            <h1 class="video-slogan" style="font-size: 6.5rem; font-weight: 900; line-height: 1.2; color: #fff;">
+                {{ $slogan }}
+            </h1>
+        </div>
 @endif
 
 <!-- HEADER -->
@@ -21,10 +47,12 @@
             <div class="top-bar left">
                 <ul class="horizontal-menu">
                     <li>
-                        <a href="tel:{{ $setting->company_phone }}"><i class="fa fa-phone" aria-hidden="true"></i>{{ $setting->company_phone }}</a>
+                        <a href="tel:{{ $setting->company_phone }}"><i class="fa fa-phone"
+                                aria-hidden="true"></i>{{ $setting->company_phone }}</a>
                     </li>
                     <li>
-                        <a href="mailto:{{ $setting->company_email }}"><i class="fa fa-envelope" aria-hidden="true"></i>{{ $setting->company_email }}</a>
+                        <a href="mailto:{{ $setting->company_email }}"><i class="fa fa-envelope"
+                                aria-hidden="true"></i>{{ $setting->company_email }}</a>
                     </li>
                 </ul>
             </div>
