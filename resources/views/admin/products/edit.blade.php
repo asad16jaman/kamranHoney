@@ -35,11 +35,10 @@
                                         <input type="text" class="form-control form-control-sm"
                                             value="{{ $product->product_code }}" readonly>
                                     </div>
-                                </div>
 
-                                <div class="form-group row mt-2">
                                     <!-- Product Name -->
-                                    <label for="product_name" class="col-sm-1 col-form-label">Name</label>
+                                    <label for="product_name" class="col-sm-1 col-form-label">Name <span
+                                            class="text-danger">*</span></label>
                                     <div class="col-sm-3">
                                         <input type="text" class="form-control form-control-sm" id="product_name"
                                             name="name" value="{{ old('name', $product->name) }}">
@@ -49,9 +48,11 @@
                                     </div>
 
                                     <!-- Category -->
-                                    <label for="category_id" class="col-sm-1 col-form-label">Category</label>
+                                    <label for="category_id" class="col-sm-1 col-form-label">Category <span
+                                            class="text-danger">*</span></label>
                                     <div class="col-sm-3">
-                                        <select class="form-select form-select-sm" name="category_id" id="category_id">
+                                        <select class="form-select form-select-sm" name="category_id" id="category_id"
+                                            style="padding: 0.5rem 0.75rem;">
                                             <option value="">Select Category</option>
                                             @foreach ($categories as $category)
                                                 <option value="{{ $category->id }}"
@@ -64,12 +65,15 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
+                                </div>
 
+                                <div class="form-group row mt-2">
                                     <!-- Subcategory -->
-                                    <label for="sub_category_id" class="col-sm-1 col-form-label">S_Category</label>
+                                    <label for="sub_category_id" class="col-sm-1 col-form-label">S_Cat <span
+                                            class="text-danger">*</span></label>
                                     <div class="col-sm-3">
                                         <select class="form-select form-select-sm" name="sub_category_id"
-                                            id="sub_category_id">
+                                            id="sub_category_id" style="padding: 0.5rem 0.75rem;">
                                             <option value="">Select Subcategory</option>
                                             @foreach ($subCategories as $subCategory)
                                                 <option value="{{ $subCategory->id }}"
@@ -82,13 +86,13 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                </div>
 
-                                <div class="form-group row mt-2">
                                     <!-- Brand -->
-                                    <label for="client_id" class="col-sm-1 col-form-label">Brand</label>
+                                    <label for="client_id" class="col-sm-1 col-form-label">Brand <span
+                                            class="text-danger">*</span></label>
                                     <div class="col-sm-3">
-                                        <select class="form-select form-select-sm" name="client_id" id="client_id">
+                                        <select class="form-select form-select-sm" name="client_id" id="client_id"
+                                            style="padding: 0.5rem 0.75rem;">
                                             <option value="">Select Brand</option>
                                             @foreach ($clients as $client)
                                                 <option value="{{ $client->id }}"
@@ -116,7 +120,9 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
+                                </div>
 
+                                <div class="form-group row mt-2">
                                     <!-- Gallery Images -->
                                     <label for="gallery_images" class="col-sm-1 col-form-label">M. Image</label>
                                     <div class="col-sm-3">
@@ -150,22 +156,22 @@
                                             @endif
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="form-group row mt-2">
                                     <!-- Short Description -->
                                     <label for="short_description" class="col-sm-1 col-form-label">S_
                                         Descrip</label>
-                                    <div class="col-sm-5">
+                                    <div class="col-sm-7">
                                         <textarea name="short_description" id="short_description" class="form-control form-control-sm" rows="4">{{ old('short_description', $product->short_description) }}</textarea>
                                         @error('short_description')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
+                                </div>
 
+                                <div class="form-group row mt-2">
                                     <!-- Description -->
                                     <label for="description" class="col-sm-1 col-form-label">Description</label>
-                                    <div class="col-sm-5">
+                                    <div class="col-sm-11">
                                         <textarea name="description" id="description" class="form-control form-control-sm" rows="4">{{ old('description', $product->description) }}</textarea>
                                         @error('description')
                                             <span class="text-danger">{{ $message }}</span>
