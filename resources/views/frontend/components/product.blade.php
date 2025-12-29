@@ -11,6 +11,11 @@
         <div class="row xs-margin-top-30px">
 
             @forelse ($products as $product)
+                @php
+                    $prices = $product->inventory->pluck('price');
+                    $discountPrices = $product->inventory->whereNotNull('discount_price')->pluck('discount_price');
+                @endphp
+
                 <div class="col-lg-3 col-md-6 mb-3">
                     <div class="product-item fade-up-on-scroll">
                         <div class="contain-product layout-default">
@@ -23,18 +28,16 @@
                                         class="product-thumnail">
                                 </a>
 
-                                @if ($product->discount_price)
-                                    <p class="offer">
-                                        -{{ round((($product->price - $product->discount_price) / $product->price) * 100) }}%
-                                    </p>
+                                {{-- Discount badge --}}
+                                @if ($discountPrices->count())
+                                    <p class="offer">SALE</p>
                                 @endif
 
                                 @if ($product->is_hot ?? false)
                                     <p class="attribute">HOT</p>
                                 @endif
 
-                                <a class="lookup btn_call_quickview"
-                                    href="#" title="Quick View">
+                                <a class="lookup btn_call_quickview" href="#" title="Quick View">
                                     <i class="biolife-icon icon-search"></i>
                                 </a>
                             </div>
@@ -47,28 +50,44 @@
                                     </a>
                                 </h4>
 
+                                <!-- Price -->
                                 <div class="price">
-                                    @if ($product->discount_price)
-                                        <ins>
-                                            <span class="price-amount">
-                                                <span class="currencySymbol">৳</span>
-                                                {{ number_format($product->discount_price, 2) }}
-                                            </span>
-                                        </ins>
-                                        <del>
-                                            <span class="price-amount">
-                                                <span class="currencySymbol">৳</span>
-                                                {{ number_format($product->price, 2) }}
-                                            </span>
-                                        </del>
+                                    @if ($discountPrices->count())
+                                        <div>
+                                            <ins class="d-block">
+                                                <span class="price-amount">
+                                                    <span class="currencySymbol">৳</span>
+                                                    {{ number_format($discountPrices->min(), 2) }}
+                                                    @if ($discountPrices->min() != $discountPrices->max())
+                                                        – ৳{{ number_format($discountPrices->max(), 2) }}
+                                                    @endif
+                                                </span>
+                                            </ins>
+                                        </div>
+
+                                        <div class="mt-1">
+                                            <del class="d-block text-muted">
+                                                <span class="price-amount">
+                                                    <span class="currencySymbol">৳</span>
+                                                    {{ number_format($prices->min(), 2) }}
+                                                    @if ($prices->min() != $prices->max())
+                                                        – ৳{{ number_format($prices->max(), 2) }}
+                                                    @endif
+                                                </span>
+                                            </del>
+                                        </div>
                                     @else
-                                        <ins>
+                                        <ins class="d-block">
                                             <span class="price-amount">
                                                 <span class="currencySymbol">৳</span>
-                                                {{ number_format($product->price, 2) }}
+                                                {{ number_format($prices->min(), 2) }}
+                                                @if ($prices->min() != $prices->max())
+                                                    – ৳{{ number_format($prices->max(), 2) }}
+                                                @endif
                                             </span>
                                         </ins>
                                     @endif
+
                                 </div>
 
                                 <!-- Buttons -->
