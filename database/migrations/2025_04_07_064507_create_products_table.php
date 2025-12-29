@@ -25,6 +25,7 @@ return new class extends Migration
             $table->json('gallery_images')->nullable();
             $table->ipAddress('ip_address');
             $table->enum('status', ['a', 'd'])->default('a')->comment('a=active, d=deactive,');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
