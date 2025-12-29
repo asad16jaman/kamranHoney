@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Models\Size;
+use App\Models\Unit;
 use App\Models\Color;
 use App\Models\Client;
 use App\Models\Product;
@@ -10,6 +11,7 @@ use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 
@@ -33,11 +35,12 @@ class ProductController extends Controller
             $subCategories = SubCategory::all();
             $clients = Client::all();
             $products = Product::with('category', 'subCategory')->latest()->get();
+            $units = Unit::all();
 
             $count = Product::count() + 1;
             $nextProductCode = 'P' . str_pad($count, 4, '0', STR_PAD_LEFT);
 
-            return view('admin.products.create', compact('categories', 'subCategories', 'products', 'clients', 'nextProductCode'));
+            return view('admin.products.create', compact('categories', 'subCategories', 'products', 'clients', 'nextProductCode', 'units'));
         } catch (\Exception $e) {
             Log::error('Error displaying product create page: ' . $e->getMessage());
             return back()->with('error', 'Error loading create product page.');
@@ -55,6 +58,16 @@ class ProductController extends Controller
             'gallery_images.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'short_description' => 'nullable|string',
             'description' => 'nullable|string',
+
+            'inventory' => 'required|array|min:1',
+            'inventory.*.unit_id' => 'required|exists:units,id',
+            'inventory.*.price' => 'required|numeric|min:0',
+            'inventory.*.discount_price' => 'nullable|numeric|min:0',
+            'inventory.*.discount_percent' => 'nullable|numeric|min:0',
+            'inventory.*.initial_qty' => 'required|numeric|min:0',
+            'inventory.*.purchase_qty' => 'nullable|numeric|min:0',
+            'inventory.*.sale_qty' => 'nullable|numeric|min:0',
+
         ]);
 
         try {
@@ -78,19 +91,35 @@ class ProductController extends Controller
             $count = Product::count() + 1;
             $productCode = 'P' . str_pad($count, 4, '0', STR_PAD_LEFT);
 
-            Product::create([
-                'category_id' => $request->category_id,
-                'sub_category_id' => $request->sub_category_id,
-                'client_id' => $request->client_id,
-                'name' => $request->name,
-                'slug' => Str::slug($request->name),
-                'short_description' => strip_tags($request->short_description),
-                'description' => strip_tags($request->description),
-                'product_code' =>  $productCode,
-                'thumbnail_image' => $thumbnailPath,
-                'gallery_images' => json_encode($galleryPaths),
-                'ip_address' => $request->ip(),
-            ]);
+            DB::transaction(function () use ($request, $thumbnailPath, $galleryPaths, $productCode) {
+
+                $product = Product::create([
+                    'category_id' => $request->category_id,
+                    'sub_category_id' => $request->sub_category_id,
+                    'client_id' => $request->client_id,
+                    'name' => $request->name,
+                    'slug' => Str::slug($request->name),
+                    'short_description' => strip_tags($request->short_description),
+                    'description' => strip_tags($request->description),
+                    'product_code' => $productCode,
+                    'thumbnail_image' => $thumbnailPath,
+                    'gallery_images' => json_encode($galleryPaths),
+                    'ip_address' => $request->ip(),
+                ]);
+
+                foreach ($request->inventory as $item) {
+                    $product->inventory()->create([
+                        'unit_id' => $item['unit_id'],
+                        'price' => $item['price'],
+                        'discount_price' => $item['discount_price'] ?? null,
+                        'discount_percent' => $item['discount_percent'] ?? null,
+                        'initial_qty' => $item['initial_qty'],
+                        'purchase_qty' => 0,
+                        'sale_qty' => 0,
+                        'ip_address' => $request->ip(),
+                    ]);
+                }
+            });
 
             return redirect()->route('products.index')->with('success', 'Product created successfully.');
         } catch (\Exception $e) {

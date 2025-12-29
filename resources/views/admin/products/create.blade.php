@@ -26,16 +26,16 @@
                             @csrf
                             <div class="row">
                                 <div class="form-group row mt-2">
+
+                                    <!-- Product Code -->
                                     <label for="product_code" class="col-sm-1 col-form-label">Code</label>
                                     <div class="col-sm-3">
                                         <input type="text" class="form-control form-control-sm" id="product_code"
                                             name="product_code" value="{{ $nextProductCode ?? '' }}" readonly>
                                     </div>
-                                </div>
 
-                                <div class="form-group row mt-2">
                                     <!-- Product Name -->
-                                    <label for="product_name" class="col-sm-1 col-form-label">Name</label>
+                                    <label for="product_name" class="col-sm-1 col-form-label">Name <span class="text-danger">*</span></label>
                                     <div class="col-sm-3">
                                         <input type="text" class="form-control form-control-sm" id="product_name"
                                             name="name" value="{{ old('name') }}">
@@ -45,9 +45,9 @@
                                     </div>
 
                                     <!-- Category -->
-                                    <label for="category_id" class="col-sm-1 col-form-label">Category</label>
+                                    <label for="category_id" class="col-sm-1 col-form-label">Category <span class="text-danger">*</span></label>
                                     <div class="col-sm-3">
-                                        <select class="form-select form-select-sm" name="category_id" id="category_id">
+                                        <select class="form-select form-select-sm" name="category_id" id="category_id" style="padding: 0.5rem 0.75rem;">
                                             <option value="">Select Category</option>
                                             @foreach ($categories as $category)
                                                 <option value="{{ $category->id }}"
@@ -60,12 +60,13 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
+                                </div>
 
+                                <div class="form-group row mt-2">
                                     <!-- Subcategory -->
-                                    <label for="sub_category_id" class="col-sm-1 col-form-label">S_Category</label>
+                                    <label for="sub_category_id" class="col-sm-1 col-form-label">S_Cate<span class="text-danger">*</span></label>
                                     <div class="col-sm-3">
-                                        <select class="form-select form-select-sm" name="sub_category_id"
-                                            id="sub_category_id">
+                                        <select class="form-select form-select-sm" name="sub_category_id" id="sub_category_id" style="padding: 0.5rem 0.75rem;">
                                             <option value="">Select Subcategory</option>
                                             @foreach ($subCategories as $subCategory)
                                                 <option value="{{ $subCategory->id }}"
@@ -78,14 +79,11 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                </div>
 
-                                <div class="form-group row mt-2">
-
-                                    <!-- Brand -->
-                                    <label for="client_id" class="col-sm-1 col-form-label">Brand</label>
+                                     <!-- Brand -->
+                                    <label for="client_id" class="col-sm-1 col-form-label">Brand <span class="text-danger">*</span></label>
                                     <div class="col-sm-3">
-                                        <select class="form-select form-select-sm" name="client_id" id="client_id">
+                                        <select class="form-select form-select-sm" name="client_id" id="client_id" style="padding: 0.5rem 0.75rem;">
                                             <option value="">Select Brand</option>
                                             @foreach ($clients as $client)
                                                 <option value="{{ $client->id }}"
@@ -111,13 +109,15 @@
                                         @error('thumbnail_image')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
-                                        <small class="text-muted d-inline-block text-nowrap">
+                                        {{-- <small class="text-muted d-inline-block text-nowrap">
                                             <span style="color: red; position: relative;">
                                                 JPG/JPEG/PNG • Max: 2MB • 500×500px
                                             </span>
-                                        </small>
+                                        </small> --}}
                                     </div>
+                                </div>
 
+                                <div class="form-group row mt-2">
                                     <!-- Gallery -->
                                     <label for="gallery_images" class="col-sm-1 col-form-label">M. Image</label>
                                     <div class="col-sm-3">
@@ -132,26 +132,85 @@
                                             </span>
                                         </small>
                                     </div>
-                                </div>
 
-                                <div class="form-group row mt-2">
                                     <!-- Short Description -->
                                     <label for="short_description" class="col-sm-1 col-form-label">S_
                                         Descrip</label>
-                                    <div class="col-sm-5">
+                                    <div class="col-sm-7">
                                         <textarea name="short_description" id="short_description" class="form-control form-control-sm" rows="4">{{ old('short_description') }}</textarea>
                                         @error('short_description')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
+                                </div>
 
+                                <div class="form-group row mt-2">
                                     <!-- Description -->
                                     <label for="description" class="col-sm-1 col-form-label">Description</label>
-                                    <div class="col-sm-5">
+                                    <div class="col-sm-11">
                                         <textarea name="description" id="description" class="form-control form-control-sm" rows="4">{{ old('description') }}</textarea>
                                         @error('description')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
+                                    </div>
+                                </div>
+
+                                <div class="card-header mt-4">
+                                    <div class="table-head">
+                                        <i class="fas fa-money-bill-wave me-1"></i> Product Pricing
+                                    </div>
+                                </div>
+
+                                <div id="inventory-wrapper">
+                                    <div class="inventory-row border rounded p-2 mt-2">
+                                        <div class="row align-items-center g-2">
+
+                                            <!-- Unit -->
+                                            <div class="col-sm-3">
+                                                <label class="form-label mb-0">Unit <span class="text-danger">*</span></label>
+                                                <select name="inventory[0][unit_id]" class="form-select form-select-sm" style="padding: 0.5rem 0.75rem;" required>
+                                                    <option value="">Select Unit</option>
+                                                    @foreach ($units as $unit)
+                                                        <option value="{{ $unit->id }}">{{ $unit->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                            <!-- Price -->
+                                            <div class="col-sm-3">
+                                                <label class="form-label mb-0">Price <span class="text-danger">*</span></label>
+                                                <input type="number" step="0.01" name="inventory[0][price]"
+                                                    class="form-control form-control-sm" required>
+                                            </div>
+
+                                            <!-- Discount -->
+                                            <div class="col-sm-3">
+                                                <label class="form-label mb-0">Discount</label>
+                                                <div class="input-group input-group-sm">
+                                                    <input type="number" step="0.01"
+                                                        name="inventory[0][discount_percent]"
+                                                        class="form-control discount-percent" placeholder="%">
+                                                    <input type="number" step="0.01"
+                                                        name="inventory[0][discount_price]"
+                                                        class="form-control discount-price" placeholder="Amount" style="width: 35%;">
+                                                </div>
+                                            </div>
+
+                                            <!-- Initial Qty -->
+                                            <div class="col-sm-2">
+                                                <label class="form-label mb-0">Initial Qty <span class="text-danger">*</span></label>
+                                                <input type="number" name="inventory[0][initial_qty]"
+                                                    class="form-control form-control-sm" required>
+                                            </div>
+
+                                            <div class="col-sm-1 text-center mt-4">
+                                                <button type="button" class="btn btn-sm btn-success"
+                                                    id="addInventoryRow">
+                                                    <i class="fas fa-plus"></i>
+                                                </button>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
 
@@ -194,5 +253,95 @@
             .catch(error => {
                 console.error('CKEditor Error:', error);
             });
+    </script>
+
+    <script>
+        let inventoryIndex = 1;
+
+        document.getElementById('addInventoryRow').addEventListener('click', function() {
+            let wrapper = document.getElementById('inventory-wrapper');
+
+            let html = `
+                <div class="inventory-row border rounded p-2 mt-2">
+                    <div class="row align-items-center g-2">
+
+                        <div class="col-sm-3">
+                            <label class="form-label mb-0">Unit</label>
+                            <select name="inventory[${inventoryIndex}][unit_id]"
+                                    class="form-select form-select-sm" required>
+                                <option value="">Select Unit</option>
+                                @foreach ($units as $unit)
+                                    <option value="{{ $unit->id }}">{{ $unit->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label class="form-label mb-0">Price</label>
+                            <input type="number" step="0.01"
+                                name="inventory[${inventoryIndex}][price]"
+                                class="form-control form-control-sm" required>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label class="form-label mb-0">Discount</label>
+                            <div class="input-group input-group-sm">
+                                <input type="number" step="0.01" name="inventory[${inventoryIndex}][discount_percent]" class="form-control discount-percent" placeholder="%">
+                                <input type="number" step="0.01" name="inventory[${inventoryIndex}][discount_price]" class="form-control discount-price" placeholder="Amount" style="width: 35%;">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <label class="form-label mb-0">Init Qty</label>
+                            <input type="number"
+                                name="inventory[${inventoryIndex}][initial_qty]"
+                                class="form-control form-control-sm" required>
+                        </div>
+
+                        <div class="col-sm-1 text-center mt-4">
+                            <button type="button"
+                                    class="btn btn-sm btn-danger removeRow">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>`;
+            wrapper.insertAdjacentHTML('beforeend', html);
+            inventoryIndex++;
+        });
+
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.removeRow')) {
+                e.target.closest('.inventory-row').remove();
+            }
+        });
+
+        document.addEventListener('input', function(e) {
+            if (e.target.classList.contains('discount-price') || e.target.classList.contains('discount-percent')) {
+                const row = e.target.closest('.inventory-row');
+                const priceInput = row.querySelector('input[name*="[price]"]');
+                const price = parseFloat(priceInput.value) || 0;
+
+                const discountPriceInput = row.querySelector('.discount-price');
+                const discountPercentInput = row.querySelector('.discount-percent');
+
+                if (!price) {
+                    discountPriceInput.value = '';
+                    discountPercentInput.value = '';
+                    return;
+                }
+
+                if (e.target.classList.contains('discount-percent')) {
+                    const percent = parseFloat(discountPercentInput.value) || 0;
+                    discountPriceInput.value = (price - (percent / 100) * price).toFixed(2);
+                }
+
+                if (e.target.classList.contains('discount-price')) {
+                    const finalPrice = parseFloat(discountPriceInput.value) || 0;
+                    discountPercentInput.value = ((1 - finalPrice / price) * 100).toFixed(2);
+                }
+            }
+        });
     </script>
 @endsection
