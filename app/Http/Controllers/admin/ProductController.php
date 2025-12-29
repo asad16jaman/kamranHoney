@@ -131,15 +131,13 @@ class ProductController extends Controller
     public function edit($id)
     {
         try {
-            $product = Product::findOrFail($id);
+            $product = Product::with('inventory')->findOrFail($id);
             $categories = Category::all();
+            $subCategories = SubCategory::all();
             $clients = Client::all();
+            $units = Unit::all();
 
-            $subCategories = $product->category
-                ? $product->category->subCategories()->get()
-                : collect();
-
-            return view('admin.products.edit', compact('product', 'categories', 'clients', 'subCategories'));
+            return view('admin.products.edit', compact('product', 'categories', 'subCategories', 'clients', 'units'));
         } catch (\Exception $e) {
             Log::error('Error fetching product for edit: ' . $e->getMessage());
             return back()->with('error', 'Could not load product.');
@@ -148,22 +146,28 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'category_id' => 'required|exists:categories,id',
+            'sub_category_id' => 'nullable|exists:sub_categories,id',
+            'client_id' => 'required|exists:clients,id',
+            'name' => 'required|string|max:255',
+            'thumbnail_image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'gallery_images.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'short_description' => 'nullable|string',
+            'description' => 'nullable|string',
+
+            'inventory' => 'required|array|min:1',
+            'inventory.*.unit_id' => 'required|exists:units,id',
+            'inventory.*.price' => 'required|numeric|min:0',
+            'inventory.*.discount_price' => 'nullable|numeric|min:0',
+            'inventory.*.discount_percent' => 'nullable|numeric|min:0',
+            'inventory.*.initial_qty' => 'required|numeric|min:0',
+        ]);
+
         try {
             $product = Product::findOrFail($id);
 
-            $request->validate([
-                'category_id' => 'required|exists:categories,id',
-                'sub_category_id' => 'nullable|exists:sub_categories,id',
-                'client_id' => 'required|exists:clients,id',
-                'name' => 'required|string|max:255',
-                'thumbnail_image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
-                'gallery_images.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
-                'short_description' => 'nullable|string',
-                'description' => 'nullable|string',
-            ]);
-
             $thumbnailPath = $product->thumbnail_image;
-
             if ($request->hasFile('thumbnail_image')) {
                 if ($thumbnailPath && file_exists(public_path($thumbnailPath))) {
                     unlink(public_path($thumbnailPath));
@@ -178,8 +182,7 @@ class ProductController extends Controller
             $galleryPaths = json_decode($product->gallery_images, true) ?? [];
 
             if ($request->has('remove_gallery_images')) {
-                $removeGalleryImages = $request->remove_gallery_images;
-                foreach ($removeGalleryImages as $index) {
+                foreach ($request->remove_gallery_images as $index) {
                     if (isset($galleryPaths[$index]) && file_exists(public_path($galleryPaths[$index]))) {
                         unlink(public_path($galleryPaths[$index]));
                         unset($galleryPaths[$index]);
@@ -195,17 +198,36 @@ class ProductController extends Controller
                 }
             }
 
-            $product->update([
-                'category_id' => $request->category_id,
-                'sub_category_id' => $request->sub_category_id,
-                'client_id' => $request->client_id,
-                'name' => $request->name,
-                'slug' => Str::slug($request->name),
-                'short_description' => strip_tags($request->short_description),
-                'description' => strip_tags($request->description),
-                'thumbnail_image' => $thumbnailPath,
-                'gallery_images' => json_encode(array_values($galleryPaths)),
-            ]);
+            DB::transaction(function () use ($request, $product, $thumbnailPath, $galleryPaths) {
+
+                $product->update([
+                    'category_id' => $request->category_id,
+                    'sub_category_id' => $request->sub_category_id,
+                    'client_id' => $request->client_id,
+                    'name' => $request->name,
+                    'slug' => Str::slug($request->name),
+                    'short_description' => strip_tags($request->short_description),
+                    'description' => strip_tags($request->description),
+                    'thumbnail_image' => $thumbnailPath,
+                    'gallery_images' => json_encode(array_values($galleryPaths)),
+                    'ip_address' => $request->ip(),
+                ]);
+
+                $product->inventory()->delete();
+
+                foreach ($request->inventory as $item) {
+                    $product->inventory()->create([
+                        'unit_id' => $item['unit_id'],
+                        'price' => $item['price'],
+                        'discount_price' => $item['discount_price'] ?? null,
+                        'discount_percent' => $item['discount_percent'] ?? null,
+                        'initial_qty' => $item['initial_qty'],
+                        'purchase_qty' => 0,
+                        'sale_qty' => 0,
+                        'ip_address' => $request->ip(),
+                    ]);
+                }
+            });
 
             return redirect()->route('products.index')->with('success', 'Product updated successfully.');
         } catch (\Exception $e) {

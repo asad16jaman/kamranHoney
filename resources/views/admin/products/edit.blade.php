@@ -179,6 +179,137 @@
                                     </div>
                                 </div>
 
+                                <div class="card-header mt-4">
+                                    <div class="table-head">
+                                        <i class="fas fa-money-bill-wave me-1"></i> Product Pricing
+                                    </div>
+                                </div>
+
+                                <div id="inventory-wrapper">
+                                    @if ($product->inventory->count())
+                                        @foreach ($product->inventory as $index => $inv)
+                                            <div class="inventory-row border rounded p-2 mt-2">
+                                                <div class="row align-items-center g-2">
+
+                                                    <div class="col-sm-3">
+                                                        <label class="form-label mb-0">Unit <span
+                                                                class="text-danger">*</span></label>
+                                                        <select name="inventory[{{ $index }}][unit_id]"
+                                                            class="form-select form-select-sm" style="padding: 0.5rem 0.75rem;" required>
+                                                            <option value="">Select Unit</option>
+                                                            @foreach ($units as $unit)
+                                                                <option value="{{ $unit->id }}"
+                                                                    {{ $inv->unit_id == $unit->id ? 'selected' : '' }}>
+                                                                    {{ $unit->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-sm-3">
+                                                        <label class="form-label mb-0">Price <span
+                                                                class="text-danger">*</span></label>
+                                                        <input type="number" step="0.01"
+                                                            name="inventory[{{ $index }}][price]"
+                                                            class="form-control form-control-sm"
+                                                            value="{{ $inv->price }}" required>
+                                                    </div>
+
+                                                    <div class="col-sm-3">
+                                                        <label class="form-label mb-0">Discount</label>
+                                                        <div class="input-group input-group-sm">
+                                                            <input type="number" step="0.01"
+                                                                name="inventory[{{ $index }}][discount_percent]"
+                                                                class="form-control discount-percent"
+                                                                value="{{ $inv->discount_percent }}" placeholder="%">
+                                                            <input type="number" step="0.01"
+                                                                name="inventory[{{ $index }}][discount_price]"
+                                                                class="form-control discount-price"
+                                                                value="{{ $inv->discount_price }}" placeholder="Amount" style="width: 35%;">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <label class="form-label mb-0">Initial Qty <span
+                                                                class="text-danger">*</span></label>
+                                                        <input type="number"
+                                                            name="inventory[{{ $index }}][initial_qty]"
+                                                            class="form-control form-control-sm"
+                                                            value="{{ $inv->initial_qty }}" required>
+                                                    </div>
+
+                                                    <div class="col-sm-1 text-center mt-4">
+                                                        @if ($index == 0)
+                                                            <button type="button" class="btn btn-sm btn-success"
+                                                                id="addInventoryRow">
+                                                                <i class="fas fa-plus"></i>
+                                                            </button>
+                                                        @else
+                                                            <button type="button"
+                                                                class="btn btn-sm btn-danger removeRow">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        @endif
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        <div class="inventory-row border rounded p-2 mt-2">
+                                            <div class="row align-items-center g-2">
+
+                                                <div class="col-sm-3">
+                                                    <label class="form-label mb-0">Unit <span
+                                                            class="text-danger">*</span></label>
+                                                    <select name="inventory[0][unit_id]"
+                                                        class="form-select form-select-sm" style="padding: 0.5rem 0.75rem;" required>
+                                                        <option value="">Select Unit</option>
+                                                        @foreach ($units as $unit)
+                                                            <option value="{{ $unit->id }}">{{ $unit->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-sm-3">
+                                                    <label class="form-label mb-0">Price <span
+                                                            class="text-danger">*</span></label>
+                                                    <input type="number" step="0.01" name="inventory[0][price]"
+                                                        class="form-control form-control-sm" required>
+                                                </div>
+
+                                                <div class="col-sm-3">
+                                                    <label class="form-label mb-0">Discount</label>
+                                                    <div class="input-group input-group-sm">
+                                                        <input type="number" step="0.01"
+                                                            name="inventory[0][discount_percent]"
+                                                            class="form-control discount-percent" placeholder="%">
+                                                        <input type="number" step="0.01"
+                                                            name="inventory[0][discount_price]"
+                                                            class="form-control discount-price" placeholder="Amount" style="width: 35%;">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-2">
+                                                    <label class="form-label mb-0">Initial Qty <span
+                                                            class="text-danger">*</span></label>
+                                                    <input type="number" name="inventory[0][initial_qty]"
+                                                        class="form-control form-control-sm" required>
+                                                </div>
+
+                                                <div class="col-sm-1 text-center mt-4">
+                                                    <button type="button" class="btn btn-sm btn-success"
+                                                        id="addInventoryRow">
+                                                        <i class="fas fa-plus"></i>
+                                                    </button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
+
                                 <!-- Submit -->
                                 <hr class="my-2">
                                 <div class="clearfix">
@@ -230,5 +361,92 @@
             // Remove the thumbnail container from the DOM
             btn.closest('.position-relative').remove();
         }
+    </script>
+
+    <script>
+        let inventoryIndex = {{ max(1, $product->inventory->count()) }};
+
+        document.getElementById('addInventoryRow').addEventListener('click', function() {
+            let wrapper = document.getElementById('inventory-wrapper');
+
+            let html = `
+        <div class="inventory-row border rounded p-2 mt-2">
+            <div class="row align-items-center g-2">
+
+                <div class="col-sm-3">
+                    <label class="form-label mb-0">Unit</label>
+                    <select name="inventory[${inventoryIndex}][unit_id]"
+                        class="form-select form-select-sm" style="padding: 0.5rem 0.75rem;" required>
+                        <option value="">Select Unit</option>
+                        @foreach ($units as $unit)
+                            <option value="{{ $unit->id }}">{{ $unit->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-sm-3">
+                    <label class="form-label mb-0">Price</label>
+                    <input type="number" step="0.01"
+                        name="inventory[${inventoryIndex}][price]"
+                        class="form-control form-control-sm" required>
+                </div>
+
+                <div class="col-sm-3">
+                    <label class="form-label mb-0">Discount</label>
+                    <div class="input-group input-group-sm">
+                        <input type="number" step="0.01"
+                            name="inventory[${inventoryIndex}][discount_percent]"
+                            class="form-control discount-percent" placeholder="%">
+                        <input type="number" step="0.01"
+                            name="inventory[${inventoryIndex}][discount_price]"
+                            class="form-control discount-price" placeholder="Amount"
+                            style="width: 35%;">
+                    </div>
+                </div>
+
+                <div class="col-sm-2">
+                    <label class="form-label mb-0">Init Qty</label>
+                    <input type="number"
+                        name="inventory[${inventoryIndex}][initial_qty]"
+                        class="form-control form-control-sm" required>
+                </div>
+
+                <div class="col-sm-1 text-center mt-4">
+                    <button type="button" class="btn btn-sm btn-danger removeRow">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>`;
+            wrapper.insertAdjacentHTML('beforeend', html);
+            inventoryIndex++;
+        });
+
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.removeRow')) {
+                e.target.closest('.inventory-row').remove();
+            }
+        });
+
+        document.addEventListener('input', function(e) {
+            if (e.target.classList.contains('discount-price') || e.target.classList.contains('discount-percent')) {
+                const row = e.target.closest('.inventory-row');
+                const price = parseFloat(row.querySelector('input[name*="[price]"]').value) || 0;
+
+                const dp = row.querySelector('.discount-price');
+                const dper = row.querySelector('.discount-percent');
+
+                if (!price) return;
+
+                if (e.target.classList.contains('discount-percent')) {
+                    dp.value = (price - (dper.value / 100) * price).toFixed(2);
+                }
+
+                if (e.target.classList.contains('discount-price')) {
+                    dper.value = ((1 - dp.value / price) * 100).toFixed(2);
+                }
+            }
+        });
     </script>
 @endsection
