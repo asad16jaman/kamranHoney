@@ -25,29 +25,10 @@
                                 @method('PUT')
                             @endif
 
-                            <div class="row">
-                                <!-- Client Image -->
-                                <div class="form-group row mt-2">
-                                    <label for="client_image" class="col-sm-1 col-form-label">Brand Logo</label>
-                                    <div class="col-sm-3">
-                                        <div class="d-flex align-items-center">
-                                            <img id="imagePreview"
-                                                src="{{ isset($client) && $client->image ? asset($client->image) : asset('uploads/no_images/no-image.png') }}"
-                                                alt="Client Logo Preview" width="40" class="me-2">
-                                            <input type="file" class="form-control form-control-sm" id="client_image"
-                                                name="image" accept="image/*" onchange="previewImage(event)">
-                                        </div>
-                                        @error('image')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                        <small class="text-muted d-inline-block text-nowrap">
-                                            <span style="color: red; position: relative;">
-                                                JPG/JPEG/PNG • Max: 2MB • 410×410px
-                                            </span>
-                                        </small>
-                                    </div>
+                            <div class="row justify-content-center">
 
-                                    <!-- Client Name -->
+                                <!-- Brand Name -->
+                                <div class="form-group row mt-2 align-items-center justify-content-center">
                                     <label for="client_name" class="col-sm-1 col-form-label">Brand Name</label>
                                     <div class="col-sm-3">
                                         <input type="text" class="form-control form-control-sm" id="client_name"
@@ -58,15 +39,37 @@
                                     </div>
                                 </div>
 
-                                <hr class="my-2">
-                                <div class="clearfix">
-                                    <div class="text-end m-auto">
-                                        <button type="reset" class="btn btn-dark">Reset</button>
-                                        <button type="submit" class="btn btn-primary">
-                                            {{ isset($client) ? 'Update Brand' : 'Add Brand' }}
-                                        </button>
+                                <!-- Brand Logo -->
+                                <div class="form-group row mt-2 align-items-center justify-content-center">
+                                    <label for="client_image" class="col-sm-1 col-form-label">Brand Logo</label>
+                                    <div class="col-sm-3">
+                                        <div class="d-flex align-items-center">
+                                            <img id="clientImagePreview"
+                                                src="{{ isset($client) && $client->image ? asset($client->image) : asset('uploads/no_images/no-image.png') }}"
+                                                width="40" class="me-2">
+                                            <input type="file" class="form-control form-control-sm" id="client_image"
+                                                name="image" accept="image/*" onchange="previewClientImage(event)">
+                                        </div>
+                                        @error('image')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                        <small class="text-muted d-inline-block text-nowrap">
+                                            <span style="color:red;">
+                                                JPG/JPEG/PNG • Max: 2MB • 410×410px
+                                            </span>
+                                        </small>
                                     </div>
                                 </div>
+
+                                <hr class="my-2">
+
+                                <div class="clearfix text-center">
+                                    <button type="reset" class="btn btn-dark">Reset</button>
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ isset($client) ? 'Update Brand' : 'Add Brand' }}
+                                    </button>
+                                </div>
+
                             </div>
                         </form>
                     </div>

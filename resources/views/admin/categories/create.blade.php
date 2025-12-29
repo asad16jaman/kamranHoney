@@ -27,9 +27,22 @@
                                 @method('PUT')
                             @endif
 
-                            <div class="row">
+                            <div class="row justify-content-center">
+
+                                <!-- Category Name -->
+                                <div class="form-group row mt-2 align-items-center justify-content-center">
+                                    <label for="category_name" class="col-sm-1 col-form-label">Name</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" class="form-control form-control-sm" id="category_name"
+                                            name="name" value="{{ old('name', $category->name ?? '') }}">
+                                        @error('name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
                                 <!-- Category Image -->
-                                <div class="form-group row mt-2">
+                                <div class="form-group row mt-2 align-items-center justify-content-center">
                                     <label for="category_image" class="col-sm-1 col-form-label">Image</label>
                                     <div class="col-sm-3">
                                         <div class="d-flex align-items-center">
@@ -43,32 +56,22 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                         <small class="text-muted d-inline-block text-nowrap">
-                                            <span style="color: red; position: relative;">
+                                            <span style="color: red;">
                                                 JPG/JPEG/PNG • Max: 2MB • 700×600px
                                             </span>
                                         </small>
                                     </div>
-
-                                    <!-- Category Name -->
-                                    <label for="category_name" class="col-sm-1 col-form-label">Name</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" class="form-control form-control-sm" id="category_name"
-                                            name="name" value="{{ old('name', $category->name ?? '') }}">
-                                        @error('name')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
                                 </div>
 
                                 <hr class="my-2">
-                                <div class="clearfix">
-                                    <div class="text-end m-auto">
-                                        <button type="reset" class="btn btn-dark">Reset</button>
-                                        <button type="submit" class="btn btn-primary">
-                                            {{ isset($category) ? 'Update Category' : 'Add Category' }}
-                                        </button>
-                                    </div>
+
+                                <div class="clearfix text-center">
+                                    <button type="reset" class="btn btn-dark">Reset</button>
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ isset($category) ? 'Update Category' : 'Add Category' }}
+                                    </button>
                                 </div>
+
                             </div>
                         </form>
                     </div>

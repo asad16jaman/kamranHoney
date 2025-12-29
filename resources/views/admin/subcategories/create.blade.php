@@ -27,29 +27,10 @@
                             @method('PUT')
                         @endif
 
-                        <div class="row">
-                            <!-- Select Category -->
-                            <div class="form-group row mt-2 align-items-center">
-                                <!-- Subcategory Image -->
-                                <label for="subcategory_image" class="col-sm-1 col-form-label">Image</label>
-                                <div class="col-sm-3">
-                                    <div class="d-flex align-items-center">
-                                        <img id="imagePreview"
-                                            src="{{ isset($subCategory) && $subCategory->image ? asset($subCategory->image) : asset('uploads/no_images/no-image.png') }}"
-                                            alt="Subcategory Image Preview" width="40" class="me-2">
-                                        <input type="file" class="form-control form-control-sm" id="subcategory_image"
-                                            name="image" accept="image/*" onchange="previewImage(event)">
-                                    </div>
-                                    @error('image')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                    <small class="text-muted d-inline-block text-nowrap">
-                                        <span style="color: red; position: relative;">
-                                            JPG/JPEG/PNG • Max: 2MB • 700×600px
-                                        </span>
-                                    </small>
-                                </div>
+                        <div class="row justify-content-center">
 
+                            <!-- Category -->
+                            <div class="form-group row mt-2 align-items-center justify-content-center">
                                 <label for="category_id" class="col-sm-1 col-form-label">Category</label>
                                 <div class="col-sm-3">
                                     <select name="category_id" id="category_id" class="form-control form-control-sm">
@@ -65,8 +46,10 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
+                            </div>
 
-                                <!-- Subcategory Name -->
+                            <!-- Subcategory Name -->
+                            <div class="form-group row mt-2 align-items-center justify-content-center">
                                 <label for="subcategory_name" class="col-sm-1 col-form-label">Name</label>
                                 <div class="col-sm-3">
                                     <input type="text" class="form-control form-control-sm" id="subcategory_name"
@@ -77,15 +60,37 @@
                                 </div>
                             </div>
 
-                            <hr class="my-2">
-                            <div class="clearfix">
-                                <div class="text-end m-auto">
-                                    <button type="reset" class="btn btn-dark">Reset</button>
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ isset($subCategory) ? 'Update Subcategory' : 'Add Subcategory' }}
-                                    </button>
+                            <!-- Image -->
+                            <div class="form-group row mt-2 align-items-center justify-content-center">
+                                <label for="subcategory_image" class="col-sm-1 col-form-label">Image</label>
+                                <div class="col-sm-3">
+                                    <div class="d-flex align-items-center">
+                                        <img id="imagePreview"
+                                            src="{{ isset($subCategory) && $subCategory->image ? asset($subCategory->image) : asset('uploads/no_images/no-image.png') }}"
+                                            alt="Subcategory Image Preview" width="40" class="me-2">
+                                        <input type="file" class="form-control form-control-sm" id="subcategory_image"
+                                            name="image" accept="image/*" onchange="previewImage(event)">
+                                    </div>
+                                    @error('image')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                    <small class="text-muted d-inline-block text-nowrap">
+                                        <span style="color: red;">
+                                            JPG/JPEG/PNG • Max: 2MB • 700×600px
+                                        </span>
+                                    </small>
                                 </div>
                             </div>
+
+                            <hr class="my-2">
+
+                            <div class="clearfix text-center">
+                                <button type="reset" class="btn btn-dark">Reset</button>
+                                <button type="submit" class="btn btn-primary">
+                                    {{ isset($subCategory) ? 'Update Subcategory' : 'Add Subcategory' }}
+                                </button>
+                            </div>
+
                         </div>
                     </form>
                 </div>
