@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\FaqController;
 use App\Http\Controllers\admin\NewsController;
 use App\Http\Controllers\admin\SizeController;
+use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\ColorController;
 use App\Http\Controllers\admin\OrderController;
@@ -136,6 +137,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/client/update/{id}', [ClientController::class, 'update'])->name('client.update');
     Route::put('/client/update-status/{id}', [ClientController::class, 'updateStatus'])->name('client.updateStatus');
     Route::delete('/client/destroy/{id}', [ClientController::class, 'destroy'])->name('client.destroy');
+
+    // Unit
+    Route::get('/unit', [UnitController::class, 'index'])->name('unit.index');
+    Route::get('/unit/create', [UnitController::class, 'create'])->name('unit.create');
+    Route::post('/unit/store', [UnitController::class, 'store'])->name('unit.store');
+    Route::get('/unit/edit/{id}', [UnitController::class, 'edit'])->name('unit.edit');
+    Route::put('/unit/update/{id}', [UnitController::class, 'update'])->name('unit.update');
+    Route::put('/unit/update-status/{id}', [UnitController::class, 'updateStatus'])->name('unit.updateStatus');
+    Route::delete('/unit/destroy/{id}', [UnitController::class, 'destroy'])->name('unit.destroy');
 
     // Categories
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');

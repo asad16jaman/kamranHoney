@@ -15,7 +15,9 @@
                             checkAccess('subcategories.create') ||
                             checkAccess('subcategories.index') ||
                             checkAccess('client.create') ||
-                            checkAccess('client.index'))
+                            checkAccess('client.index')||
+                            checkAccess('unit.index') ||
+                            checkAccess('unit.create'))
                         <!-- Catalog Setup -->
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#collapseCatalogSetup" aria-expanded="false"
@@ -24,7 +26,7 @@
                             Inventory
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-                        <div class="collapse {{ Request::routeIs('categories.*') || Request::routeIs('subcategories.*') || Request::routeIs('client.*') || Request::routeIs('sizes_colors.*') ? 'show' : '' }}"
+                        <div class="collapse {{ Request::routeIs('categories.*') || Request::routeIs('subcategories.*') || Request::routeIs('client.*') || Request::routeIs('unit.*') ? 'show' : '' }}"
                             id="collapseCatalogSetup" aria-labelledby="headingCatalogSetup"
                             data-bs-parent="#sidenavAccordion">
 
@@ -58,45 +60,23 @@
                                     <a class="nav-link {{ Request::routeIs('client.index') ? 'active' : '' }}"
                                         href="{{ route('client.index') }}">Brand List</a>
                                 @endif
-                            </nav>
-                        </div>
-                    @endif
 
-                    <!-- Coupons -->
-                    @if (checkAccess('coupons.create') || checkAccess('coupons.index'))
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                            data-bs-target="#collapseCoupons" aria-expanded="false" aria-controls="collapseCoupons">
-                            <div class="sb-nav-link-icon"><i class="fas fa-ticket-alt"></i></div>
-                            Coupons
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse {{ Request::routeIs('coupons.*') ? 'show' : '' }}" id="collapseCoupons"
-                            aria-labelledby="headingCoupons" data-bs-parent="#sidenavAccordion">
-
-                            <nav class="sb-sidenav-menu-nested nav">
-                                @if (checkAccess('coupons.create'))
-                                    <a class="nav-link {{ Request::routeIs('coupons.create') ? 'active' : '' }}"
-                                        href="{{ route('coupons.create') }}">Create Coupon</a>
+                                {{-- Units --}}
+                                @if (checkAccess('unit.create'))
+                                    <a class="nav-link {{ Request::routeIs('unit.create') ? 'active' : '' }}"
+                                        href="{{ route('unit.create') }}">Create Unit</a>
                                 @endif
-
-                                @if (checkAccess('coupons.index'))
-                                    <a class="nav-link {{ Request::routeIs('coupons.index') ? 'active' : '' }}"
-                                        href="{{ route('coupons.index') }}">Coupon List</a>
+                                @if (checkAccess('unit.index'))
+                                    <a class="nav-link {{ Request::routeIs('unit.index') ? 'active' : '' }}"
+                                        href="{{ route('unit.index') }}">Unit List</a>
                                 @endif
                             </nav>
                         </div>
                     @endif
 
                     <!-- Web Content -->
-                    @if (checkAccess('sliders.create') ||
-                            checkAccess('sliders.index') ||
-                            checkAccess('features.create') ||
-                            checkAccess('features.index') ||
-                            checkAccess('banners.create') ||
-                            checkAccess('banners.index') ||
-                            checkAccess('products.create') ||
+                    @if (checkAccess('products.create') ||
                             checkAccess('products.index') ||
-                            checkAccess('products.variants.index') ||
                             checkAccess('faqs.create') ||
                             checkAccess('faqs.index') ||
                             checkAccess('review.index') ||
@@ -106,92 +86,16 @@
                             checkAccess('contact-us.index'))
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#collapseWebContentMenu"
-                            aria-expanded="{{ Request::is('sliders*') || Request::is('feature*') || Request::is('banners*') || Request::is('products*') || Request::is('product-variants*') || Request::is('faq*') || Request::routeIs('about-us.index', 'return.index', 'privacy.index', 'terms.index', 'contact-us.index', 'reviews.index', 'faqs.*') ? 'true' : 'false' }}"
+                            aria-expanded="{{ Request::is('products*') || Request::is('faq*') || Request::routeIs('about-us.index', 'return.index', 'privacy.index', 'terms.index', 'contact-us.index', 'reviews.index', 'faqs.*') ? 'true' : 'false' }}"
                             aria-controls="collapseWebContentMenu">
                             <div class="sb-nav-link-icon"><i class="fas fa-globe"></i></div>
                             Web Content
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-                        <div class="collapse {{ Request::is('sliders*') || Request::is('feature*') || Request::is('banners*') || Request::is('products*') || Request::is('product-variants*') || Request::is('faq*') || Request::routeIs('about-us.index', 'return.index', 'privacy.index', 'terms.index', 'contact-us.index', 'reviews.index') ? 'show' : '' }}"
+                        <div class="collapse {{  Request::is('products*') || Request::is('faq*') || Request::routeIs('about-us.index', 'return.index', 'privacy.index', 'terms.index', 'contact-us.index', 'reviews.index') ? 'show' : '' }}"
                             id="collapseWebContentMenu" aria-labelledby="headingWebContentMenu"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-
-                                <!-- Sliders -->
-                                @if (checkAccess('sliders.create') || checkAccess('sliders.index'))
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseSlidersMenu"
-                                        aria-expanded="{{ Request::is('sliders*') ? 'true' : 'false' }}"
-                                        aria-controls="collapseSlidersMenu">
-                                        Sliders
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse {{ Request::is('sliders*') ? 'show' : '' }}"
-                                        id="collapseSlidersMenu" aria-labelledby="headingSlidersMenu"
-                                        data-bs-parent="#collapseWebContentMenu">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            @if (checkAccess('sliders.create'))
-                                                <a class="nav-link {{ Request::routeIs('sliders.create') ? 'active' : '' }}"
-                                                    href="{{ route('sliders.create') }}">Create Slider</a>
-                                            @endif
-                                            @if (checkAccess('sliders.index'))
-                                                <a class="nav-link {{ Request::routeIs('sliders.index') ? 'active' : '' }}"
-                                                    href="{{ route('sliders.index') }}">Slider Lists</a>
-                                            @endif
-                                        </nav>
-                                    </div>
-                                @endif
-
-                                <!-- Features -->
-                                @if (checkAccess('features.create') || checkAccess('features.index'))
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseFeaturesMenu"
-                                        aria-expanded="{{ Request::is('feature*') ? 'true' : 'false' }}"
-                                        aria-controls="collapseFeaturesMenu">
-                                        Features
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse {{ Request::is('feature*') ? 'show' : '' }}"
-                                        id="collapseFeaturesMenu" aria-labelledby="headingFeaturesMenu"
-                                        data-bs-parent="#collapseWebContentMenu">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            @if (checkAccess('features.create'))
-                                                <a class="nav-link {{ Request::routeIs('features.create') ? 'active' : '' }}"
-                                                    href="{{ route('features.create') }}">Create Features</a>
-                                            @endif
-                                            @if (checkAccess('features.index'))
-                                                <a class="nav-link {{ Request::routeIs('features.index') ? 'active' : '' }}"
-                                                    href="{{ route('features.index') }}">Features List</a>
-                                            @endif
-                                        </nav>
-                                    </div>
-                                @endif
-
-                                <!-- Banners -->
-                                @if (checkAccess('banners.create') || checkAccess('banners.index'))
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseBannersMenu"
-                                        aria-expanded="{{ Request::is('banners*') ? 'true' : 'false' }}"
-                                        aria-controls="collapseBannersMenu">
-                                        Banners
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse {{ Request::is('banners*') ? 'show' : '' }}"
-                                        id="collapseBannersMenu" aria-labelledby="headingBannersMenu"
-                                        data-bs-parent="#collapseWebContentMenu">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            @if (checkAccess('banners.create'))
-                                                <a class="nav-link {{ Request::routeIs('banners.create') ? 'active' : '' }}"
-                                                    href="{{ route('banners.create') }}">Create Banner</a>
-                                            @endif
-                                            @if (checkAccess('banners.index'))
-                                                <a class="nav-link {{ Request::routeIs('banners.index') ? 'active' : '' }}"
-                                                    href="{{ route('banners.index') }}">Banner Lists</a>
-                                            @endif
-                                        </nav>
-                                    </div>
-                                @endif
-
                                 <!-- Products -->
                                 @if (checkAccess('products.create') || checkAccess('products.index') || checkAccess('products.variants.index'))
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -212,10 +116,6 @@
                                             @if (checkAccess('products.index'))
                                                 <a class="nav-link {{ Request::routeIs('products.index') ? 'active' : '' }}"
                                                     href="{{ route('products.index') }}">Product Lists</a>
-                                            @endif
-                                            @if (checkAccess('products.variants.index'))
-                                                <a class="nav-link {{ Request::routeIs('products.variants.index') ? 'active' : '' }}"
-                                                    href="{{ route('products.variants.index') }}">Variant Manage</a>
                                             @endif
                                         </nav>
                                     </div>
