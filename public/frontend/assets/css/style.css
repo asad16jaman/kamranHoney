@@ -1160,7 +1160,7 @@ body {
 
 .header-top .right .horizontal-menu>li {
     vertical-align: middle;
-    min-width: 140px;
+    /* min-width: 140px; */
     padding: 0 20px;
     border-right: 1px solid rgba(255, 255, 255, 0.33);
 }
@@ -14915,7 +14915,7 @@ body.open-quickview-block .biolife-quickview-block {
     }
 
     .biolife-cart-info>div+div {
-        margin-left: 22px;
+        margin-left: 25%;
     }
 
     .mobile-search .mobile-search-content {
