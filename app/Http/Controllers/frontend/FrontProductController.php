@@ -17,7 +17,8 @@ class FrontProductController extends Controller
     public function index()
     {
         try {
-            return view('frontend.pages.all_products'); 
+            $products = Product::with(['inventory.unit', 'category', 'client'])->where('status', 'a')->latest()->paginate(12);
+            return view('frontend.pages.all_products', compact('products')); 
         } catch (\Exception $e) {
             Log::error('Error fetching products: ' . $e->getMessage());
             return redirect()->route('home')->with('error', 'There was an error loading the products. Please try again later.');

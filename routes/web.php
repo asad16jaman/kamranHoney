@@ -3,46 +3,34 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\FaqController;
 use App\Http\Controllers\admin\BlogController;
-use App\Http\Controllers\admin\NewsController;
-use App\Http\Controllers\admin\SizeController;
-use App\Http\Controllers\Admin\UnitController;
+use App\Http\Controllers\admin\UnitController;
 use App\Http\Controllers\admin\UserController;
-use App\Http\Controllers\admin\ColorController;
 use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\BannerController;
 use App\Http\Controllers\admin\ClientController;
 use App\Http\Controllers\admin\CouponController;
-use App\Http\Controllers\admin\DealerController;
 use App\Http\Controllers\admin\ReviewController;
 use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\admin\AboutUsController;
-use App\Http\Controllers\admin\CounterController;
 use App\Http\Controllers\admin\FeatureController;
 use App\Http\Controllers\admin\GalleryController;
-use App\Http\Controllers\admin\MessageController;
 use App\Http\Controllers\admin\ProductController;
-use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\admin\SettingController;
 use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\admin\CategoryController;
-use App\Http\Controllers\admin\FavoriteController;
 use App\Http\Controllers\admin\AttributeController;
 use App\Http\Controllers\admin\ContactUsController;
 use App\Http\Controllers\admin\DashboardController;
-use App\Http\Controllers\admin\ManagementController;
-use App\Http\Controllers\admin\CertificateController;
 use App\Http\Controllers\admin\SubCategoryController;
 use App\Http\Controllers\frontend\CheckoutController;
 use App\Http\Controllers\frontend\CustomerController;
 use App\Http\Controllers\admin\ReturnPolicyController;
 use App\Http\Controllers\admin\PrivacyPolicyController;
-use App\Http\Controllers\frontend\FacilitiesController;
 use App\Http\Controllers\admin\AuthenticationController;
 use App\Http\Controllers\admin\ProductVariantController;
 use App\Http\Controllers\admin\TermsConditionController;
 use App\Http\Controllers\frontend\FrontProductController;
-use App\Http\Controllers\frontend\CustomerOrderController;
 
 /*
 |--------------------------------------------------------------------------
