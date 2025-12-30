@@ -80,10 +80,20 @@
                         </div>
                     </li>
 
-                    <li class="hidden-sm hidden-xs">
-                        <a href="#" class="link-to">
+                    <li class="hidden-sm hidden-xs user-dropdown">
+                        <a href="javascript:void(0)" class="link-to user-toggle">
                             <i class="biolife-icon icon-login"></i>
                         </a>
+
+                        <div class="user-menu">
+                            <div class="user-info">
+                                <img src="https://i.pravatar.cc/80" alt="User">
+                                <h6>Guest User</h6>
+                            </div>
+                            <a href="#" class="dropdown-link">
+                                <i class="fa fa-sign-in"></i> Sign In
+                            </a>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -171,3 +181,19 @@
 @if (Route::currentRouteName() === 'home')
     </div>
 @endif
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const toggle = document.querySelector('.user-toggle');
+        const menu = document.querySelector('.user-menu');
+
+        toggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        });
+
+        document.addEventListener('click', function() {
+            menu.style.display = 'none';
+        });
+    });
+</script>

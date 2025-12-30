@@ -1145,8 +1145,9 @@ body {
 }
 
 .header-top .top-bar .horizontal-menu a {
-    color: #ffffff;
+    color: #201a1a;
     font-size: 14px;
+    text-align: center;
 }
 
 .header-top .top-bar .horizontal-menu a:hover {
@@ -1600,9 +1601,49 @@ body.open-mobile-search .header-area.layout-02 {
     bottom: 8px;
 }
 
+.user-dropdown {
+    position: relative;
+}
+
+.user-menu {
+    position: absolute;
+    top: 45px;
+    right: -75px;
+    width: 220px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    display: none;
+    z-index: 999;
+}
+
+.user-menu .user-info {
+    text-align: center;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.user-menu .user-info img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 8px;
+}
+
+.user-menu .dropdown-link {
+    display: block;
+    padding: 12px 15px;
+    color: #333;
+    text-decoration: none;
+}
+
+.user-menu .dropdown-link:hover {
+    background: #f5f5f5;
+}
+
 .form-search .input-text {
-    height: 42px;              
-    line-height: 40px;       
+    height: 42px;
+    line-height: 40px;
     padding-top: 0;
     padding-bottom: 0;
 }
