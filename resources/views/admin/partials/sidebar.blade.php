@@ -77,18 +77,20 @@
                     <!-- Web Content -->
                     @if (checkAccess('products.create') ||
                             checkAccess('products.index') ||
+                            checkAccess('blogs.create') ||
+                            checkAccess('blogs.index') ||
                             checkAccess('review.index') ||
                             checkAccess('privacy.index') ||
                             checkAccess('contact-us.index'))
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#collapseWebContentMenu"
-                            aria-expanded="{{ Request::is('products*') || Request::routeIs('privacy.index', 'contact-us.index', 'reviews.index') ? 'true' : 'false' }}"
+                            aria-expanded="{{ Request::is('products*') || Request::is('blogs*') || Request::routeIs('privacy.index', 'contact-us.index', 'reviews.index') ? 'true' : 'false' }}"
                             aria-controls="collapseWebContentMenu">
                             <div class="sb-nav-link-icon"><i class="fas fa-globe"></i></div>
                             Web Content
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-                        <div class="collapse {{  Request::is('products*') || Request::routeIs('privacy.index', 'contact-us.index', 'reviews.index') ? 'show' : '' }}"
+                        <div class="collapse {{  Request::is('products*') || Request::is('blogs*') || Request::routeIs('privacy.index', 'contact-us.index', 'reviews.index') ? 'show' : '' }}"
                             id="collapseWebContentMenu" aria-labelledby="headingWebContentMenu"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
@@ -112,6 +114,31 @@
                                             @if (checkAccess('products.index'))
                                                 <a class="nav-link {{ Request::routeIs('products.index') ? 'active' : '' }}"
                                                     href="{{ route('products.index') }}">Product Lists</a>
+                                            @endif
+                                        </nav>
+                                    </div>
+                                @endif
+
+                                <!-- Blog -->
+                                @if (checkAccess('blogs.create') || checkAccess('blogs.index'))
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseBlogMenu"
+                                        aria-expanded="{{ Request::is('blogs*') ? 'true' : 'false' }}"
+                                        aria-controls="collapseBlogMenu">
+                                        Blog
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse {{ Request::is('blogs*') ? 'show' : '' }}"
+                                        id="collapseBlogMenu" aria-labelledby="headingBlogMenu"
+                                        data-bs-parent="#collapseWebContentMenu">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            @if (checkAccess('blogs.create'))
+                                                <a class="nav-link {{ Request::routeIs('blogs.create') ? 'active' : '' }}"
+                                                    href="{{ route('blogs.create') }}">Create Blog</a>
+                                            @endif
+                                            @if (checkAccess('blogs.index'))
+                                                <a class="nav-link {{ Request::routeIs('blogs.index') ? 'active' : '' }}"
+                                                    href="{{ route('blogs.index') }}">Blog List</a>
                                             @endif
                                         </nav>
                                     </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Models\Faq;
+use App\Models\Blog;
 use App\Models\Banner;
 use App\Models\Client;
 use App\Models\Slider;
@@ -41,7 +42,8 @@ class HomeController extends Controller
         try {
             $categories = Category::where('status', 'a')->latest()->get();
             $products = Product::with(['inventory.unit', 'category', 'client'])->where('status', 'a')->latest()->take(8)->get();
-            return view('frontend.pages.home', compact('categories', 'products'));
+            $blogs = Blog::where('status', 'a')->latest()->get();
+            return view('frontend.pages.home', compact('categories', 'products', 'blogs'));
         } catch (\Exception $e) {
             Log::error('Error fetching sliders: ' . $e->getMessage());
             return redirect()->route('home')->with('error', 'There was an error loading the sliders. Please try again later.');

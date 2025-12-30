@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\FaqController;
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\admin\NewsController;
 use App\Http\Controllers\admin\SizeController;
 use App\Http\Controllers\Admin\UnitController;
@@ -199,6 +200,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/faq/update/{id}', [FaqController::class, 'update'])->name('faqs.update');
     Route::put('/faq/update-status/{id}', [FaqController::class, 'updateStatus'])->name('faqs.updateStatus');
     Route::delete('/faq/destroy/{id}', [FaqController::class, 'destroy'])->name('faqs.destroy');
+
+    // Blog
+    Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
+    Route::get('/blogs/create', [BlogController::class, 'create'])->name('blogs.create');
+    Route::post('/blogs/store', [BlogController::class, 'store'])->name('blogs.store');
+    Route::get('/blogs/edit/{id}', [BlogController::class, 'edit'])->name('blogs.edit');
+    Route::put('/blogs/update/{id}', [BlogController::class, 'update'])->name('blogs.update');
+    Route::put('/blogs/update-status/{id}', [BlogController::class, 'updateStatus'])->name('blogs.updateStatus');
+    Route::delete('/blogs/destroy/{id}', [BlogController::class, 'destroy'])->name('blogs.destroy');
+
 
     // Reviews
     Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews.index');
