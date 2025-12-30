@@ -115,7 +115,9 @@
                 </div>
 
                 <span class="company-name">
-                    {{ $setting->company_name ?? 'Company Name' }}
+                    <a href="{{route('home')}}" style="color: black;">
+                        {{ $setting->company_name ?? 'Company Name' }}
+                    </a>
                 </span>
 
                 <div class="col-lg-5 col-md-7 hidden-sm hidden-xs">

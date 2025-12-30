@@ -3019,10 +3019,10 @@ body.open-mobile-search .header-area.layout-02 {
 .header-search-bar.layout-01 .input-text {
     font-size: 14px;
     color: #222222;
-    border: 2px solid #dddddd;
+    border: 2px solid #e17f26;
     width: 100%;
     display: inline-block;
-    padding: 4px 150px 10px 20px;
+    padding: 4px 150px 3px 20px;
     border-radius: 5px;
     ;
 }
@@ -5091,7 +5091,7 @@ body.open-overlay #overlay {
     display: inline-block;
     float: left;
     width: calc(100% - 38.462%);
-    padding-left: 20px;
+    padding-left: 100px;
     /* padding-top: 13px; */
 }
 
@@ -5476,7 +5476,7 @@ body.open-overlay #overlay {
 }
 
 .single-layout.product-tabs {
-    margin-top: 191px;
+    margin-top: 90px;
 }
 
 .product-tabs.single-layout .tab-head .tabs {
