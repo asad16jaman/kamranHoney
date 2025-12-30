@@ -90,6 +90,21 @@ img {
     outline: none;
 }
 
+.company-name {
+    margin-left: 40px;
+    font-weight: bold;
+    white-space: nowrap;
+    display: inline-block;
+    font-size: 20px;
+}
+
+
+.biolife-logo img {
+    height: 60px;
+    width: auto !important;
+    max-width: none;
+}
+
 .img-fluid {
     width: 100%;
     height: 100%;
@@ -1217,7 +1232,7 @@ body {
 }
 
 .header-area .header-middle {
-    padding: 15px 0;
+    padding: 8px 0;
     border-bottom: 1px solid #3c383454;
     background-color: #ffffff96;
 }
@@ -1555,6 +1570,30 @@ body.open-mobile-search .header-area.layout-02 {
 .header-area.layout-02 .biolife-cart-info .minicart-contain a>.title,
 .header-area.layout-02 .biolife-cart-info .icon-qty-combine .biolife-icon {
     color: #ffffff;
+}
+
+.header-middle .biolife-cart-info {
+    width: 100%;
+}
+
+.header-middle .header-search-bar {
+    margin-left: auto !important;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(80px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.menu-shift-right {
+    margin-right: -80px;
 }
 
 .biolife-cart-info {
@@ -2930,8 +2969,9 @@ body.open-mobile-search .header-area.layout-02 {
     border: 2px solid #dddddd;
     width: 100%;
     display: inline-block;
-    /* border-radius: 99999px; */
-    padding: 10px 240px 10px 20px;
+    padding: 4px 150px 10px 20px;
+    border-radius: 5px;
+    ;
 }
 
 @media screen and (-ms-high-contrast: active),
@@ -2952,13 +2992,14 @@ body.open-mobile-search .header-area.layout-02 {
     line-height: 0;
     font-size: 16px;
     display: inline-block;
-    padding: 16px;
+    padding: 13px;
     width: 54px;
     text-align: center;
     position: absolute;
     top: 0px;
     right: 0;
     color: #fff;
+    border-radius: 0px 5px 5px 0px;
 }
 
 .header-search-bar.layout-01 .input-text::-ms-input-placeholder,
@@ -13711,6 +13752,18 @@ body.open-quickview-block .biolife-quickview-block {
     .header-area .header-middle {
         padding: 15px 0 !important;
         /* border-bottom: 1px solid #3c383454; */
+    }
+
+    .company-name {
+        margin-left: 0px;
+        font-weight: bold;
+        white-space: normal;
+        display: inline-block;
+        font-size: 20px;
+    }
+
+    .video-slogan {
+        font-size: 4.5rem !important;
     }
 
     .slider-opt04__layout01 .text-content .third-line {
