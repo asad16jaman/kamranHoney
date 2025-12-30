@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\FaqController;
-use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\admin\BlogController;
 use App\Http\Controllers\admin\NewsController;
 use App\Http\Controllers\admin\SizeController;
 use App\Http\Controllers\Admin\UnitController;
