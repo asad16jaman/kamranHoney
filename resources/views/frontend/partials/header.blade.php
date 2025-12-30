@@ -45,13 +45,18 @@
             <div class="top-bar right">
                 <ul class="social-list">
                     <li>
-                        <a href="{{ $setting->twitter_url }}">
-                            <i class="fa fa-twitter" aria-hidden="true"></i>
+                        <a href="{{ $setting->facebook_url }}">
+                            <i class="fa fa-facebook" aria-hidden="true"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ $setting->facebook_url }}">
-                            <i class="fa fa-facebook" aria-hidden="true"></i>
+                        <a href="#">
+                            <i class="fa fa-youtube" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ $setting->instagram_url }}">
+                            <i class="fa fa-instagram" aria-hidden="true"></i>
                         </a>
                     </li>
                 </ul>
@@ -112,14 +117,14 @@
                             <li class="menu-item"><a href="{{ route('all.products') }}">All Products</a></li>
                             <li class="menu-item"><a href="{{ route('contact.create') }}">Contact</a></li>
 
-                            <li class="menu-item menu-item-has-children has-child">
+                            {{-- <li class="menu-item menu-item-has-children has-child">
                                 <a href="#" class="menu-name" data-title="Pages">Pages</a>
                                 <ul class="sub-menu">
                                     <li class="menu-item"><a href="#">Our Services</a></li>
                                     <li class="menu-item"><a href="#">Video Gallery</a></li>
                                     <li class="menu-item"><a href="#">Photo Gallery</a></li>
                                 </ul>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                 </div>

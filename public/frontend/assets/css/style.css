@@ -91,7 +91,6 @@ img {
 }
 
 .company-name {
-    margin-left: 40px;
     font-weight: bold;
     white-space: nowrap;
     display: inline-block;
@@ -1209,7 +1208,7 @@ body {
 .header-top .top-bar .social-list li {
     font-size: 15px;
     line-height: 42px;
-    margin: 0 13px;
+    margin: 0 5px;
 }
 
 .header-top .top-bar .social-list li a {
@@ -1594,6 +1593,18 @@ body.open-mobile-search .header-area.layout-02 {
 
 .menu-shift-right {
     margin-right: -80px;
+}
+
+.header-search-bar {
+    position: relative;
+    bottom: 8px;
+}
+
+.form-search .input-text {
+    height: 42px;              
+    line-height: 40px;       
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 .biolife-cart-info {
@@ -13755,9 +13766,8 @@ body.open-quickview-block .biolife-quickview-block {
     }
 
     .company-name {
-        margin-left: 0px;
+        margin-left: -65px;
         font-weight: bold;
-        white-space: normal;
         display: inline-block;
         font-size: 20px;
     }
