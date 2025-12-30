@@ -1876,6 +1876,7 @@ body.open-mobile-search .header-area.layout-02 {
 .minicart-item .left-info .price del {
     position: relative;
     margin-left: 6px;
+    margin-bottom: 13px;
 }
 
 .price-contain del::after,

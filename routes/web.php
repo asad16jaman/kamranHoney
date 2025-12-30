@@ -48,6 +48,7 @@ Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('about',[AboutUsController::class, 'view'])->name('about.view');
 
 Route::get('all-products',[FrontProductController::class, 'index'])->name('all.products');
+Route::get('product/{slug}', [FrontProductController::class, 'show'])->name('product.show');
 
 Route::get('contact',[ContactUsController::class, 'create'])->name('contact.create');
 

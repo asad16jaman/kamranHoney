@@ -84,7 +84,7 @@
 
                                                 <!-- Thumbnail -->
                                                 <div class="product-thumb">
-                                                    <a href="#" class="link-to-product">
+                                                    <a href="{{ route('product.show', $product->slug) }}" class="link-to-product">
                                                         <img src="{{ asset($product->thumbnail_image ?? 'uploads/no_images/no-image.png') }}"
                                                             alt="{{ $product->name }}" width="270" height="270"
                                                             class="product-thumnail">
@@ -111,7 +111,7 @@
                                                 <!-- Info -->
                                                 <div class="info">
                                                     <h4 class="product-title">
-                                                        <a href="#" class="pr-name">
+                                                        <a href="{{ route('product.show', $product->slug) }}" class="pr-name">
                                                             {{ $product->name }}
                                                         </a>
                                                     </h4>
@@ -154,7 +154,7 @@
                                                                 </span>
                                                             </ins>
                                                         @endif
-                                                    </div>
+                                                    </div> 
 
                                                     <!-- Buttons -->
                                                     <div class="buttons card-padding">
