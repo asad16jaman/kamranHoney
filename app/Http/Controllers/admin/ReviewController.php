@@ -15,40 +15,115 @@ class ReviewController extends Controller
             $reviews = Review::latest()->get();
             return view('admin.reviews.index', compact('reviews'));
         } catch (\Exception $e) {
-            Log::error('Error fetching Reviews content: ' . $e->getMessage());
-            return back()->with('error', 'An error occurred while fetching the Reviews content. Please try again later.');
+            Log::error('Error loading reviews index page: ' . $e->getMessage());
+            return redirect()->route('dashboard')->with('error', 'An unexpected error occurred. Please try again later.');
+        }
+    }
+
+    public function create(?Review $review = null)
+    {
+        try {
+            $reviews = Review::latest()->get();
+            return view('admin.reviews.create', compact('reviews', 'review'));
+        } catch (\Exception $e) {
+            Log::error('Error displaying create review page: ' . $e->getMessage());
+            return back()->with('error', 'An error occurred while loading the review creation page.');
         }
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'product_id' => 'required|exists:products,id',
-            'message' => 'required|string',
-            'rating' => 'required|integer|min:1|max:5',
+            'name' => 'required|string|max:255',
+            'title' => 'nullable|string|max:255',
+            'review' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         try {
-            $customer = auth('customer')->user();
+            $imagePath = 'uploads/no_images/no-image.png';
 
-            if (!$customer) {
-                return back()->with('error', 'You must be logged in to leave a review.');
+            if ($request->hasFile('image')) {
+                $imageFile = $request->file('image');
+                $imageName = now()->format('Ymd') . rand(1000, 9999) . '.' . $imageFile->getClientOriginalExtension();
+                $imageFile->move(public_path('uploads/review'), $imageName);
+                $imagePath = 'uploads/review/' . $imageName;
             }
 
             Review::create([
-                'product_id' => $request->product_id,
-                'customer_id' => $customer->id,
-                'message'    => $request->message,
-                'rating'     => $request->rating,
+                'name' => $request->name,
+                'title' => $request->title,
+                'review' => strip_tags($request->review),
+                'image' => $imagePath,
                 'ip_address' => $request->ip(),
-                'created_at' => now(),
-                'updated_at' => now(),
             ]);
 
-            return back()->with('success', 'Review submitted successfully.');
+            return redirect()->route('review.create')->with('success', 'Review created successfully.');
         } catch (\Exception $e) {
-            Log::error('Error while storing review: ' . $e->getMessage());
-            return back()->with('error', 'An unexpected error occurred. Please try again.');
+            Log::error('Error occurred while creating review: ' . $e->getMessage());
+            return back()->with('error', 'An error occurred while creating the review.');
+        }
+    }
+
+    public function edit($id)
+    {
+        try {
+            $review = Review::findOrFail($id);
+            $reviews = Review::latest()->get();
+            return view('admin.reviews.create', compact('review', 'reviews'));
+        } catch (\Exception $e) {
+            Log::error('Error fetching review for editing: ' . $e->getMessage());
+            return back()->with('error', 'An error occurred while fetching the review.');
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        try {
+            $review = Review::findOrFail($id);
+
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'title' => 'nullable|string|max:255',
+                'review' => 'nullable|string',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            ]);
+
+            $imagePath = $review->image;
+
+            if ($request->hasFile('image')) {
+                if ($review->image && $review->image !== 'uploads/no_images/no-image.png' && file_exists(public_path($review->image))) {
+                    unlink(public_path($review->image));
+                }
+
+                $imageFile = $request->file('image');
+                $imageName = now()->format('Ymd') . rand(1000, 9999) . '.' . $imageFile->getClientOriginalExtension();
+                $imageFile->move(public_path('uploads/review'), $imageName);
+                $imagePath = 'uploads/review/' . $imageName;
+            }
+
+            $review->update([
+                'name' => $request->name,
+                'title' => $request->title,
+                'review' => strip_tags($request->review),
+                'image' => $imagePath,
+            ]);
+
+            return redirect()->route('review.create')->with('success', 'Review updated successfully.');
+        } catch (\Exception $e) {
+            Log::error('Error occurred while updating review: ' . $e->getMessage());
+            return back()->with('error', 'An error occurred while updating the review.');
+        }
+    }
+
+    public function view()
+    {
+        try {
+            $reviews = Review::where('status', 'a')->latest()->get();
+            return view('frontend.pages.reviews', compact('reviews'));
+        } catch (\Exception $e) {
+            Log::error('Error fetching review content: ' . $e->getMessage());
+            return redirect()->route('home')->with('error', 'An error occurred while fetching the review content. Please try again later.');
         }
     }
 
@@ -64,26 +139,31 @@ class ReviewController extends Controller
             $review->status = $request->status;
             $review->save();
 
-            return back()->with('success', 'Review status updated.');
+            return back()->with('success', 'Review status updated successfully.');
         } catch (\Exception $e) {
             Log::error('Error updating review status: ' . $e->getMessage());
-            return back()->with('error', 'Unable to update review status.');
+            return back()->with('error', 'An error occurred while updating the status.');
         }
     }
-
 
     public function destroy($id)
     {
         try {
-
             $review = Review::findOrFail($id);
+
+            if ($review->image && basename($review->image) !== 'no-image.png') {
+                $imagePath = public_path($review->image);
+                if (file_exists($imagePath)) {
+                    unlink($imagePath);
+                }
+            }
 
             $review->delete();
 
-            return redirect()->route('reviews.index')->with('success', 'Review deleted successfully.');
+            return redirect()->route('review.create')->with('success', 'Review deleted successfully.');
         } catch (\Exception $e) {
-            Log::error('Error deleting Review: ' . $e->getMessage());
-            return back()->with('error', 'An error occurred while deleting the Review. Please try again later.');
+            Log::error('Error deleting review with ID ' . $id . ': ' . $e->getMessage());
+            return redirect()->route('review.create')->with('error', 'An error occurred while deleting the review.');
         }
     }
 }

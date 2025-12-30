@@ -45,12 +45,12 @@ use App\Http\Controllers\frontend\FrontProductController;
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
-Route::get('about',[AboutUsController::class, 'view'])->name('about.view');
+Route::get('about', [AboutUsController::class, 'view'])->name('about.view');
 
-Route::get('all-products',[FrontProductController::class, 'index'])->name('all.products');
+Route::get('all-products', [FrontProductController::class, 'index'])->name('all.products');
 Route::get('product/{slug}', [FrontProductController::class, 'show'])->name('product.show');
 
-Route::get('contact',[ContactUsController::class, 'create'])->name('contact.create');
+Route::get('contact', [ContactUsController::class, 'create'])->name('contact.create');
 
 
 // Authentication
@@ -199,11 +199,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/blogs/update-status/{id}', [BlogController::class, 'updateStatus'])->name('blogs.updateStatus');
     Route::delete('/blogs/destroy/{id}', [BlogController::class, 'destroy'])->name('blogs.destroy');
 
-
-    // Reviews
-    Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews.index');
-    Route::put('/reviews/update-status/{id}', [ReviewController::class, 'updateStatus'])->name('reviews.updateStatus');
-    Route::delete('/reviews/{id}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
+    // Review
+    Route::get('/review', [ReviewController::class, 'index'])->name('review.index');
+    Route::get('/review/create', [ReviewController::class, 'create'])->name('review.create');
+    Route::post('/review/store', [ReviewController::class, 'store'])->name('review.store');
+    Route::get('/review/edit/{id}', [ReviewController::class, 'edit'])->name('review.edit');
+    Route::put('/review/update/{id}', [ReviewController::class, 'update'])->name('review.update');
+    Route::put('/review/update-status/{id}', [ReviewController::class, 'updateStatus'])->name('review.updateStatus');
+    Route::delete('/review/destroy/{id}', [ReviewController::class, 'destroy'])->name('review.destroy');
 
     // Order Items
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');

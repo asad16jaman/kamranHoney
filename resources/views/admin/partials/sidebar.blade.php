@@ -79,18 +79,19 @@
                             checkAccess('products.index') ||
                             checkAccess('blogs.create') ||
                             checkAccess('blogs.index') ||
+                            checkAccess('review.create') ||
                             checkAccess('review.index') ||
                             checkAccess('privacy.index') ||
                             checkAccess('contact-us.index'))
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#collapseWebContentMenu"
-                            aria-expanded="{{ Request::is('products*') || Request::is('blogs*') || Request::routeIs('privacy.index', 'contact-us.index', 'reviews.index') ? 'true' : 'false' }}"
+                            aria-expanded="{{ Request::is('products*') || Request::is('blogs*') || Request::is('review*') || Request::routeIs('privacy.index', 'contact-us.index') ? 'true' : 'false' }}"
                             aria-controls="collapseWebContentMenu">
                             <div class="sb-nav-link-icon"><i class="fas fa-globe"></i></div>
                             Web Content
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-                        <div class="collapse {{  Request::is('products*') || Request::is('blogs*') || Request::routeIs('privacy.index', 'contact-us.index', 'reviews.index') ? 'show' : '' }}"
+                        <div class="collapse {{  Request::is('products*') || Request::is('blogs*') || Request::is('review*') || Request::routeIs('privacy.index', 'contact-us.index') ? 'show' : '' }}"
                             id="collapseWebContentMenu" aria-labelledby="headingWebContentMenu"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
@@ -144,10 +145,31 @@
                                     </div>
                                 @endif
 
-                                <!-- Reviews -->
-                                @if (checkAccess('review.index'))
-                                    <a class="nav-link {{ Request::routeIs('reviews.index') ? 'active' : '' }}"
-                                        href="{{ route('reviews.index') }}">Reviews</a>
+                                <!-- Review -->
+                                @if (checkAccess('review.create') || checkAccess('review.index'))
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseReviewMenu"
+                                        aria-expanded="{{ Request::is('review*') ? 'true' : 'false' }}"
+                                        aria-controls="collapseReviewMenu">
+                                        Review
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse {{ Request::is('review*') ? 'show' : '' }}"
+                                        id="collapseReviewMenu" aria-labelledby="headingReviewMenu"
+                                        data-bs-parent="#collapseWebContentMenu">
+                                        <nav class="sb-sidenav-menu-nested nav">
+
+                                            @if (checkAccess('review.create'))
+                                                <a class="nav-link {{ Request::routeIs('review.create') ? 'active' : '' }}"
+                                                    href="{{ route('review.create') }}">Create Review</a>
+                                            @endif
+
+                                            @if (checkAccess('review.index'))
+                                                <a class="nav-link {{ Request::routeIs('review.index') ? 'active' : '' }}"
+                                                    href="{{ route('review.index') }}">Review List</a>
+                                            @endif
+                                        </nav>
+                                    </div>
                                 @endif
 
                                 <!-- Privacy Policy -->
