@@ -208,6 +208,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/review/update-status/{id}', [ReviewController::class, 'updateStatus'])->name('review.updateStatus');
     Route::delete('/review/destroy/{id}', [ReviewController::class, 'destroy'])->name('review.destroy');
 
+    // Gallery
+    Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
+    Route::get('/gallery/create', [GalleryController::class, 'create'])->name('gallery.create');
+    Route::post('/gallery/store', [GalleryController::class, 'store'])->name('gallery.store');
+    Route::get('/gallery/edit/{id}', [GalleryController::class, 'edit'])->name('gallery.edit');
+    Route::put('/gallery/update-status/{id}', [GalleryController::class, 'updateStatus'])->name('gallery.updateStatus');
+    Route::put('/gallery/update/{id}', [GalleryController::class, 'update'])->name('gallery.update');
+    Route::delete('/gallery/destroy/{id}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
+
     // Order Items
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/{order}/edit', [OrderController::class, 'edit'])->name('orders.edit');

@@ -20,24 +20,6 @@ use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
-    // public function home()
-    // {
-    //     try {
-    //         $sliders = Slider::where('status', 'a')->latest()->get();
-    //         $categories = Category::withCount('products')->where('status', 'a')->latest()->get();
-    //         $features = Feature::where('status', 'a')->get();
-    //         $banners = Banner::where('status', 'a')->get();
-    //         $featuredProducts = Product::with('variants')->where('is_featured', 'Yes')->where('status', 'a')->latest()->get();
-    //         $newArrival = Product::with('variants')->where('is_new', 'Yes')->where('status', 'a')->latest()->get();
-    //         $brands = Client::where('status', 'a')->get();
-    //         $faqs = Faq::where('status', 'a')->latest()->get();
-    //         return view('frontend.pages.home', compact('categories', 'sliders', 'features', 'banners', 'featuredProducts', 'newArrival', 'faqs', 'brands'));
-    //     } catch (\Exception $e) {
-    //         Log::error('Error fetching sliders: ' . $e->getMessage());
-    //         return redirect()->route('home')->with('error', 'There was an error loading the sliders. Please try again later.');
-    //     }
-    // }
-
     public function home()
     {
         try {
@@ -45,7 +27,9 @@ class HomeController extends Controller
             $products = Product::with(['inventory.unit', 'category', 'client'])->where('status', 'a')->latest()->take(8)->get();
             $blogs = Blog::where('status', 'a')->latest()->get();
             $reviews = Review::where('status', 'a')->latest()->get();
-            return view('frontend.pages.home', compact('categories', 'products', 'blogs', 'reviews'));
+            $galleryImages = Gallery::where('type', 'image')->where('status', 'a')->take(10)->get();
+            $videos = Gallery::where('type', 'video')->where('status', 'a')->take(5)->get();
+            return view('frontend.pages.home', compact('categories', 'products', 'blogs', 'reviews', 'galleryImages', 'videos'));
         } catch (\Exception $e) {
             Log::error('Error fetching sliders: ' . $e->getMessage());
             return redirect()->route('home')->with('error', 'There was an error loading the sliders. Please try again later.');

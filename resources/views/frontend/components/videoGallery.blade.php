@@ -1,4 +1,23 @@
-<!-- Vodeo Gallery -->
+@php
+    function youtubeEmbedUrl($url) {
+        if (str_contains($url, 'embed')) {
+            return $url;
+        }
+
+        preg_match(
+            '/(youtube\.com\/watch\?v=|youtu\.be\/)([^\&\?\/]+)/',
+            $url,
+            $matches
+        );
+
+        return isset($matches[2])
+            ? 'https://www.youtube.com/embed/' . $matches[2]
+            : '';
+    }
+@endphp
+
+
+<!-- Video Gallery -->
 <div class="brand-slide xs-padding-bottom-50px">
     <div class="biolife-title-box xs-padding-bottom-50px">
         <div class="g-img">
@@ -8,59 +27,48 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-6 col-12">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-12 fade-up-on-scroll">
-                        <div class="">
-                            <iframe width="100%" height=""
-                                src="https://www.youtube.com/embed/x2ho4FDachY?si=owYIKZ6a50nby59F"
-                                title="YouTube video player" frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        </div>
-                    </div>
 
-                    <div class="col-lg-6 col-md-6 col-12 fade-up-on-scroll">
-                        <div class="">
-                            <iframe width="100%" height=""
-                                src="https://www.youtube.com/embed/x2ho4FDachY?si=owYIKZ6a50nby59F"
-                                title="YouTube video player" frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        </div>
-                    </div>
+            @if($videos->count())
 
-                    <div class="col-lg-6 col-md-6 col-12 fade-up-on-scroll">
-                        <div class="">
-                            <iframe width="100%" height=""
-                                src="https://www.youtube.com/embed/x2ho4FDachY?si=owYIKZ6a50nby59F"
-                                title="YouTube video player" frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        </div>
-                    </div>
+                <div class="col-lg-6 col-12">
+                    <div class="row">
 
-                    <div class="col-lg-6 col-md-6 col-12 fade-up-on-scroll">
-                        <div class="">
-                            <iframe width="100%" height=""
-                                src="https://www.youtube.com/embed/x2ho4FDachY?si=owYIKZ6a50nby59F"
-                                title="YouTube video player" frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        </div>
+                        @foreach($videos->take(4) as $video)
+                            <div class="col-lg-6 col-md-6 col-12 fade-up-on-scroll">
+                                <div class="">
+                                    <iframe width="100%" height=""
+                                        src="{{ youtubeEmbedUrl($video->video_url) }}"
+                                        title="{{ $video->title_1 ?? 'YouTube video player' }}"
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        referrerpolicy="strict-origin-when-cross-origin"
+                                        allowfullscreen>
+                                    </iframe>
+                                </div>
+                            </div>
+                        @endforeach
+
                     </div>
                 </div>
-            </div>
 
-            <div class="col-lg-6 d-lg-block d-none fade-up-on-scroll">
-                <div class="">
-                    <iframe width="560" height="315"
-                        src="https://www.youtube.com/embed/PdkGSFf8keo?si=4RY7mI0nP2VU4URc" title="YouTube video player"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                @php $mainVideo = $videos->first(); @endphp
+
+                <div class="col-lg-6 d-lg-block d-none fade-up-on-scroll">
+                    <div class="">
+                        <iframe width="560" height="315"
+                            src="{{ youtubeEmbedUrl($mainVideo->video_url) }}"
+                            title="{{ $mainVideo->title_1 ?? 'YouTube video player' }}"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
                 </div>
-            </div>
+
+            @endif
+
         </div>
     </div>
 </div>
+

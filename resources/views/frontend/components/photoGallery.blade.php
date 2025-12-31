@@ -8,118 +8,46 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-4 d-lg-block d-none fade-up-on-scroll">
-                <a href="{{ asset('frontend/assets') }}/images/photoGallery/h1.jpg" data-fancybox="gallery"
-                    data-caption="">
-                    <div class="mb-4 overlay-container-left">
-                        <div class="overlay"></div>
-                        <img src="{{ asset('frontend/assets') }}/images/photoGallery/h1.jpg" alt=""
-                            style="width: 100%; height: 100%" />
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-8">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 fade-up-on-scroll">
-                        <a href="{{ asset('frontend/assets') }}/images/photoGallery/g1.jpg" data-fancybox="gallery"
-                            data-caption="">
-                            <div class="mb-4 overlay-container">
-                                <div class="overlay"></div>
-                                <img style="width: 100%; height: 100%; object-fit: cover"
-                                    src="{{ asset('frontend/assets') }}/images/photoGallery/g1.jpg" alt="" />
-                            </div>
-                        </a>
-                    </div>
 
-                    <div class="col-lg-4 col-md-6 fade-up-on-scroll">
-                        <a href="{{ asset('frontend/assets') }}/images/photoGallery/g2.jpg" data-fancybox="gallery"
-                            data-caption="">
-                            <div class="mb-4 overlay-container">
-                                <div class="overlay"></div>
-                                <img style="width: 100%; height: 100%; object-fit: cover"
-                                    src="{{ asset('frontend/assets') }}/images/photoGallery/g2.jpg" alt="" />
-                            </div>
-                        </a>
-                    </div>
+            @if ($galleryImages->count())
 
-                    <div class="col-lg-4 col-md-6 fade-up-on-scroll">
-                        <a href="{{ asset('frontend/assets') }}/images/photoGallery/g3.jpg" data-fancybox="gallery"
-                            data-caption="">
-                            <div class="mb-4 overlay-container">
-                                <div class="overlay"></div>
-                                <img style="width: 100%; height: 100%; object-fit: cover"
-                                    src="{{ asset('frontend/assets') }}/images/photoGallery/g3.jpg" alt="" />
-                            </div>
-                        </a>
-                    </div>
+                <!-- Left Large Image -->
+                <div class="col-lg-4 d-lg-block d-none fade-up-on-scroll">
+                    @php $firstImage = $galleryImages->first(); @endphp
+                    <a href="{{ asset('uploads/gallery/' . $firstImage->image) }}"
+                       data-fancybox="gallery"
+                       data-caption="{{ $firstImage->title_1 ?? '' }}">
+                        <div class="mb-4 overlay-container-left">
+                            <div class="overlay"></div>
+                            <img src="{{ asset('uploads/gallery/' . $firstImage->image) }}"
+                                 alt="{{ $firstImage->title_1 }}"
+                                 style="width:100%; height:100%; object-fit:cover;">
+                        </div>
+                    </a>
+                </div>
 
-                    <div class="col-lg-4 col-md-6 fade-up-on-scroll">
-                        <a href="{{ asset('frontend/assets') }}/images/photoGallery/g4.jpg" data-fancybox="gallery"
-                            data-caption="">
-                            <div class="mb-4 overlay-container">
-                                <div class="overlay"></div>
-                                <img style="width: 100%; height: 100%; object-fit: cover"
-                                    src="{{ asset('frontend/assets') }}/images/photoGallery/g4.jpg" alt="" />
+                <!-- Right Grid Images -->
+                <div class="col-lg-8">
+                    <div class="row">
+                        @foreach ($galleryImages->skip(1) as $image)
+                            <div class="col-lg-4 col-md-6 fade-up-on-scroll">
+                                <a href="{{ asset('uploads/gallery/' . $image->image) }}"
+                                   data-fancybox="gallery"
+                                   data-caption="{{ $image->title_1 ?? '' }}">
+                                    <div class="mb-4 overlay-container">
+                                        <div class="overlay"></div>
+                                        <img src="{{ asset('uploads/gallery/' . $image->image) }}"
+                                             alt="{{ $image->title_1 }}"
+                                             style="width:100%; height:100%; object-fit:cover;">
+                                    </div>
+                                </a>
                             </div>
-                        </a>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 fade-up-on-scroll">
-                        <a href="{{ asset('frontend/assets') }}/images/photoGallery/g6.jpg" data-fancybox="gallery"
-                            data-caption="">
-                            <div class="mb-4 overlay-container">
-                                <div class="overlay"></div>
-                                <img style="width: 100%; height: 100%; object-fit: cover"
-                                    src="{{ asset('frontend/assets') }}/images/photoGallery/g6.jpg" alt="" />
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 fade-up-on-scroll">
-                        <a href="{{ asset('frontend/assets') }}/images/photoGallery/g5.jpg" data-fancybox="gallery"
-                            data-caption="">
-                            <div class="mb-4 overlay-container">
-                                <div class="overlay"></div>
-                                <img style="width: 100%; height: 100%; object-fit: cover"
-                                    src="{{ asset('frontend/assets') }}/images/photoGallery/g5.jpg" alt="" />
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 fade-up-on-scroll">
-                        <a href="{{ asset('frontend/assets') }}/images/photoGallery/g1.jpg" data-fancybox="gallery"
-                            data-caption="">
-                            <div class="mb-4 overlay-container">
-                                <div class="overlay"></div>
-                                <img style="width: 100%; height: 100%; object-fit: cover"
-                                    src="{{ asset('frontend/assets') }}/images/photoGallery/g1.jpg" alt="" />
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 fade-up-on-scroll">
-                        <a href="{{ asset('frontend/assets') }}/images/photoGallery/g1.jpg" data-fancybox="gallery"
-                            data-caption="">
-                            <div class="mb-4 overlay-container">
-                                <div class="overlay"></div>
-                                <img style="width: 100%; height: 100%; object-fit: cover"
-                                    src="{{ asset('frontend/assets') }}/images/photoGallery/g1.jpg" alt="" />
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 fade-up-on-scroll">
-                        <a href="{{ asset('frontend/assets') }}/images/photoGallery/g1.jpg" data-fancybox="gallery"
-                            data-caption="">
-                            <div class="mb-4 overlay-container">
-                                <div class="overlay"></div>
-                                <img style="width: 100%; height: 100%; object-fit: cover"
-                                    src="{{ asset('frontend/assets') }}/images/photoGallery/g1.jpg" alt="" />
-                            </div>
-                        </a>
+                        @endforeach
                     </div>
                 </div>
-            </div>
+
+            @endif
+
         </div>
     </div>
 </div>

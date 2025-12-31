@@ -81,17 +81,19 @@
                             checkAccess('blogs.index') ||
                             checkAccess('review.create') ||
                             checkAccess('review.index') ||
+                            checkAccess('gallery.index') ||
+                             checkAccess('gallery.create') ||
                             checkAccess('privacy.index') ||
                             checkAccess('contact-us.index'))
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#collapseWebContentMenu"
-                            aria-expanded="{{ Request::is('products*') || Request::is('blogs*') || Request::is('review*') || Request::routeIs('privacy.index', 'contact-us.index') ? 'true' : 'false' }}"
+                            aria-expanded="{{ Request::is('products*') || Request::is('blogs*') || Request::is('review*') || Request::is('gallery*') || Request::routeIs('privacy.index', 'contact-us.index') ? 'true' : 'false' }}"
                             aria-controls="collapseWebContentMenu">
                             <div class="sb-nav-link-icon"><i class="fas fa-globe"></i></div>
                             Web Content
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-                        <div class="collapse {{  Request::is('products*') || Request::is('blogs*') || Request::is('review*') || Request::routeIs('privacy.index', 'contact-us.index') ? 'show' : '' }}"
+                        <div class="collapse {{  Request::is('products*') || Request::is('blogs*') || Request::is('review*') || Request::is('gallery*') || Request::routeIs('privacy.index', 'contact-us.index') ? 'show' : '' }}"
                             id="collapseWebContentMenu" aria-labelledby="headingWebContentMenu"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
@@ -171,6 +173,26 @@
                                         </nav>
                                     </div>
                                 @endif
+
+                                <!-- Gallery -->
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseGalleryMenu"
+                                    aria-expanded="{{ Request::is('gallery*') ? 'true' : 'false' }}"
+                                    aria-controls="collapseGalleryMenu">
+                                    Gallery
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse {{ Request::is('gallery*') ? 'show' : '' }}" id="collapseGalleryMenu"
+                                    aria-labelledby="headingGalleryMenu" data-bs-parent="#collapseWebContentMenu">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        @if (auth()->user()->type == 'admin')
+                                            <a class="nav-link {{ Request::routeIs('gallery.create') ? 'active' : '' }}"
+                                                href="{{ route('gallery.create') }}">Create Gallery</a>
+                                        @endif
+                                        <a class="nav-link {{ Request::routeIs('gallery.index') ? 'active' : '' }}"
+                                            href="{{ route('gallery.index') }}">Gallery Lists</a>
+                                    </nav>
+                                </div>
 
                                 <!-- Privacy Policy -->
                                 @if (checkAccess('privacy.index'))
