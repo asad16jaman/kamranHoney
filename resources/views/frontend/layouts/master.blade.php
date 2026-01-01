@@ -90,7 +90,7 @@
 
                     <p class="excerpt" id="qv-description"></p>
 
-                    <div class="from-cart">
+                    <div class="from-cart product-qty">
                         <div class="qty-input">
                             <input type="text" name="qty12554" value="1" data-max_value="20" data-min_value="1"
                                 data-step="1" />
