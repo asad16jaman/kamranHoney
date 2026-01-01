@@ -48,6 +48,14 @@
             font-size: 18px;
             font-weight: 600;
         }
+
+        .product-tabs {
+            overflow: hidden;
+        }
+
+        .tab-content {
+            min-height: 200px;
+        }
     </style>
 @endpush
 
@@ -195,6 +203,216 @@
                                 </div>
                             </div>
 
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab info -->
+                <div class="product-tabs single-layout biolife-tab-contain">
+                    <div class="tab-head">
+                        <ul class="tabs">
+                            <li class="tab-element active"><a href="#tab_1st" class="tab-link">Products Descriptions</a>
+                            </li>
+                            <li class="tab-element"><a href="#tab_4th" class="tab-link">Customer Reviews
+                                    <sup>(3)</sup></a></li>
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div id="tab_1st" class="tab-contain desc-tab active">
+                            <p class="desc">{!! $product->description ?? 'No description available.' !!}</p>
+                        </div>
+
+                        <div id="tab_4th" class="tab-contain review-tab">
+                            <div class="row">
+                                <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
+                                    <div class="rating-info">
+                                        <p class="index"><strong class="rating">4.4</strong>out of 5</p>
+                                        <div class="rating">
+                                            <p class="star-rating"><span class="width-80percent"></span></p>
+                                        </div>
+                                        <p class="see-all">See all 68 reviews</p>
+                                        <ul class="options">
+                                            <li>
+                                                <div class="detail-for">
+                                                    <span class="option-name">5stars</span>
+                                                    <span class="progres">
+                                                        <span class="line-100percent"><span
+                                                                class="percent width-90percent"></span></span>
+                                                    </span>
+                                                    <span class="number">90</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="detail-for">
+                                                    <span class="option-name">4stars</span>
+                                                    <span class="progres">
+                                                        <span class="line-100percent"><span
+                                                                class="percent width-30percent"></span></span>
+                                                    </span>
+                                                    <span class="number">30</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="detail-for">
+                                                    <span class="option-name">3stars</span>
+                                                    <span class="progres">
+                                                        <span class="line-100percent"><span
+                                                                class="percent width-40percent"></span></span>
+                                                    </span>
+                                                    <span class="number">40</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="detail-for">
+                                                    <span class="option-name">2stars</span>
+                                                    <span class="progres">
+                                                        <span class="line-100percent"><span
+                                                                class="percent width-20percent"></span></span>
+                                                    </span>
+                                                    <span class="number">20</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="detail-for">
+                                                    <span class="option-name">1star</span>
+                                                    <span class="progres">
+                                                        <span class="line-100percent"><span
+                                                                class="percent width-10percent"></span></span>
+                                                    </span>
+                                                    <span class="number">10</span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12">
+                                    <div class="review-form-wrapper">
+                                        <span class="title">Submit your review</span>
+                                        <form action="#" name="frm-review" method="post">
+                                            <div class="comment-form-rating">
+                                                <label>1. Your rating of this products:</label>
+                                                <p class="stars">
+                                                    <span>
+                                                        <a class="btn-rating" data-value="star-1" href="#"><i
+                                                                class="fa fa-star-o" aria-hidden="true"></i></a>
+                                                        <a class="btn-rating" data-value="star-2" href="#"><i
+                                                                class="fa fa-star-o" aria-hidden="true"></i></a>
+                                                        <a class="btn-rating" data-value="star-3" href="#"><i
+                                                                class="fa fa-star-o" aria-hidden="true"></i></a>
+                                                        <a class="btn-rating" data-value="star-4" href="#"><i
+                                                                class="fa fa-star-o" aria-hidden="true"></i></a>
+                                                        <a class="btn-rating" data-value="star-5" href="#"><i
+                                                                class="fa fa-star-o" aria-hidden="true"></i></a>
+                                                    </span>
+                                                </p>
+                                            </div>
+                                            <p class="form-row wide-half">
+                                                <input type="text" name="name" value=""
+                                                    placeholder="Your name">
+                                            </p>
+                                            <p class="form-row wide-half">
+                                                <input type="email" name="email" value=""
+                                                    placeholder="Email address">
+                                            </p>
+                                            <p class="form-row">
+                                                <textarea name="comment" id="txt-comment" cols="30" rows="10" placeholder="Write your review here..."></textarea>
+                                            </p>
+                                            <p class="form-row">
+                                                <button type="submit" name="submit">submit review</button>
+                                            </p>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="comments">
+                                <ol class="commentlist">
+                                    <li class="review">
+                                        <div class="comment-container">
+                                            <div class="row">
+                                                <div class="comment-content col-lg-8 col-md-9 col-sm-8 col-xs-12">
+                                                    <p class="comment-in"><span class="post-name">Quality is our
+                                                            way
+                                                            of life</span><span class="post-date">01/04/2018</span>
+                                                    </p>
+                                                    <div class="rating">
+                                                        <p class="star-rating"><span class="width-80percent"></span>
+                                                        </p>
+                                                    </div>
+                                                    <p class="author">by: <b>Shop organic</b></p>
+                                                    <p class="comment-text">There are few things in life that
+                                                        please
+                                                        people more than the succulence of quality fresh fruit and
+                                                        vegetables. At Fresh Fruits we work to deliver the world’s
+                                                        freshest, choicest, and juiciest produce to discerning
+                                                        customers across the UAE and GCC.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="review">
+                                        <div class="comment-container">
+                                            <div class="row">
+                                                <div class="comment-content col-lg-8 col-md-9 col-sm-8 col-xs-12">
+                                                    <p class="comment-in"><span class="post-name">Quality is our
+                                                            way
+                                                            of life</span><span class="post-date">01/04/2018</span>
+                                                    </p>
+                                                    <div class="rating">
+                                                        <p class="star-rating"><span class="width-80percent"></span>
+                                                        </p>
+                                                    </div>
+                                                    <p class="author">by: <b>Shop organic</b></p>
+                                                    <p class="comment-text">There are few things in life that
+                                                        please
+                                                        people more than the succulence of quality fresh fruit and
+                                                        vegetables. At Fresh Fruits we work to deliver the world’s
+                                                        freshest, choicest, and juiciest produce to discerning
+                                                        customers across the UAE and GCC.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="review">
+                                        <div class="comment-container">
+                                            <div class="row">
+                                                <div class="comment-content col-lg-8 col-md-9 col-sm-8 col-xs-12">
+                                                    <p class="comment-in"><span class="post-name">Quality is our
+                                                            way
+                                                            of life</span><span class="post-date">01/04/2018</span>
+                                                    </p>
+                                                    <div class="rating">
+                                                        <p class="star-rating"><span class="width-80percent"></span>
+                                                        </p>
+                                                    </div>
+                                                    <p class="author">by: <b>Shop organic</b></p>
+                                                    <p class="comment-text">There are few things in life that
+                                                        please
+                                                        people more than the succulence of quality fresh fruit and
+                                                        vegetables. At Fresh Fruits we work to deliver the world’s
+                                                        freshest, choicest, and juiciest produce to discerning
+                                                        customers across the UAE and GCC.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ol>
+                                <div class="biolife-panigations-block version-2">
+                                    <ul class="panigation-contain">
+                                        <li><span class="current-page">1</span></li>
+                                        <li><a href="#" class="link-page">2</a></li>
+                                        <li><a href="#" class="link-page">3</a></li>
+                                        <li><span class="sep">....</span></li>
+                                        <li><a href="#" class="link-page">20</a></li>
+                                        <li><a href="#" class="link-page next"><i class="fa fa-angle-right"
+                                                    aria-hidden="true"></i></a></li>
+                                    </ul>
+                                    <div class="result-count">
+                                        <p class="txt-count"><b>1-5</b> of <b>126</b> reviews</p>
+                                        <a href="#" class="link-to">See all<i class="fa fa-caret-right"
+                                                aria-hidden="true"></i></a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
