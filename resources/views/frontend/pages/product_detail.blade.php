@@ -160,8 +160,9 @@
                                 <div class="product-atts-item">
                                     <div class="unit-wrapper">
                                         @foreach ($product->inventory as $inv)
-                                            <button type="button" class="unit-btn" data-price="{{ $inv->price }}"
-                                                data-discount="{{ $inv->discount_price }}">
+                                            <button type="button" class="unit-btn" data-unit-id="{{ $inv->unit_id }}"
+                                                data-unit-name="{{ $inv->unit->name }}" data-price="{{ $inv->price }}"
+                                                data-discount="{{ $inv->discount_price ?? 0 }}">
                                                 {{ $inv->unit->name }}
                                             </button>
                                         @endforeach
@@ -185,7 +186,7 @@
                                 </div>
                             </div>
 
-                            <div class="from-cart">
+                            <div class="from-cart product-qty">
                                 <div class="qty-input">
                                     <input type="text" name="qty" value="1" data-max_value="20"
                                         data-min_value="1" data-step="1">
@@ -418,105 +419,107 @@
                 </div>
 
                 <!-- related products -->
-                <div class="product-related-box single-layout">
-                    <div class="biolife-title-box lg-margin-bottom-26px-im text-center">
-                        <h3 class="main-title">Related Products</h3>
-                    </div>
+                @if ($relatedProducts->count())
+                    <div class="product-related-box single-layout">
+                        <div class="biolife-title-box lg-margin-bottom-26px-im text-center">
+                            <h3 class="main-title">Related Products</h3>
+                        </div>
 
-                    <ul class="products-list biolife-carousel nav-center-02 nav-none-on-mobile"
-                        data-slick='{"rows":1,"arrows":true,"dots":false,"infinite":false,"speed":400,"slidesMargin":35,"slidesToShow":4, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 4}},{"breakpoint":992, "settings":{ "slidesToShow": 3, "slidesMargin":20 }},{"breakpoint":768, "settings":{ "slidesToShow": 2, "slidesMargin":10}}]}'>
+                        <ul class="products-list biolife-carousel nav-center-02 nav-none-on-mobile"
+                            data-slick='{"rows":1,"arrows":true,"dots":false,"infinite":false,"speed":400,"slidesMargin":35,"slidesToShow":4, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 4}},{"breakpoint":992, "settings":{ "slidesToShow": 3, "slidesMargin":20 }},{"breakpoint":768, "settings":{ "slidesToShow": 2, "slidesMargin":10}}]}'>
 
-                        @forelse($relatedProducts as $related)
-                            @php
-                                $prices = $related->inventory->pluck('price');
-                                $discountPrices = $related->inventory
-                                    ->whereNotNull('discount_price')
-                                    ->pluck('discount_price');
-                            @endphp
-                            <li class="product-item">
-                                <div class="contain-product layout-default">
-                                    <div class="product-thumb">
-                                        <a href="{{ route('product.show', $related->slug) }}" class="link-to-product">
-                                            <img src="{{ asset($related->thumbnail_image ?? 'uploads/no_images/no-image.png') }}"
-                                                alt="{{ $related->name }}" width="270" height="270"
-                                                class="product-thumnail">
-                                        </a>
+                            @foreach ($relatedProducts as $related)
+                                @php
+                                    $prices = $related->inventory->pluck('price');
+                                    $discountPrices = $related->inventory
+                                        ->whereNotNull('discount_price')
+                                        ->pluck('discount_price');
+                                @endphp
 
-                                        @if ($discountPrices->count())
-                                            <p class="offer">SALE</p>
-                                        @endif
-
-                                        @if ($related->is_hot ?? false)
-                                            <p class="attribute">HOT</p>
-                                        @endif
-
-                                        <a class="lookup btn_call_quickview" href="javascript:void(0)"
-                                            data-product='@json($related)'
-                                            data-gallery='@json(json_decode($related->gallery_images, true))'
-                                            data-inventory='@json($related->inventory)' onclick="openQuickView(this)">
-                                            <i class="biolife-icon icon-search"></i>
-                                        </a>
-                                    </div>
-
-                                    <div class="info">
-                                        <h4 class="product-title">
+                                <li class="product-item">
+                                    <div class="contain-product layout-default">
+                                        <div class="product-thumb">
                                             <a href="{{ route('product.show', $related->slug) }}"
-                                                class="pr-name">{{ $related->name }}</a>
-                                        </h4>
+                                                class="link-to-product">
+                                                <img src="{{ asset($related->thumbnail_image ?? 'uploads/no_images/no-image.png') }}"
+                                                    alt="{{ $related->name }}" width="270" height="270"
+                                                    class="product-thumnail">
+                                            </a>
 
-                                        <div class="price">
                                             @if ($discountPrices->count())
-                                                <ins>
-                                                    <span class="price-amount">
-                                                        <span
-                                                            class="currencySymbol">৳</span>{{ number_format($discountPrices->min(), 2) }}
-                                                        @if ($discountPrices->min() != $discountPrices->max())
-                                                            – ৳{{ number_format($discountPrices->max(), 2) }}
-                                                        @endif
-                                                    </span>
-                                                </ins>
-                                                <del>
-                                                    <span class="price-amount">
-                                                        <span
-                                                            class="currencySymbol">৳</span>{{ number_format($prices->min(), 2) }}
-                                                        @if ($prices->min() != $prices->max())
-                                                            – ৳{{ number_format($prices->max(), 2) }}
-                                                        @endif
-                                                    </span>
-                                                </del>
-                                            @else
-                                                <ins>
-                                                    <span class="price-amount">
-                                                        <span
-                                                            class="currencySymbol">৳</span>{{ number_format($prices->min(), 2) }}
-                                                        @if ($prices->min() != $prices->max())
-                                                            – ৳{{ number_format($prices->max(), 2) }}
-                                                        @endif
-                                                    </span>
-                                                </ins>
+                                                <p class="offer">SALE</p>
                                             @endif
+
+                                            @if ($related->is_hot ?? false)
+                                                <p class="attribute">HOT</p>
+                                            @endif
+
+                                            <a class="lookup btn_call_quickview" href="javascript:void(0)"
+                                                data-product='@json($related)'
+                                                data-gallery='@json(json_decode($related->gallery_images, true))'
+                                                data-inventory='@json($related->inventory)'
+                                                onclick="openQuickView(this)">
+                                                <i class="biolife-icon icon-search"></i>
+                                            </a>
                                         </div>
 
-                                        <div class="buttons card-padding">
-                                            <a href="#" class="btn add-cart-btn">
-                                                <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                                add to cart
-                                            </a>
-                                            <a href="#" class="btn add-cart-btn buy_now_btn">
-                                                <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                                Buy Now
-                                            </a>
+                                        <div class="info">
+                                            <h4 class="product-title">
+                                                <a href="{{ route('product.show', $related->slug) }}"
+                                                    class="pr-name">{{ $related->name }}</a>
+                                            </h4>
+
+                                            <div class="price">
+                                                @if ($discountPrices->count())
+                                                    <ins>
+                                                        <span class="price-amount">
+                                                            <span
+                                                                class="currencySymbol">৳</span>{{ number_format($discountPrices->min(), 2) }}
+                                                            @if ($discountPrices->min() != $discountPrices->max())
+                                                                – ৳{{ number_format($discountPrices->max(), 2) }}
+                                                            @endif
+                                                        </span>
+                                                    </ins>
+                                                    <del>
+                                                        <span class="price-amount">
+                                                            <span
+                                                                class="currencySymbol">৳</span>{{ number_format($prices->min(), 2) }}
+                                                            @if ($prices->min() != $prices->max())
+                                                                – ৳{{ number_format($prices->max(), 2) }}
+                                                            @endif
+                                                        </span>
+                                                    </del>
+                                                @else
+                                                    <ins>
+                                                        <span class="price-amount">
+                                                            <span
+                                                                class="currencySymbol">৳</span>{{ number_format($prices->min(), 2) }}
+                                                            @if ($prices->min() != $prices->max())
+                                                                – ৳{{ number_format($prices->max(), 2) }}
+                                                            @endif
+                                                        </span>
+                                                    </ins>
+                                                @endif
+                                            </div>
+
+                                            <div class="buttons card-padding">
+                                                <a href="#" class="btn add-cart-btn">
+                                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                                                    add to cart
+                                                </a>
+                                                <a href="#" class="btn add-cart-btn buy_now_btn">
+                                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                                                    Buy Now
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
-                        @empty
-                            <li class="col-12 text-center">
-                                <p>No related products found.</p>
-                            </li>
-                        @endforelse
-                    </ul>
-                </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
             </div>
         </div>
     </div>
@@ -524,39 +527,110 @@
 
 @push('scripts')
     <script>
+        let selectedUnit = null;
+        let selectedPrice = 0;
+        let selectedDiscount = 0;
+
         const unitButtons = document.querySelectorAll('.unit-btn');
-        const priceBox = document.getElementById('unitPrice');
-        const finalPrice = document.getElementById('finalPrice');
-        const oldPrice = document.getElementById('oldPrice');
-        const oldWrapper = document.getElementById('oldPriceWrapper');
 
         unitButtons.forEach(btn => {
             btn.addEventListener('click', function() {
-
                 unitButtons.forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
 
-                const price = this.dataset.price;
-                const discount = this.dataset.discount;
+                selectedUnit = this.dataset.unitName;
+                selectedPrice = parseFloat(this.dataset.price);
+                selectedDiscount = parseFloat(this.dataset.discount);
+
+                // Show price
+                const priceBox = document.getElementById('unitPrice');
+                const finalPrice = document.getElementById('finalPrice');
+                const oldPrice = document.getElementById('oldPrice');
+                const oldWrapper = document.getElementById('oldPriceWrapper');
 
                 priceBox.style.display = 'block';
 
-                if (discount && discount > 0) {
-                    finalPrice.innerText = parseFloat(discount).toFixed(2);
-                    oldPrice.innerText = parseFloat(price).toFixed(2);
+                if (selectedDiscount && selectedDiscount > 0) {
+                    finalPrice.innerText = selectedDiscount.toFixed(2);
+                    oldPrice.innerText = selectedPrice.toFixed(2);
                     oldWrapper.style.display = 'inline';
                 } else {
-                    finalPrice.innerText = parseFloat(price).toFixed(2);
+                    finalPrice.innerText = selectedPrice.toFixed(2);
                     oldWrapper.style.display = 'none';
                 }
             });
         });
 
+        // Select first unit by default
         document.addEventListener('DOMContentLoaded', function() {
             const firstUnit = document.querySelector('.unit-btn');
-            if (firstUnit) {
-                firstUnit.click();
+            if (firstUnit) firstUnit.click();
+        });
+
+        // Add to cart
+        $('.add-to-cart-btn').click(function(e) {
+            e.preventDefault();
+
+            if (!selectedUnit) {
+                toastr.warning('Please select a unit.');
+                return;
             }
+
+            let qty = parseInt($('input[name="qty"]').val());
+            let productId = "{{ $product->id }}";
+            let productName = "{{ $product->name }}";
+            let priceToUse = selectedDiscount > 0 ? selectedDiscount : selectedPrice;
+            let productImage = "{{ $product->thumbnail_image ?? 'uploads/no_images/no-image.png' }}";
+
+            $.ajax({
+                url: "{{ route('cart.add') }}",
+                method: 'POST',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    product_id: productId,
+                    product_name: productName,
+                    unit: selectedUnit,
+                    price: priceToUse,
+                    qty: qty,
+                    image: productImage
+                },
+                success: function(res) {
+
+                    if (res.success) {
+                        $('#desktop-cart-qty, #mobile-cart-qty').text(res.count);
+                        $('#desktop-cart-subtotal, #mobile-cart-subtotal').text(res.subtotal.toFixed(
+                            2) + ' ৳');
+
+                        $.get("{{ route('cart.data') }}", function(html) {
+                            $('#cart-body').html(html);
+                        });
+
+                        toastr.success(productName + ' has been added to your cart!');
+                    }
+                },
+                error: function() {
+                    toastr.error('Something went wrong. Please try again.');
+                }
+            });
+        });
+
+        // Remove from cart
+        $(document).on('click', '.remove-cart-item', function() {
+            let key = $(this).data('key');
+            $.ajax({
+                url: "{{ route('cart.remove') }}",
+                method: 'POST',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    key: key
+                },
+                success: function(res) {
+                    $('#desktop-cart-qty, #mobile-cart-qty').text(res.count);
+                    $('#desktop-cart-subtotal, #mobile-cart-subtotal').text(res.subtotal.toFixed(2) +
+                        ' ৳');
+                    $('#offcanvasRight .offcanvas-body').html(res.html);
+                }
+            });
         });
     </script>
 @endpush

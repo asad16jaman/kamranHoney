@@ -67,14 +67,14 @@
                     </li>
 
                     <li class="hidden-sm hidden-xs">
-                        <div class="minicart-block">
+                        <div class="minicart-block" id="desktop-cart">
                             <div class="minicart-contain">
-                                <a href="javascript:void(0)" id="openOffcanvas" class="link-to">
-                                    <span class="icon-qty-combine">
-                                        <i class="icon-cart-mini biolife-icon"></i>
-                                        <span class="qty">1</span>
+                                <a href="javascript:void(0)" id="openOffcanvasDesktop" class="cart-icon">
+                                    <i class="icon-cart-mini biolife-icon"></i>
+
+                                    <span class="cart-badge" id="desktop-cart-qty">
+                                        {{ array_sum(array_column(session('cart', []), 'qty')) }}
                                     </span>
-                                    <span class="sub-total ms-2">150 ৳</span>
                                 </a>
                             </div>
                         </div>
@@ -115,7 +115,7 @@
                 </div>
 
                 <span class="company-name">
-                    <a href="{{route('home')}}" style="color: black;">
+                    <a href="{{ route('home') }}" style="color: black;">
                         {{ $setting->company_name ?? 'Company Name' }}
                     </a>
                 </span>
@@ -154,14 +154,14 @@
                         </div>
 
                         <div class="mobile-cart hidden-md hidden-lg me-2">
-                            <div class="minicart-block">
+                            <div class="minicart-block" id="mobile-cart">
                                 <div class="minicart-contain">
-                                    <a href="javascript:void(0)" id="openOffcanvas" class="link-to">
-                                        <span class="icon-qty-combine">
-                                            <i class="icon-cart-mini biolife-icon"></i>
-                                            <span class="qty">1</span>
+                                    <a href="javascript:void(0)" id="openOffcanvasDesktop" class="cart-icon">
+                                        <i class="icon-cart-mini biolife-icon"></i>
+
+                                        <span class="cart-badge" id="desktop-cart-qty">
+                                            {{ array_sum(array_column(session('cart', []), 'qty')) }}
                                         </span>
-                                        <span class="sub-total ms-2">150 ৳</span>
                                     </a>
                                 </div>
                             </div>

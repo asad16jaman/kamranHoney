@@ -50,6 +50,12 @@ Route::get('about', [AboutUsController::class, 'view'])->name('about.view');
 Route::get('all-products', [FrontProductController::class, 'index'])->name('all.products');
 Route::get('product/{slug}', [FrontProductController::class, 'show'])->name('product.show');
 
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
+Route::get('/cart/count', [CartController::class, 'count'])->name('cart.count');
+Route::get('/cart/data', [CartController::class, 'data'])->name('cart.data'); 
+Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+
 Route::get('contact', [ContactUsController::class, 'create'])->name('contact.create');
 
 

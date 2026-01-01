@@ -175,6 +175,7 @@ h6,
 
 .offcanvas-body {
     padding: 15px;
+    font-size: small;
 }
 
 .close-offcanvas {
@@ -453,3 +454,19 @@ h6,
 }
 
 /* top video css end */
+
+@media only screen and (max-width:767px) {
+    .offcanvas-right.active {
+        right: -47px;
+        overflow-x: auto;
+    }
+
+    .offcanvas-body {
+        width: 92%;
+    }
+
+    .offcanvas-header {
+        padding-left: 27px;
+        padding-right: 55px;
+    }
+}

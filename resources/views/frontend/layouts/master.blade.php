@@ -43,11 +43,14 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend/assets') }}/css/style2.css" />
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend/assets') }}/css/main-color.css" />
 
+    <!-- Toastr CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
     @stack('styles')
 </head>
 
 <body class="">
-    
+
     @include('frontend.partials.header')
 
     <!-- Page Contain -->
@@ -89,8 +92,8 @@
 
                     <div class="from-cart">
                         <div class="qty-input">
-                            <input type="text" name="qty12554" value="1" data-max_value="20"
-                                data-min_value="1" data-step="1" />
+                            <input type="text" name="qty12554" value="1" data-max_value="20" data-min_value="1"
+                                data-step="1" />
                             <a href="#" class="qty-btn btn-up"><i class="fa fa-caret-up"
                                     aria-hidden="true"></i></a>
                             <a href="#" class="qty-btn btn-down"><i class="fa fa-caret-down"
@@ -107,7 +110,7 @@
                                 <b class="meta-title">Categories:</b>
                                 <ul class="meta-list">
                                     <li><a href="#" class="meta-link" id="qv-category"></a></li>
-                                </ul> 
+                                </ul>
                             </div>
                             <div class="product-atts-item">
                                 <b class="meta-title">Brand:</b>
@@ -134,17 +137,31 @@
     <script src="{{ asset('frontend/assets') }}/js/slick.min.js"></script>
     <script src="{{ asset('frontend/assets') }}/js/biolife.framework.js"></script>
     <script src="{{ asset('frontend/assets') }}/js/functions.js"></script>
+    <!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "timeOut": "3000"
+        };
+    </script>
+
+    {{-- for cart --}}
     <script>
         $(document).ready(function() {
-            $("#openOffcanvas").click(function() {
+
+            $("#openOffcanvasDesktop, #openOffcanvasMobile").on("click", function() {
                 $("#offcanvasRight").addClass("active");
                 $(".offcanvas-overlay").addClass("active");
             });
 
-            $(".close-offcanvas, .offcanvas-overlay").click(function() {
+            $(".close-offcanvas, .offcanvas-overlay").on("click", function() {
                 $("#offcanvasRight").removeClass("active");
                 $(".offcanvas-overlay").removeClass("active");
             });
+
         });
 
         Fancybox.bind("[data-fancybox='gallery']", {
@@ -153,6 +170,47 @@
                 gestures: false,
             },
         });
+    </script>
+
+    {{-- cart quantity update --}}
+    <script>
+        $(document).on('click', '.increase', function() {
+            let key = $(this).data('key');
+            let row = $(this).closest('tr');
+            let input = row.find('.qty-input');
+            let qty = parseInt(input.val()) + 1;
+
+            updateCartQty(key, qty, row);
+        });
+
+        $(document).on('click', '.decrease', function() {
+            let key = $(this).data('key');
+            let row = $(this).closest('tr');
+            let input = row.find('.qty-input');
+            let qty = Math.max(1, parseInt(input.val()) - 1);
+
+            updateCartQty(key, qty, row);
+        });
+
+        function updateCartQty(key, qty, row) {
+            $.ajax({
+                url: "{{ route('cart.update') }}",
+                method: "POST",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    key: key,
+                    qty: qty
+                },
+                success: function(res) {
+                    row.find('.qty-input').val(res.qty);
+                    row.find('.item-total').text('৳' + res.item_total.toFixed(2));
+
+                    $('#desktop-cart-qty, #mobile-cart-qty').text(res.count);
+                    $('#desktop-cart-subtotal, #mobile-cart-subtotal')
+                        .text(res.subtotal.toFixed(2) + ' ৳');
+                }
+            });
+        }
     </script>
 
     <script>
@@ -164,11 +222,11 @@
                     entries.forEach((entry) => {
                         if (entry.isIntersecting) {
                             entry.target.classList.add("is-visible");
-                            observer.unobserve(entry.target); 
+                            observer.unobserve(entry.target);
                         }
                     });
                 }, {
-                    threshold: 0.2, 
+                    threshold: 0.2,
                 }
             );
 
