@@ -17,8 +17,8 @@
             cursor: pointer;
             border-radius: 3px;
             transition: all 0.2s ease;
-            width: 100px; 
-            text-align: center; 
+            width: 100px;
+            text-align: center;
         }
 
         .unit-btn:hover {
@@ -197,6 +197,107 @@
 
                         </div>
                     </div>
+                </div>
+
+                <!-- related products -->
+                <div class="product-related-box single-layout">
+                    <div class="biolife-title-box lg-margin-bottom-26px-im text-center">
+                        <h3 class="main-title">Related Products</h3>
+                    </div>
+
+                    <ul class="products-list biolife-carousel nav-center-02 nav-none-on-mobile"
+                        data-slick='{"rows":1,"arrows":true,"dots":false,"infinite":false,"speed":400,"slidesMargin":35,"slidesToShow":4, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 4}},{"breakpoint":992, "settings":{ "slidesToShow": 3, "slidesMargin":20 }},{"breakpoint":768, "settings":{ "slidesToShow": 2, "slidesMargin":10}}]}'>
+
+                        @forelse($relatedProducts as $related)
+                            @php
+                                $prices = $related->inventory->pluck('price');
+                                $discountPrices = $related->inventory
+                                    ->whereNotNull('discount_price')
+                                    ->pluck('discount_price');
+                            @endphp
+                            <li class="product-item">
+                                <div class="contain-product layout-default">
+                                    <div class="product-thumb">
+                                        <a href="{{ route('product.show', $related->slug) }}" class="link-to-product">
+                                            <img src="{{ asset($related->thumbnail_image ?? 'uploads/no_images/no-image.png') }}"
+                                                alt="{{ $related->name }}" width="270" height="270"
+                                                class="product-thumnail">
+                                        </a>
+
+                                        @if ($discountPrices->count())
+                                            <p class="offer">SALE</p>
+                                        @endif
+
+                                        @if ($related->is_hot ?? false)
+                                            <p class="attribute">HOT</p>
+                                        @endif
+
+                                        <a class="lookup btn_call_quickview" href="javascript:void(0)"
+                                            data-product='@json($related)'
+                                            data-gallery='@json(json_decode($related->gallery_images, true))'
+                                            data-inventory='@json($related->inventory)' onclick="openQuickView(this)">
+                                            <i class="biolife-icon icon-search"></i>
+                                        </a>
+                                    </div>
+
+                                    <div class="info">
+                                        <h4 class="product-title">
+                                            <a href="{{ route('product.show', $related->slug) }}"
+                                                class="pr-name">{{ $related->name }}</a>
+                                        </h4>
+
+                                        <div class="price">
+                                            @if ($discountPrices->count())
+                                                <ins>
+                                                    <span class="price-amount">
+                                                        <span
+                                                            class="currencySymbol">৳</span>{{ number_format($discountPrices->min(), 2) }}
+                                                        @if ($discountPrices->min() != $discountPrices->max())
+                                                            – ৳{{ number_format($discountPrices->max(), 2) }}
+                                                        @endif
+                                                    </span>
+                                                </ins>
+                                                <del>
+                                                    <span class="price-amount">
+                                                        <span
+                                                            class="currencySymbol">৳</span>{{ number_format($prices->min(), 2) }}
+                                                        @if ($prices->min() != $prices->max())
+                                                            – ৳{{ number_format($prices->max(), 2) }}
+                                                        @endif
+                                                    </span>
+                                                </del>
+                                            @else
+                                                <ins>
+                                                    <span class="price-amount">
+                                                        <span
+                                                            class="currencySymbol">৳</span>{{ number_format($prices->min(), 2) }}
+                                                        @if ($prices->min() != $prices->max())
+                                                            – ৳{{ number_format($prices->max(), 2) }}
+                                                        @endif
+                                                    </span>
+                                                </ins>
+                                            @endif
+                                        </div>
+
+                                        <div class="buttons card-padding">
+                                            <a href="#" class="btn add-cart-btn">
+                                                <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                                                add to cart
+                                            </a>
+                                            <a href="#" class="btn add-cart-btn buy_now_btn">
+                                                <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                                                Buy Now
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        @empty
+                            <li class="col-12 text-center">
+                                <p>No related products found.</p>
+                            </li>
+                        @endforelse
+                    </ul>
                 </div>
             </div>
         </div>
